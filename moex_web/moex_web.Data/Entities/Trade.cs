@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace moex_web.Data.Entities
 {
-    [Table("trade")]
+    [Table("trade_1")]
     public class Trade
     {
         [Column("TradeDate", Order = 0)]

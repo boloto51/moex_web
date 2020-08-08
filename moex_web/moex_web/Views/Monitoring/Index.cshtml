@@ -9,6 +9,9 @@
 <table class="table table-bordered">
     <tr>
         <td>
+            <b></b>
+        </td>
+        <td>
             <b>SecId</b>
         </td>
         <td>
@@ -21,22 +24,42 @@
             <b>Close</b>
         </td>
     </tr>
-    @foreach (var item in Model)
+    @for (int i = 0; i <= 1000; i++)
     {
         <tr>
             <td>
-                @item.SecId
+                @(i+1)
             </td>
             <td>
-                @item.ShortName
+                @Model[i].SecId
             </td>
             <td>
-                @item.TradeDate
+                @Model[i].ShortName
             </td>
             <td>
-                @item.Close
+                @Model[i].TradeDate.ToShortDateString()
+            </td>
+            <td>
+                @Model[i].Close
             </td>
         </tr>
     }
+    @*@foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.SecId
+                </td>
+                <td>
+                    @item.ShortName
+                </td>
+                <td>
+                    @item.TradeDate
+                </td>
+                <td>
+                    @item.Close
+                </td>
+            </tr>
+        }*@
 </table>
 

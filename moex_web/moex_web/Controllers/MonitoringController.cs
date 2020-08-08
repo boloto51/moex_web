@@ -30,7 +30,7 @@ namespace moex_web.Controllers
             {
                 SecId = t.SecId,
                 ShortName = securities.Where(s => s.SecId == t.SecId).Select(s => s.ShortName).FirstOrDefault(),
-                TradeDate = t.TradeDate,
+                TradeDate = t.TradeDate.Date,
                 Close = t.Close
             });
 

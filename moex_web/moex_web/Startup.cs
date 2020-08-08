@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using moex_web.DbContext;
 using Microsoft.EntityFrameworkCore;
+using moex_web.Data.Repositories;
+using moex_web.Data.DbContext;
 
 namespace moex_web
 {
@@ -26,6 +28,10 @@ namespace moex_web
             {
                 options.UseMySql(Configuration.GetConnectionString("DataContext"));
             });
+
+            services.AddScoped<IContextFactory, ContextFactory>();
+            services.AddScoped<ISecurityRepository, SecurityRepository>();
+            services.AddScoped<ITradeRepository, TradeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

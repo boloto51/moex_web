@@ -9,11 +9,11 @@ namespace moex_web.Data.Entities
     [Table("security")]
     public class Security
     {
-        [Column("SECID")]
+        [Column("SecId")]
         [Key]
-        public string SECID { get; set; }
-        [Column("SHORTNAME")]
-        public string SHORTNAME { get; set; }
+        public string SecId { get; set; }
+        [Column("ShortName")]
+        public string ShortName { get; set; }
 
         public virtual ICollection<Trade> Trades { get; set; }
     }

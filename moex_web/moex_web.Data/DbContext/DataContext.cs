@@ -22,12 +22,10 @@ namespace moex_web.DbContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Security>().HasKey(a => new { a.SECID });
-            modelBuilder.Entity<Trade>().HasKey(a => new { a.TRADEDATE, a.SECID });
+            modelBuilder.Entity<Security>().HasKey(a => new { a.SecId });
+            modelBuilder.Entity<Trade>().HasKey(a => new { a.TradeDate, a.SecId });
             modelBuilder.Entity<Security>().HasMany(s => s.Trades);
             modelBuilder.Entity<Trade>().HasOne(t => t.Security);
         }
-
-
     }
 }

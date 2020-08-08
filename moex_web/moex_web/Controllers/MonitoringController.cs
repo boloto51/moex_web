@@ -4,15 +4,37 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using moex_web.Data.Repositories;
+using moex_web.Models;
 
 namespace moex_web.Controllers
 {
     public class MonitoringController : Controller
     {
-        // GET: Monitoring
-        public ActionResult Index()
+        private readonly ISecurityRepository _securityRepository;
+        private readonly ITradeRepository _tradeRepository;
+
+        public MonitoringController(ISecurityRepository securityRepository, ITradeRepository tradeRepository)
         {
-            return View();
+            _securityRepository = securityRepository;
+            _tradeRepository = tradeRepository;
+        }
+
+        // GET: Monitoring
+        [HttpGet]
+        public async Task<ActionResult> Index()
+        {
+            var securities = await _securityRepository.Get();
+            var trades = await _tradeRepository.Get();
+            var models = trades.Select(t => new MonitoringModel
+            {
+                SecId = t.SecId,
+                ShortName = securities.Where(s => s.SecId == t.SecId).Select(s => s.ShortName).FirstOrDefault(),
+                TradeDate = t.TradeDate,
+                Close = t.Close
+            });
+
+            return View(models.ToList());
         }
 
         // GET: Monitoring/Details/5

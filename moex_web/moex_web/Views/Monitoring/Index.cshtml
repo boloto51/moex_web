@@ -1,0 +1,28 @@
+﻿@model List<MonitoringModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.SecId
+            </td>
+            <td>
+                @item.ShortName
+            </td>
+            <td>
+                @item.TradeDate
+            </td>
+            <td>
+                @item.Close
+            </td>
+        </tr>
+    }
+</table>
+

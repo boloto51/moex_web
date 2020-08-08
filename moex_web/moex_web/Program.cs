@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using moex_web.Core.Config;
 
 namespace moex_web
 {
@@ -14,6 +15,7 @@ namespace moex_web
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
+            //CreateHostBuilder(args).Build().MigrateDatabase().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

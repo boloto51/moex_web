@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "moex_web", "moex_web\moex_web.csproj", "{8F193937-5866-453B-BB87-80448B8CF711}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "moex_web.Data", "moex_web.Data\moex_web.Data.csproj", "{3ABEDB38-DCB6-476D-B182-025F021B87EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "moex_web.Data", "moex_web.Data\moex_web.Data.csproj", "{3ABEDB38-DCB6-476D-B182-025F021B87EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

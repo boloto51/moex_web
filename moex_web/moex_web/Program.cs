@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using moex_web.Core.Config;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace moex_web
 {
@@ -14,8 +15,8 @@ namespace moex_web
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
-            //CreateHostBuilder(args).Build().MigrateDatabase().Run();
+            //CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().MigrateDatabase().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -23,6 +24,10 @@ namespace moex_web
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                })
+                .ConfigureServices(services =>
+                {
+                    services.AddHostedService<Worker>();
                 });
     }
 }

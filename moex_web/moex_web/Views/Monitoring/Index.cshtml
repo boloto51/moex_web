@@ -9,9 +9,6 @@
 <table class="table table-bordered">
     <tr>
         <td>
-            <b></b>
-        </td>
-        <td>
             <b>SecId</b>
         </td>
         <td>
@@ -24,12 +21,9 @@
             <b>Close</b>
         </td>
     </tr>
-    @for (int i = 0; i <= 1000; i++)
+    @for (int i = 0; i <= 100; i++)
     {
         <tr>
-            <td>
-                @(i+1)
-            </td>
             <td>
                 @Model[i].SecId
             </td>
@@ -61,5 +55,26 @@
                 </td>
             </tr>
         }*@
+    @*@for (int i = 0; i <= 1000; i++)
+        {
+            <tr>
+                <td>
+                    @(i+1)
+                </td>
+                <td>
+                    @Model[i].SecId
+                </td>
+                <td>
+                    @Model[i].ShortName
+                </td>
+                <td>
+                    @Model[i].TradeDate.ToShortDateString()
+                </td>
+                <td>
+                    @Model[i].Close
+                </td>
+            </tr>
+        }*@
+    @**@
 </table>
 

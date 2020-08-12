@@ -26,6 +26,9 @@ namespace moex_web.Controllers
         {
             var securities = await _securityRepository.Get();
             var trades = await _tradeRepository.Get();
+
+
+
             var models = trades.Select(t => new MonitoringModel
             {
                 SecId = t.SecId,

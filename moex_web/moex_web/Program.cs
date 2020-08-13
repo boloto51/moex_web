@@ -27,7 +27,8 @@ namespace moex_web
                 })
                 .ConfigureServices(services =>
                 {
-                    services.AddHostedService<Worker>();
+                    //services.AddHostedService<Worker>();
+                    services.AddHostedService<TimedHostedService>();
                 });
     }
 }

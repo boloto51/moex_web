@@ -3,10 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using moex_web.DbContext;
+using moex_web.Data.DbContext;
 using Microsoft.EntityFrameworkCore;
 using moex_web.Data.Repositories;
-using moex_web.Data.DbContext;
 
 namespace moex_web
 {

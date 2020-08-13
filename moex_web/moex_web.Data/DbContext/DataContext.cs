@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using moex_web.Data.Entities;
 
-namespace moex_web.DbContext
+namespace moex_web.Data.DbContext
 {
     public class DataContext : Microsoft.EntityFrameworkCore.DbContext
     {
-        private string connectionString;
+        public DataContext() : base()
+        {
+        }
 
-        public DataContext(DbContextOptions<DataContext> options)
-           : base(options)
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }
 

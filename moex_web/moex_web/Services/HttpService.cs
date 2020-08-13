@@ -66,5 +66,19 @@ namespace moex_web.Services
             request.Content = new StringContent(value, Encoding.UTF8, "application/xml");
             return await HttpClient.SendAsync(request);
         }
+
+        public async Task<T> GetAsync1<T>(string serviceUrl, long? value = null)
+        {
+            try
+            {
+                var result = await HttpClient.GetAsync(serviceUrl);
+                var content = await result.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<T>(content);
+            }
+            catch
+            {
+                return default(T);
+            }
+        }
     }
 }

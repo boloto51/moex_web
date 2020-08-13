@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using moex_web.DbContext;
+using moex_web.Data.DbContext;
 
 namespace moex_web.Core.Config
 {

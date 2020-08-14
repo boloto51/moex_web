@@ -2,15 +2,15 @@
 using moex_web.Models.JSON;
 using moex_web.Services;
 
-namespace moex_web.Services.Worker
+namespace moex_web.Converters
 {
-    public class Uri
+    public class UriConverter : IUriConverter
     {
-        HttpService httpService;
+        IHttpService _httpService;
 
-        public Uri(HttpService _httpService)
+        public UriConverter(IHttpService httpService)
         {
-            httpService = _httpService;
+            _httpService = httpService;
         }
         public string ConcatenateUrlStart(string url, string json, string postfix, int i = 0)
         {
@@ -24,7 +24,7 @@ namespace moex_web.Services.Worker
 
         public int GetCountHundredsPages(string url)
         {
-            Root root = httpService.GetAsync1<Root>(url).Result;
+            Root root = _httpService.GetAsync1<Root>(url).Result;
             return (int)Math.Truncate(Convert.ToDecimal(root.history_cursor.data[0][1] / 100));
         }
 

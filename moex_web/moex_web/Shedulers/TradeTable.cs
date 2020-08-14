@@ -1,23 +1,30 @@
-﻿using moex_web.Models.JSON;
+﻿using moex_web.Converters;
+using moex_web.Data.Repositories;
+using moex_web.Models.JSON;
 using moex_web.Services;
 using System;
 using System.Threading.Tasks;
 
-namespace moex_web.Services.Worker
+namespace moex_web.Shedulers
 {
-    class TableTrade
+    class TradeTable : ITradeTable
     {
-        Uri uri;
-        HttpService httpService;
-        DataBase dataBase;
+        IUriConverter uri;
+        IHttpService httpService;
+        IDataBase dataBase;
+        ISecurityRepository _securityRepository;
+        ITradeRepository _tradeRepository;
 
-        public TableTrade() { }
+        //public TradeTable() { }
 
-        public TableTrade(Uri _uri, HttpService _httpService, DataBase _dataBase)
+        public TradeTable(IUriConverter _uri, IHttpService _httpService, IDataBase _dataBase,
+            ISecurityRepository securityRepository, ITradeRepository tradeRepository)
         {
             uri = _uri;
             httpService = _httpService;
             dataBase = _dataBase;
+            _securityRepository = securityRepository;
+            _tradeRepository = tradeRepository;
         }
 
         public void Fill(string url_init, string postfix_date_init)
@@ -26,11 +33,11 @@ namespace moex_web.Services.Worker
 
             foreach (var secItem in secList)
             {
-                StartFromSpecifiedPage(uri, url_init, secItem.SecId, postfix_date_init);
+                StartFromSpecifiedPage(url_init, secItem.SecId, postfix_date_init);
             }
         }
 
-        public async void StartFromSpecifiedPage(Uri uri, string url_init, string secId, string postfix_date_init)
+        public async void StartFromSpecifiedPage(string url_init, string secId, string postfix_date_init)
         {
             string postfix_json = ".json";
             string postfix_from = "?from=";
@@ -50,7 +57,7 @@ namespace moex_web.Services.Worker
                     if (count != 0)
                     {
                         var pageLastData = uri.GetPageLastData(root, count);
-                        await Task.Run(() => dataBase.ToTradeTable(root, url_init, secId, postfix_json, postfix_from, date));
+                        await Task.Run(() => dataBase.ToTradeTable(root));
                         date = ConvertDate(pageLastData.Date.AddDays(1));
                     }
                     else
@@ -75,11 +82,12 @@ namespace moex_web.Services.Worker
         public void UpdateTable(string url_init)
         {
             var lastTradesInDB = dataBase.FindLastTrades();
+            //var lastTradesInDB = _tradeRepository.FindLastTrades().Result;
 
             foreach (var lastTrade in lastTradesInDB)
             {
                 string postfix_date_last = ConvertDate(lastTrade.TradeDate.Date.AddDays(1));
-                StartFromSpecifiedPage(uri, url_init, lastTrade.SecId, postfix_date_last);
+                StartFromSpecifiedPage(url_init, lastTrade.SecId, postfix_date_last);
             }
         }
     }

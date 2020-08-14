@@ -6,6 +6,9 @@ using Microsoft.Extensions.Hosting;
 using moex_web.Data.DbContext;
 using Microsoft.EntityFrameworkCore;
 using moex_web.Data.Repositories;
+using moex_web.Converters;
+using moex_web.Shedulers;
+using moex_web.Services;
 
 namespace moex_web
 {
@@ -31,6 +34,13 @@ namespace moex_web
             services.AddScoped<IContextFactory, ContextFactory>();
             services.AddScoped<ISecurityRepository, SecurityRepository>();
             services.AddScoped<ITradeRepository, TradeRepository>();
+            services.AddScoped<ISecurityConverter, SecurityConverter>();
+            services.AddScoped<ITradeConverter, TradeConverter>();
+            services.AddScoped<ISecurityTable, SecurityTable>();
+            services.AddScoped<ITradeTable, TradeTable>();
+            services.AddScoped<IUriConverter, UriConverter>();
+            services.AddScoped<IDataBase, DataBase>();
+            services.AddScoped<IHttpService, HttpService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

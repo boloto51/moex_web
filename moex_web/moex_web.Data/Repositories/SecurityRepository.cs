@@ -27,26 +27,24 @@ namespace moex_web.Data.Repositories
             return await _context.GetContext().Securities.FirstOrDefaultAsync(s => s.SecId == secId);
         }
 
+        public async Task AddRange(List<Security> securities)
+        {
+            var context = _context.GetContext();
+            context.Securities.AddRange(securities);
+            await context.SaveChangesAsync();
+        }
+
         //public async Task<List<Security>> GetByTheme(int id)
         //{
         //    return await _context.GetContext().Patterns
         //        .Where(p => p.ThemeId == id).ToListAsync();
         //}
 
-        //public async Task<int> Create(Security pattern)
+        //public async Task Update(Security security)
         //{
-        //    pattern.Theme = null;
+        //    security.Theme = null;
         //    var context = _context.GetContext();
-        //    var created = context.Patterns.Add(pattern);
-        //    await context.SaveChangesAsync();
-        //    return created?.Entity?.Id ?? -1;
-        //}
-
-        //public async Task Update(Security pattern)
-        //{
-        //    pattern.Theme = null;
-        //    var context = _context.GetContext();
-        //    context.Patterns.Update(pattern);
+        //    context.Patterns.Update(security);
         //    await context.SaveChangesAsync();
         //}
 

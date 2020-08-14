@@ -12,5 +12,6 @@ namespace moex_web.Data.Repositories
         //Task Update(Security security);
         //Task Delete(string secId);
         //Task<List<Security>> GetBySECID(string secId);
+        Task AddRange(List<Security> security);
     }
 }

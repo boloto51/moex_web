@@ -5,10 +5,6 @@ namespace moex_web.Data.DbContext
 {
     public class DataContext : Microsoft.EntityFrameworkCore.DbContext
     {
-        public DataContext() : base()
-        {
-        }
-
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }

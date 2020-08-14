@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using moex_web.Core.Config;
 using Microsoft.Extensions.DependencyInjection;
+using moex_web.Shedulers;
 
 namespace moex_web
 {
@@ -28,7 +29,7 @@ namespace moex_web
                 .ConfigureServices(services =>
                 {
                     //services.AddHostedService<Worker>();
-                    services.AddHostedService<TimedHostedService>();
+                    services.AddHostedService<TradeCleanerSheduler>();
                 });
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web\\moex_web.csproj": {}
+    "C:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web\\moex_web.csproj": {}
   },
   "projects": {
-    "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj": {
+    "C:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj",
+        "projectUniqueName": "C:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj",
         "projectName": "moex_web.Data",
-        "projectPath": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj",
+        "projectPath": "C:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj",
         "packagesPath": "C:\\Users\\test\\.nuget\\packages\\",
-        "outputPath": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\obj\\",
+        "outputPath": "C:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\test\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -72,14 +72,14 @@
         }
       }
     },
-    "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web\\moex_web.csproj": {
+    "C:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web\\moex_web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web\\moex_web.csproj",
+        "projectUniqueName": "C:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web\\moex_web.csproj",
         "projectName": "moex_web",
-        "projectPath": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web\\moex_web.csproj",
+        "projectPath": "C:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web\\moex_web.csproj",
         "packagesPath": "C:\\Users\\test\\.nuget\\packages\\",
-        "outputPath": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web\\obj\\",
+        "outputPath": "C:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\test\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -95,8 +95,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj": {
-                "projectPath": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj"
+              "C:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj": {
+                "projectPath": "C:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj"
               }
             }
           }

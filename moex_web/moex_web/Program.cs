@@ -30,6 +30,10 @@ namespace moex_web
                 {
                     //services.AddHostedService<Worker>();
                     services.AddHostedService<TradeCleanerSheduler>();
-                });
+                })
+            .ConfigureServices(services =>
+            {
+                services.AddHostedService<TradeUpdateSheduler>();
+            });
     }
 }

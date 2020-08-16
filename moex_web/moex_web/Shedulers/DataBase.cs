@@ -150,32 +150,32 @@ namespace moex_web.Shedulers
         //    return lastTradesInDB;
         //}
 
-        public List<Trade> FindLastTrades()
-        {
-            //DataContext _context = new DataContext();
-            //return _context.Trades.ToList().GroupBy(t => t.SecId)
-            //            .Select(g => new Trade()
-            //            {
-            //                SecId = g.Key,
-            //                TradeDate = g.Select(t => t.TradeDate).LastOrDefault(),
-            //                Close = g.Select(t => t.Close).LastOrDefault()
-            //            }).ToList();
-            return _tradeRepository.FindLastTrades().Result;
-        }
+        //public List<Trade> FindLastTrades()
+        //{
+        //    //DataContext _context = new DataContext();
+        //    //return _context.Trades.ToList().GroupBy(t => t.SecId)
+        //    //            .Select(g => new Trade()
+        //    //            {
+        //    //                SecId = g.Key,
+        //    //                TradeDate = g.Select(t => t.TradeDate).LastOrDefault(),
+        //    //                Close = g.Select(t => t.Close).LastOrDefault()
+        //    //            }).ToList();
+        //    return _tradeRepository.FindLastTrades().Result;
+        //}
 
-        public void DeleteOldTrades(string oldDate)
-        {
-            //DataContext _context = new DataContext();
-            //var trades = _context.Trades.Where(t => DateTime.Compare(t.TradeDate, DateTime.Parse(oldDate)) < 0).ToList();
+        //public void DeleteOldTrades(string oldDate)
+        //{
+        //    //DataContext _context = new DataContext();
+        //    //var trades = _context.Trades.Where(t => DateTime.Compare(t.TradeDate, DateTime.Parse(oldDate)) < 0).ToList();
 
-            //foreach(var trade in trades)
-            //{
-            //    _context.Trades.Remove(trade);
-            //}
+        //    //foreach(var trade in trades)
+        //    //{
+        //    //    _context.Trades.Remove(trade);
+        //    //}
 
-            //_context.SaveChanges();
+        //    //_context.SaveChanges();
 
-            _tradeRepository.DeleteOldTrades(oldDate);
-        }
+        //    _tradeRepository.DeleteOldTrades(oldDate);
+        //}
     }
 }

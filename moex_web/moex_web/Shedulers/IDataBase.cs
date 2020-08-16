@@ -18,7 +18,7 @@ namespace moex_web.Shedulers
         public void ToSecurityTableAsync(Root root);
         public void ToSecurityTable(Root root);
         public void ToTradeTable(Root root);
-        public List<Trade> FindLastTrades();
-        public void DeleteOldTrades(string oldDate);
+        //public List<Trade> FindLastTrades();
+        //public void DeleteOldTrades(string oldDate);
     }
 }

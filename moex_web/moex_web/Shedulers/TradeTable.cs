@@ -81,7 +81,8 @@ namespace moex_web.Shedulers
 
         public void UpdateTable(string url_init)
         {
-            var lastTradesInDB = dataBase.FindLastTrades();
+            //var lastTradesInDB = dataBase.FindLastTrades();
+            var lastTradesInDB = _tradeRepository.FindLastTrades().Result;
             //var lastTradesInDB = _tradeRepository.FindLastTrades().Result;
 
             foreach (var lastTrade in lastTradesInDB)

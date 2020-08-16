@@ -1,0 +1,10 @@
+C:\Temp\GitHub\moex_web\moex_web\moex_web.Data\bin\Debug\netcoreapp3.1\moex_web.Data.deps.json
+C:\Temp\GitHub\moex_web\moex_web\moex_web.Data\bin\Debug\netcoreapp3.1\moex_web.Data.dll
+C:\Temp\GitHub\moex_web\moex_web\moex_web.Data\obj\Debug\netcoreapp3.1\moex_web.Data.csprojAssemblyReference.cache
+C:\Temp\GitHub\moex_web\moex_web\moex_web.Data\obj\Debug\netcoreapp3.1\moex_web.Data.AssemblyInfoInputs.cache
+C:\Temp\GitHub\moex_web\moex_web\moex_web.Data\obj\Debug\netcoreapp3.1\moex_web.Data.AssemblyInfo.cs
+C:\Temp\GitHub\moex_web\moex_web\moex_web.Data\bin\Debug\netcoreapp3.1\moex_web.Data.runtimeconfig.json
+C:\Temp\GitHub\moex_web\moex_web\moex_web.Data\bin\Debug\netcoreapp3.1\moex_web.Data.runtimeconfig.dev.json
+C:\Temp\GitHub\moex_web\moex_web\moex_web.Data\bin\Debug\netcoreapp3.1\moex_web.Data.pdb
+C:\Temp\GitHub\moex_web\moex_web\moex_web.Data\obj\Debug\netcoreapp3.1\moex_web.Data.dll
+C:\Temp\GitHub\moex_web\moex_web\moex_web.Data\obj\Debug\netcoreapp3.1\moex_web.Data.pdb

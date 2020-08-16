@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web\\moex_web.csproj": {}
+    "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj": {}
   },
   "projects": {
-    "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web\\moex_web.csproj": {
+    "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web\\moex_web.csproj",
-        "projectName": "moex_web",
-        "projectPath": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web\\moex_web.csproj",
+        "projectUniqueName": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj",
+        "projectName": "moex_web.Data",
+        "projectPath": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj",
         "packagesPath": "C:\\Users\\test\\.nuget\\packages\\",
-        "outputPath": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web\\obj\\",
+        "outputPath": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\test\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -37,6 +37,22 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -48,9 +64,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

@@ -17,17 +17,11 @@ namespace moex_web.Shedulers
         private int executionCount = 0;
         private readonly ILogger<TradeCleanerSheduler> _logger;
         private Timer _timer;
-        //ISecurityTable _securityTable;
-        //ITradeTable _tradeTable;
-        //IDataBase _dataBase;
         private readonly IServiceScopeFactory _scopeFactory;
 
         public TradeCleanerSheduler(ILogger<TradeCleanerSheduler> logger, IServiceScopeFactory scopeFactory)
         {
             _logger = logger;
-            //_securityTable = securityTable;
-            //_tradeTable = tradeTable;
-            //_dataBase = dataBase;
             _scopeFactory = scopeFactory;
         }
 
@@ -35,9 +29,20 @@ namespace moex_web.Shedulers
         {
             _logger.LogInformation("Timed Hosted Service running.");
 
-            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromMinutes(1));
+            //_timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromMinutes(1));
+            _timer = new Timer(DoWork, null, IntervalToStartTimer(), TimeSpan.FromHours(24));
 
             return Task.CompletedTask;
+        }
+
+        public TimeSpan IntervalToStartTimer()
+        {
+            var targetTime = new DateTime(1, 1, 1, 19, 37, 0).TimeOfDay;
+
+            var nowTime = DateTime.Now.TimeOfDay;
+
+            return TimeSpan.Compare(targetTime, nowTime) >= 0 ?
+                targetTime - nowTime : targetTime - nowTime + new TimeSpan(24, 0, 0);
         }
 
         private void DoWork(object state)

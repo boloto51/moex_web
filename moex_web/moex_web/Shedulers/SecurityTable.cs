@@ -2,6 +2,7 @@
 using moex_web.Models.JSON;
 using moex_web.Services;
 using System;
+using System.Threading.Tasks;
 
 namespace moex_web.Shedulers
 {
@@ -30,7 +31,8 @@ namespace moex_web.Shedulers
             {
                 var url_param = _uri.ConcatenateUrlStart(url_init, postfix_json, postfix_start, i);
                 var root = _httpService.GetAsync1<Root>(url_param).Result;
-                _dataBase.ToSecurityTableAsync(root);
+                _dataBase.ToSecurityTable(root);
+                //_dataBase.ToSecurityTableAsync(root);
             }
 
             Console.ReadLine();

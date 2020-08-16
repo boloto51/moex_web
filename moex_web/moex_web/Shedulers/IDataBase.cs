@@ -11,14 +11,7 @@ namespace moex_web.Shedulers
 {
     public interface IDataBase
     {
-        public List<Security> FromSecurityTable();
-        public List<Trade> FromTradeTable();
-        public int FromSecurityTableCount();
-        public int FromTradeTableCount();
-        public void ToSecurityTableAsync(Root root);
         public void ToSecurityTable(Root root);
         public void ToTradeTable(Root root);
-        //public List<Trade> FindLastTrades();
-        //public void DeleteOldTrades(string oldDate);
     }
 }

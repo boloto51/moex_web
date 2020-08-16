@@ -30,14 +30,15 @@ namespace moex_web.Shedulers
         {
             _logger.LogInformation("TradeUpdateSheduler running.");
 
-            _timer = new Timer(DoWork, null, IntervalToStartTimer(), TimeSpan.FromHours(24));
+            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromMinutes(10));
+            //_timer = new Timer(DoWork, null, IntervalToStartTimer(), TimeSpan.FromHours(24));
 
             return Task.CompletedTask;
         }
 
         public TimeSpan IntervalToStartTimer()
         {
-            var targetTime = new DateTime(1, 1, 1, 21, 20, 0).TimeOfDay;
+            var targetTime = new DateTime(1, 1, 1, 22, 12, 0).TimeOfDay;
 
             var nowTime = DateTime.Now.TimeOfDay;
 
@@ -50,12 +51,15 @@ namespace moex_web.Shedulers
             using (var scope = _scopeFactory.CreateScope())
             {
                 string url_init = "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities";
-                //var _tradeRepository = scope.ServiceProvider.GetRequiredService<ITradeRepository>();
+                var _tradeRepository = scope.ServiceProvider.GetRequiredService<ITradeRepository>();
                 var _tradeTable = scope.ServiceProvider.GetRequiredService<ITradeTable>();
-                var _dataBase = scope.ServiceProvider.GetRequiredService<IDataBase>();
-                string postfix_date_init = _tradeTable.ConvertDate(DateTime.Now.AddYears(-5));
+                //var _dataBase = scope.ServiceProvider.GetRequiredService<IDataBase>();
+                var _dateConverter = scope.ServiceProvider.GetRequiredService<IDateConverter>();
 
-                if (_dataBase.FromTradeTableCount() == 0)
+                string postfix_date_init = _dateConverter.ConvertDate(DateTime.Now.AddYears(-5));
+
+                //if (_dataBase.FromTradeTableCount() == 0)
+                if (_tradeRepository.Get().Result.Count == 0)
                 {
                     _tradeTable.Fill(url_init, postfix_date_init);
                 }

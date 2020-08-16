@@ -9,27 +9,27 @@ namespace moex_web.Shedulers
 {
     class TradeTable : ITradeTable
     {
-        IUriConverter uri;
+        IUriConverter uriConverter;
         IHttpService httpService;
         IDataBase dataBase;
         ISecurityRepository _securityRepository;
         ITradeRepository _tradeRepository;
+        IDateConverter _dateConverter;
 
-        //public TradeTable() { }
-
-        public TradeTable(IUriConverter _uri, IHttpService _httpService, IDataBase _dataBase,
-            ISecurityRepository securityRepository, ITradeRepository tradeRepository)
+        public TradeTable(IUriConverter _uriConverter, IHttpService _httpService, IDataBase _dataBase,
+            ISecurityRepository securityRepository, ITradeRepository tradeRepository, IDateConverter dateConverter)
         {
-            uri = _uri;
+            uriConverter = _uriConverter;
             httpService = _httpService;
             dataBase = _dataBase;
             _securityRepository = securityRepository;
             _tradeRepository = tradeRepository;
+            _dateConverter = dateConverter;
         }
 
-        public void Fill(string url_init, string postfix_date_init)
+        public async void Fill(string url_init, string postfix_date_init)
         {
-            var secList = dataBase.FromSecurityTable();
+            var secList = await _securityRepository.Get(); // dataBase.FromSecurityTable();
 
             foreach (var secItem in secList)
             {
@@ -43,52 +43,46 @@ namespace moex_web.Shedulers
             string postfix_from = "?from=";
 
             var date = postfix_date_init;
-            var dateEnd = ConvertDate(DateTime.Now.Date.AddDays(-1)).ToString();
+            var dateEnd = _dateConverter.ConvertDate(DateTime.Now.Date.AddDays(-1)).ToString();
 
             while (DateTime.Compare(DateTime.Parse(date), DateTime.Parse(dateEnd)) <= 0)
             {
-                var url = uri.ConcatenateUrlFrom(url_init, secId, postfix_json, postfix_from, date);
+                var url = uriConverter.ConcatenateUrlFrom(url_init, secId, postfix_json, postfix_from, date);
                 Root root = httpService.GetAsync1<Root>(url).Result;
 
                 if (root != null)
                 {
-                    int count = uri.GetPageLastDataCount(root);
+                    int count = uriConverter.GetPageLastDataCount(root);
 
                     if (count != 0)
                     {
-                        var pageLastData = uri.GetPageLastData(root, count);
+                        var pageLastData = uriConverter.GetPageLastData(root, count);
                         await Task.Run(() => dataBase.ToTradeTable(root));
-                        date = ConvertDate(pageLastData.Date.AddDays(1));
+                        date = _dateConverter.ConvertDate(pageLastData.Date.AddDays(1));
                     }
                     else
                     {
-                        date = ConvertDate(DateTime.Parse(date).Date.AddDays(1));
+                        date = _dateConverter.ConvertDate(DateTime.Parse(date).Date.AddDays(1));
                     }
                 }
                 else
                 {
-                    date = ConvertDate(DateTime.Parse(date).Date.AddDays(1));
+                    date = _dateConverter.ConvertDate(DateTime.Parse(date).Date.AddDays(1));
                 }
             }
         }
 
-        public string ConvertDate(DateTime date)
-        {
-            var month = date.Month.ToString().Length < 2 ? "0" + date.Month.ToString() : date.Month.ToString();
-            var day = date.Day.ToString().Length < 2 ? "0" + date.Day.ToString() : date.Day.ToString();
-            return date.Year.ToString() + "-" + month + "-" + day;
-        }
-
-        public void UpdateTable(string url_init)
+        public async void UpdateTable(string url_init)
         {
             //var lastTradesInDB = dataBase.FindLastTrades();
-            var lastTradesInDB = _tradeRepository.FindLastTrades().Result;
+            var lastTradesInDB = await _tradeRepository.FindLastTrades();
             //var lastTradesInDB = _tradeRepository.FindLastTrades().Result;
 
             foreach (var lastTrade in lastTradesInDB)
             {
-                string postfix_date_last = ConvertDate(lastTrade.TradeDate.Date.AddDays(1));
-                StartFromSpecifiedPage(url_init, lastTrade.SecId, postfix_date_last);
+                string postfix_date_last = _dateConverter.ConvertDate(lastTrade.TradeDate.Date.AddDays(1));
+                await Task.Run(() => StartFromSpecifiedPage(url_init, lastTrade.SecId, postfix_date_last));
+                //StartFromSpecifiedPage(url_init, lastTrade.SecId, postfix_date_last);
             }
         }
     }

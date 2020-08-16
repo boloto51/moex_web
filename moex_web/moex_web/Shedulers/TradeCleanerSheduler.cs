@@ -9,6 +9,7 @@ using moex_web.Data.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using moex_web.Data.Repositories;
+using moex_web.Converters;
 
 namespace moex_web.Shedulers
 {
@@ -29,8 +30,8 @@ namespace moex_web.Shedulers
         {
             _logger.LogInformation("TradeCleanerSheduler running.");
 
-            //_timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromMinutes(1));
-            _timer = new Timer(DoWork, null, IntervalToStartTimer(), TimeSpan.FromHours(24));
+            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromMinutes(5));
+            //_timer = new Timer(DoWork, null, IntervalToStartTimer(), TimeSpan.FromHours(24));
 
             return Task.CompletedTask;
         }
@@ -50,13 +51,14 @@ namespace moex_web.Shedulers
             using (var scope = _scopeFactory.CreateScope())
             {
                 var _tradeRepository = scope.ServiceProvider.GetRequiredService<ITradeRepository>();
-                var _tradeTable = scope.ServiceProvider.GetRequiredService<ITradeTable>();
+                //var _tradeTable = scope.ServiceProvider.GetRequiredService<ITradeTable>();
+                var _dateConverter = scope.ServiceProvider.GetRequiredService<IDateConverter>();
 
                 var count = Interlocked.Increment(ref executionCount);
 
                 _logger.LogInformation("TradeCleanerSheduler is working. Count: {Count}", count);
 
-                string postfix_date_init = _tradeTable.ConvertDate(DateTime.Now.AddYears(-5));
+                string postfix_date_init = _dateConverter.ConvertDate(DateTime.Now.AddYears(-5));
                 _tradeRepository.DeleteOldTrades(postfix_date_init);
             }
         }

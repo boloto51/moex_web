@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using moex_web.Core.Config;
+using Microsoft.Extensions.DependencyInjection;
+using moex_web.Shedulers;
 
 namespace moex_web
 {
@@ -13,7 +16,8 @@ namespace moex_web
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            //CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().MigrateDatabase().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -21,6 +25,11 @@ namespace moex_web
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                })
+                .ConfigureServices(services =>
+                {
+                    //services.AddHostedService<Worker>();
+                    services.AddHostedService<TradeCleanerSheduler>();
                 });
     }
 }

@@ -1,13 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using moex_web.Data.DbContext;
+using Microsoft.EntityFrameworkCore;
+using moex_web.Data.Repositories;
+using moex_web.Converters;
+using moex_web.Shedulers;
+using moex_web.Services;
 
 namespace moex_web
 {
@@ -24,6 +25,23 @@ namespace moex_web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContextPool<DataContext>(options =>
+            {
+                options.UseMySql(Configuration.GetConnectionString("DataContext"));
+            });
+
+            services.AddScoped<IContextFactory, ContextFactory>();
+            services.AddScoped<ISecurityRepository, SecurityRepository>();
+            services.AddScoped<ITradeRepository, TradeRepository>();
+            services.AddScoped<ISecurityConverter, SecurityConverter>();
+            services.AddScoped<ITradeConverter, TradeConverter>();
+            services.AddScoped<ISecurityTable, SecurityTable>();
+            services.AddScoped<ITradeTable, TradeTable>();
+            services.AddScoped<IUriConverter, UriConverter>();
+            services.AddScoped<IDataBase, DataBase>();
+            services.AddScoped<IHttpService, HttpService>();
+            services.AddSingleton<IHostedService, TradeCleanerSheduler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +68,7 @@ namespace moex_web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Monitoring}/{action=Index}/{id?}");
             });
         }
     }

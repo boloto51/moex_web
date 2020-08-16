@@ -1,0 +1,80 @@
+﻿@model List<MonitoringModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <td>
+            <b>SecId</b>
+        </td>
+        <td>
+            <b>ShortName</b>
+        </td>
+        <td>
+            <b>TradeDate</b>
+        </td>
+        <td>
+            <b>Close</b>
+        </td>
+    </tr>
+    @for (int i = 0; i <= 100; i++)
+    {
+        <tr>
+            <td>
+                @Model[i].SecId
+            </td>
+            <td>
+                @Model[i].ShortName
+            </td>
+            <td>
+                @Model[i].TradeDate.ToShortDateString()
+            </td>
+            <td>
+                @Model[i].Close
+            </td>
+        </tr>
+    }
+    @*@foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.SecId
+                </td>
+                <td>
+                    @item.ShortName
+                </td>
+                <td>
+                    @item.TradeDate
+                </td>
+                <td>
+                    @item.Close
+                </td>
+            </tr>
+        }*@
+    @*@for (int i = 0; i <= 1000; i++)
+        {
+            <tr>
+                <td>
+                    @(i+1)
+                </td>
+                <td>
+                    @Model[i].SecId
+                </td>
+                <td>
+                    @Model[i].ShortName
+                </td>
+                <td>
+                    @Model[i].TradeDate.ToShortDateString()
+                </td>
+                <td>
+                    @Model[i].Close
+                </td>
+            </tr>
+        }*@
+    @**@
+</table>
+

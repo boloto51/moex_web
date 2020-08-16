@@ -41,6 +41,7 @@ namespace moex_web
             services.AddScoped<IUriConverter, UriConverter>();
             services.AddScoped<IDataBase, DataBase>();
             services.AddScoped<IHttpService, HttpService>();
+            services.AddSingleton<IHostedService, TradeCleanerSheduler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

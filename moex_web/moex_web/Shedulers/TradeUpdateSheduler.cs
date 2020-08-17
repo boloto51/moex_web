@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using moex_web.Data.Repositories;
 using moex_web.Converters;
+using moex_web.Core.Config;
 
 namespace moex_web.Shedulers
 {
@@ -19,26 +20,37 @@ namespace moex_web.Shedulers
         private readonly ILogger<TradeCleanerSheduler> _logger;
         private Timer _timer;
         private readonly IServiceScopeFactory _scopeFactory;
+        private IConfigSettings _configSettings;
 
-        public TradeUpdateSheduler(ILogger<TradeCleanerSheduler> logger, IServiceScopeFactory scopeFactory)
+        public TradeUpdateSheduler(ILogger<TradeCleanerSheduler> logger, IServiceScopeFactory scopeFactory,
+            IConfigSettings configSettings)
         {
             _logger = logger;
             _scopeFactory = scopeFactory;
+            _configSettings = configSettings;
         }
 
         public Task StartAsync(CancellationToken stoppingToken)
         {
+            var TargetHours = _configSettings.ApplicationKeys.TradeUpdateShedulerTargetHours;
+            var TargetMinutes = _configSettings.ApplicationKeys.TradeUpdateShedulerTargetMinutes;
+            var HoursPeriod = _configSettings.ApplicationKeys.TradeUpdateShedulerHoursPeriod;
+
+            TimeSpan dueTime = TargetHours == -1 ? TimeSpan.Zero : IntervalToStartTimer(TargetHours, TargetMinutes);
+
             _logger.LogInformation("TradeUpdateSheduler running.");
 
-            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromMinutes(10));
+            //_timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromHours(24));
             //_timer = new Timer(DoWork, null, IntervalToStartTimer(), TimeSpan.FromHours(24));
+            _timer = new Timer(DoWork, null, dueTime, TimeSpan.FromHours(HoursPeriod));
 
             return Task.CompletedTask;
         }
 
-        public TimeSpan IntervalToStartTimer()
+        public TimeSpan IntervalToStartTimer(int hours, int minutes)
         {
-            var targetTime = new DateTime(1, 1, 1, 22, 12, 0).TimeOfDay;
+            //var targetTime = new DateTime(1, 1, 1, 22, 12, 0).TimeOfDay;
+            var targetTime = new DateTime(1, 1, 1, hours, minutes, 0).TimeOfDay;
 
             var nowTime = DateTime.Now.TimeOfDay;
 

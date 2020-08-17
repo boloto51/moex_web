@@ -13,4 +13,8 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\moex_web.Core\moex_web.Core.csproj" />
+  </ItemGroup>
+
 </Project>

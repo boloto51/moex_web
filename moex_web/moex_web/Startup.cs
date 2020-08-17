@@ -9,6 +9,8 @@ using moex_web.Data.Repositories;
 using moex_web.Converters;
 using moex_web.Shedulers;
 using moex_web.Services;
+using moex_web.Core.Config;
+using System;
 
 namespace moex_web
 {
@@ -28,9 +30,17 @@ namespace moex_web
 
             services.AddDbContextPool<DataContext>(options =>
             {
-                options.UseMySql(Configuration.GetConnectionString("DataContext"));
+                options.UseMySql(Configuration.GetConnectionString("DataContext"),
+                mySqlOptions => 
+                {
+                    mySqlOptions.EnableRetryOnFailure(
+                            maxRetryCount: 10,
+                            maxRetryDelay: TimeSpan.FromSeconds(30),
+                            errorNumbersToAdd: null);
+                });
             });
 
+            services.AddSingleton<IConfigSettings, ConfigSettings>();
             services.AddScoped<IContextFactory, ContextFactory>();
             services.AddScoped<ISecurityRepository, SecurityRepository>();
             services.AddScoped<ITradeRepository, TradeRepository>();

@@ -49,7 +49,6 @@ namespace moex_web
             services.AddScoped<ISecurityTable, SecurityTable>();
             services.AddScoped<ITradeTable, TradeTable>();
             services.AddScoped<IUriConverter, UriConverter>();
-            services.AddScoped<IDataBase, DataBase>();
             services.AddScoped<IHttpService, HttpService>();
             services.AddSingleton<IHostedService, TradeCleanerSheduler>();
             services.AddSingleton<IDateConverter, DateConverter>();

@@ -11,20 +11,20 @@ namespace moex_web.Shedulers
     {
         IUriConverter uriConverter;
         IHttpService httpService;
-        IDataBase dataBase;
         ISecurityRepository _securityRepository;
         ITradeRepository _tradeRepository;
         IDateConverter _dateConverter;
+        ITradeConverter _tradeConverter;
 
-        public TradeTable(IUriConverter _uriConverter, IHttpService _httpService, IDataBase _dataBase,
-            ISecurityRepository securityRepository, ITradeRepository tradeRepository, IDateConverter dateConverter)
+        public TradeTable(IUriConverter _uriConverter, IHttpService _httpService, ISecurityRepository securityRepository,
+             ITradeRepository tradeRepository, IDateConverter dateConverter, ITradeConverter tradeConverter)
         {
             uriConverter = _uriConverter;
             httpService = _httpService;
-            dataBase = _dataBase;
             _securityRepository = securityRepository;
             _tradeRepository = tradeRepository;
             _dateConverter = dateConverter;
+            _tradeConverter = tradeConverter;
         }
 
         public async void Fill(string url_init, string postfix_date_init)
@@ -57,7 +57,7 @@ namespace moex_web.Shedulers
                     if (count != 0)
                     {
                         var pageLastData = uriConverter.GetPageLastData(root, count);
-                        await Task.Run(() => dataBase.ToTradeTable(root));
+                        await Task.Run(() => ToTradeTable(root));
                         date = _dateConverter.ConvertDate(pageLastData.Date.AddDays(1));
                     }
                     else
@@ -85,5 +85,13 @@ namespace moex_web.Shedulers
                 //StartFromSpecifiedPage(url_init, lastTrade.SecId, postfix_date_last);
             }
         }
+
+        public async void ToTradeTable(Root root)
+        {
+            var tradeFromDB = await _tradeRepository.Get(); // FromTradeTable();
+            var tradeFromConverter = _tradeConverter.ToEntity(root, tradeFromDB);
+            await _tradeRepository.AddRange(tradeFromConverter);
+        }
+
     }
 }

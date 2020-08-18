@@ -25,7 +25,7 @@ namespace moex_web.Core.Config
             keys.TradeCleanerShedulerStartTime =
                 TimeSpan.Parse(temp.FirstOrDefault(e => e.Key == "TradeCleanerShedulerStartTime")?.Value ?? "0:00");
             keys.TradeUpdaterShedulerStartTime =
-                TimeSpan.Parse(temp.FirstOrDefault(e => e.Key == "TradeUpdateShedulerStartTime")?.Value ?? "0:00");
+                TimeSpan.Parse(temp.FirstOrDefault(e => e.Key == "TradeUpdaterShedulerStartTime")?.Value ?? "0:00");
             return keys;
         }
     }

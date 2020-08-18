@@ -32,20 +32,20 @@ namespace moex_web.Shedulers
 
         public Task StartAsync(CancellationToken stoppingToken)
         {
-            //var startTime = _configSettings.ApplicationKeys.TradeCleanerShedulerStartTime;
-            var startTime = TimeSpan.Parse(DateTime.Now.AddMinutes(1).TimeOfDay.ToString());
+            var startTime = _configSettings.ApplicationKeys.TradeCleanerShedulerStartTime;
+            //var dueTime = IntervalToStartTimer(startTime);
+            var dueTime = TimeSpan.Parse((DateTime.Now.AddMinutes(1) - DateTime.Now).ToString());
             _logger.LogInformation("TradeCleanerSheduler running.\t" + DateTime.Now);
-            _timer = new Timer(DoWork, null, startTime, TimeSpan.FromHours(24));
+            _timer = new Timer(DoWork, null, dueTime, TimeSpan.FromHours(24));
             return Task.CompletedTask;
         }
 
-        //public TimeSpan IntervalToStartTimer(int hours, int minutes)
-        //{
-        //    var targetTime = new DateTime(1, 1, 1, hours, minutes, 0).TimeOfDay;
-        //    var nowTime = DateTime.Now.TimeOfDay;
-        //    return TimeSpan.Compare(targetTime, nowTime) >= 0 ?
-        //        targetTime - nowTime : targetTime - nowTime + new TimeSpan(24, 0, 0);
-        //}
+        public TimeSpan IntervalToStartTimer(TimeSpan startTime)
+        {
+            var nowTime = DateTime.Now.TimeOfDay;
+            return TimeSpan.Compare(startTime, nowTime) >= 0 ?
+                startTime - nowTime : startTime - nowTime + new TimeSpan(24, 0, 0);
+        }
 
         private void DoWork(object state)
         {

@@ -32,27 +32,27 @@ namespace moex_web.Shedulers
 
         public Task StartAsync(CancellationToken stoppingToken)
         {
-            //var startTime = _configSettings.ApplicationKeys.TradeUpdaterShedulerStartTime;
-            var startTime = TimeSpan.Parse((DateTime.Now.AddMinutes(1) - DateTime.Now).ToString());
+            var startTime = _configSettings.ApplicationKeys.TradeUpdaterShedulerStartTime;
+            //var dueTime = IntervalToStartTimer(startTime);
+            var dueTime = TimeSpan.Parse((DateTime.Now.AddMinutes(1) - DateTime.Now).ToString());
             _logger.LogInformation("TradeUpdateSheduler running.\t" + DateTime.Now);
-            _timer = new Timer(DoWork, null, startTime, TimeSpan.FromHours(24));
+            _timer = new Timer(DoWork, null, dueTime, TimeSpan.FromHours(24));
             return Task.CompletedTask;
         }
 
-        //public TimeSpan IntervalToStartTimer(int hours, int minutes)
-        //{
-        //    var targetTime = new DateTime(1, 1, 1, hours, minutes, 0).TimeOfDay;
-        //    var nowTime = DateTime.Now.TimeOfDay;
-        //    return TimeSpan.Compare(targetTime, nowTime) >= 0 ?
-        //        targetTime - nowTime : targetTime - nowTime + new TimeSpan(24, 0, 0);
-        //}
+        public TimeSpan IntervalToStartTimer(TimeSpan startTime)
+        {
+            var nowTime = DateTime.Now.TimeOfDay;
+            return TimeSpan.Compare(startTime, nowTime) >= 0 ?
+                startTime - nowTime : startTime - nowTime + new TimeSpan(24, 0, 0);
+        }
 
         private void DoWork(object state)
         {
             using (var scope = _scopeFactory.CreateScope())
             {
-                //var count = Interlocked.Increment(ref executionCount);
-                //_logger.LogInformation("TradeCleanerSheduler is working.\t" + DateTime.Now + "\tCount: {Count}", count);
+                var count = Interlocked.Increment(ref executionCount);
+                _logger.LogInformation("TradeCleanerSheduler is working.\t" + DateTime.Now + "\tCount: {Count}", count);
 
                 string url_init = "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities";
                 var _tradeRepository = scope.ServiceProvider.GetRequiredService<ITradeRepository>();

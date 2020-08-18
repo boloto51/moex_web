@@ -33,7 +33,7 @@ namespace moex_web
                 })
             .ConfigureServices(services =>
             {
-                services.AddHostedService<TradeUpdateSheduler>();
+                services.AddHostedService<TradeUpdaterSheduler>();
             });
 
         //public static IHostBuilder CreateHostBuilder(string[] args) =>

@@ -22,25 +22,10 @@ namespace moex_web.Core.Config
         {
             var keys = new ApplicationKeys();
             var temp = _configuration.GetSection("appKeys").GetChildren().ToList();
-            //keys.CacheLifeTime = Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "CacheLifeTime")?.Value ?? "500");
-            //keys.TradeCleanerShedulerTargetHours = 
-            //    temp.FirstOrDefault(e => e.Key == "TradeCleanerShedulerTargetHours").Value != null ?
-            //    Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "TradeCleanerShedulerTargetHours").Value) : (int?)null;
-            keys.TradeCleanerShedulerTargetHours =
-                Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "TradeCleanerShedulerTargetHours")?.Value ?? "0");
-            //keys.TradeUpdateShedulerTargetHours =
-            //    temp.FirstOrDefault(e => e.Key == "TradeUpdateShedulerTargetHours").Value != null ?
-            //    Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "TradeUpdateShedulerTargetHours").Value) : (int?)null;
-            keys.TradeUpdateShedulerTargetHours =
-                Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "TradeUpdateShedulerTargetHours")?.Value ?? "0");
-            keys.TradeCleanerShedulerTargetMinutes = 
-                Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "TradeCleanerShedulerTargetMinutes")?.Value ?? "0");
-            keys.TradeUpdateShedulerTargetMinutes =
-                Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "TradeUpdateShedulerTargetMinutes")?.Value ?? "0");
-            keys.TradeCleanerShedulerHoursPeriod =
-                Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "TradeCleanerShedulerHoursPeriod")?.Value ?? "24");
-            keys.TradeUpdateShedulerHoursPeriod =
-                Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "TradeUpdateShedulerHoursPeriod")?.Value ?? "24");
+            keys.TradeCleanerShedulerStartTime =
+                TimeSpan.Parse(temp.FirstOrDefault(e => e.Key == "TradeCleanerShedulerStartTime")?.Value ?? "0:00");
+            keys.TradeUpdaterShedulerStartTime =
+                TimeSpan.Parse(temp.FirstOrDefault(e => e.Key == "TradeUpdateShedulerStartTime")?.Value ?? "0:00");
             return keys;
         }
     }

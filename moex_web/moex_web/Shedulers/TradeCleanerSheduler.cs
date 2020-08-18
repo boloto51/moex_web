@@ -32,30 +32,20 @@ namespace moex_web.Shedulers
 
         public Task StartAsync(CancellationToken stoppingToken)
         {
-            var TargetHours = _configSettings.ApplicationKeys.TradeCleanerShedulerTargetHours;
-            var TargetMinutes = _configSettings.ApplicationKeys.TradeCleanerShedulerTargetMinutes;
-            var HoursPeriod = _configSettings.ApplicationKeys.TradeCleanerShedulerHoursPeriod;
-
-            TimeSpan dueTime = TargetHours == -1 ? TimeSpan.Zero : IntervalToStartTimer(TargetHours, TargetMinutes);
-
+            //var startTime = _configSettings.ApplicationKeys.TradeCleanerShedulerStartTime;
+            var startTime = TimeSpan.Parse(DateTime.Now.AddMinutes(1).ToString());
             _logger.LogInformation("TradeCleanerSheduler running.");
-
-            //_timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromHours(24));
-            //_timer = new Timer(DoWork, null, IntervalToStartTimer(), TimeSpan.FromHours(24));
-            _timer = new Timer(DoWork, null, dueTime, TimeSpan.FromHours(HoursPeriod));
-
+            _timer = new Timer(DoWork, null, startTime, TimeSpan.FromHours(24));
             return Task.CompletedTask;
         }
 
-        public TimeSpan IntervalToStartTimer(int hours, int minutes)
-        {
-            var targetTime = new DateTime(1, 1, 1, hours, minutes, 0).TimeOfDay;
-
-            var nowTime = DateTime.Now.TimeOfDay;
-
-            return TimeSpan.Compare(targetTime, nowTime) >= 0 ?
-                targetTime - nowTime : targetTime - nowTime + new TimeSpan(24, 0, 0);
-        }
+        //public TimeSpan IntervalToStartTimer(int hours, int minutes)
+        //{
+        //    var targetTime = new DateTime(1, 1, 1, hours, minutes, 0).TimeOfDay;
+        //    var nowTime = DateTime.Now.TimeOfDay;
+        //    return TimeSpan.Compare(targetTime, nowTime) >= 0 ?
+        //        targetTime - nowTime : targetTime - nowTime + new TimeSpan(24, 0, 0);
+        //}
 
         private void DoWork(object state)
         {

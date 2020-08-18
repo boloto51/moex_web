@@ -17,12 +17,12 @@ namespace moex_web.Shedulers
     public class TradeUpdaterSheduler : IHostedService, IDisposable
     {
         private int executionCount = 0;
-        private readonly ILogger<TradeCleanerSheduler> _logger;
+        private readonly ILogger<TradeUpdaterSheduler> _logger;
         private Timer _timer;
         private readonly IServiceScopeFactory _scopeFactory;
         private IConfigSettings _configSettings;
 
-        public TradeUpdaterSheduler(ILogger<TradeCleanerSheduler> logger, IServiceScopeFactory scopeFactory,
+        public TradeUpdaterSheduler(ILogger<TradeUpdaterSheduler> logger, IServiceScopeFactory scopeFactory,
             IConfigSettings configSettings)
         {
             _logger = logger;
@@ -33,7 +33,7 @@ namespace moex_web.Shedulers
         public Task StartAsync(CancellationToken stoppingToken)
         {
             //var startTime = _configSettings.ApplicationKeys.TradeUpdaterShedulerStartTime;
-            var startTime = TimeSpan.Parse(DateTime.Now.AddMinutes(1).TimeOfDay.ToString());
+            var startTime = TimeSpan.Parse((DateTime.Now.AddMinutes(1) - DateTime.Now).ToString());
             _logger.LogInformation("TradeUpdateSheduler running.\t" + DateTime.Now);
             _timer = new Timer(DoWork, null, startTime, TimeSpan.FromHours(24));
             return Task.CompletedTask;
@@ -51,8 +51,8 @@ namespace moex_web.Shedulers
         {
             using (var scope = _scopeFactory.CreateScope())
             {
-                var count = Interlocked.Increment(ref executionCount);
-                _logger.LogInformation("TradeCleanerSheduler is working.\t" + DateTime.Now + "\tCount: {Count}", count);
+                //var count = Interlocked.Increment(ref executionCount);
+                //_logger.LogInformation("TradeCleanerSheduler is working.\t" + DateTime.Now + "\tCount: {Count}", count);
 
                 string url_init = "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities";
                 var _tradeRepository = scope.ServiceProvider.GetRequiredService<ITradeRepository>();

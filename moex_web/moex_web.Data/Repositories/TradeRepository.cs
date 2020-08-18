@@ -51,8 +51,11 @@ namespace moex_web.Data.Repositories
         {
             var context = _context.GetContext();
             var trades = await context.Trades.Where(t => DateTime.Compare(t.TradeDate, DateTime.Parse(oldDate)) < 0).ToListAsync();
-            context.Trades.RemoveRange(trades);
-            context.SaveChanges();
+            if (trades != null)
+            {
+                context.Trades.RemoveRange(trades);
+                context.SaveChanges();
+            }
         }
     }
 }

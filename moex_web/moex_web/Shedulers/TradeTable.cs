@@ -29,7 +29,7 @@ namespace moex_web.Shedulers
 
         public async void Fill(string url_init, string postfix_date_init)
         {
-            var secList = await _securityRepository.Get(); // dataBase.FromSecurityTable();
+            var secList = await _securityRepository.Get();
 
             foreach (var secItem in secList)
             {

@@ -16,6 +16,7 @@ namespace moex_web.Shedulers
 {
     public class TradeUpdaterSheduler : IHostedService, IDisposable
     {
+        private int executionCount = 0;
         private readonly ILogger<TradeCleanerSheduler> _logger;
         private Timer _timer;
         private readonly IServiceScopeFactory _scopeFactory;
@@ -32,8 +33,8 @@ namespace moex_web.Shedulers
         public Task StartAsync(CancellationToken stoppingToken)
         {
             //var startTime = _configSettings.ApplicationKeys.TradeUpdaterShedulerStartTime;
-            var startTime = TimeSpan.Parse(DateTime.Now.AddMinutes(1).ToString());
-            _logger.LogInformation("TradeUpdateSheduler running.");
+            var startTime = TimeSpan.Parse(DateTime.Now.AddMinutes(1).TimeOfDay.ToString());
+            _logger.LogInformation("TradeUpdateSheduler running.\t" + DateTime.Now);
             _timer = new Timer(DoWork, null, startTime, TimeSpan.FromHours(24));
             return Task.CompletedTask;
         }
@@ -50,6 +51,9 @@ namespace moex_web.Shedulers
         {
             using (var scope = _scopeFactory.CreateScope())
             {
+                var count = Interlocked.Increment(ref executionCount);
+                _logger.LogInformation("TradeCleanerSheduler is working.\t" + DateTime.Now + "\tCount: {Count}", count);
+
                 string url_init = "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities";
                 var _tradeRepository = scope.ServiceProvider.GetRequiredService<ITradeRepository>();
                 var _tradeTable = scope.ServiceProvider.GetRequiredService<ITradeTable>();
@@ -70,7 +74,7 @@ namespace moex_web.Shedulers
 
         public Task StopAsync(CancellationToken stoppingToken)
         {
-            _logger.LogInformation("TradeUpdateSheduler is stopping.");
+            _logger.LogInformation("TradeUpdateSheduler is stopping.\t" + DateTime.Now);
 
             _timer?.Change(Timeout.Infinite, 0);
 

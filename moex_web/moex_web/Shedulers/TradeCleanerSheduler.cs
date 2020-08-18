@@ -33,8 +33,8 @@ namespace moex_web.Shedulers
         public Task StartAsync(CancellationToken stoppingToken)
         {
             //var startTime = _configSettings.ApplicationKeys.TradeCleanerShedulerStartTime;
-            var startTime = TimeSpan.Parse(DateTime.Now.AddMinutes(1).ToString());
-            _logger.LogInformation("TradeCleanerSheduler running.");
+            var startTime = TimeSpan.Parse(DateTime.Now.AddMinutes(1).TimeOfDay.ToString());
+            _logger.LogInformation("TradeCleanerSheduler running.\t" + DateTime.Now);
             _timer = new Timer(DoWork, null, startTime, TimeSpan.FromHours(24));
             return Task.CompletedTask;
         }
@@ -57,7 +57,7 @@ namespace moex_web.Shedulers
 
                 var count = Interlocked.Increment(ref executionCount);
 
-                _logger.LogInformation("TradeCleanerSheduler is working. Count: {Count}", count);
+                _logger.LogInformation("TradeCleanerSheduler is working.\t" + DateTime.Now + "\tCount: {Count}", count);
 
                 string postfix_date_init = _dateConverter.ConvertDate(DateTime.Now.AddYears(-5));
                 _tradeRepository.DeleteOldTrades(postfix_date_init);
@@ -66,7 +66,7 @@ namespace moex_web.Shedulers
 
         public Task StopAsync(CancellationToken stoppingToken)
         {
-            _logger.LogInformation("TradeCleanerSheduler is stopping.");
+            _logger.LogInformation("TradeCleanerSheduler is stopping.\t" + DateTime.Now);
 
             _timer?.Change(Timeout.Infinite, 0);
 

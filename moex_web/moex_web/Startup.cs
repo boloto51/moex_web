@@ -35,7 +35,7 @@ namespace moex_web
                 {
                     mySqlOptions.EnableRetryOnFailure(
                             maxRetryCount: 10,
-                            maxRetryDelay: TimeSpan.FromSeconds(30),
+                            maxRetryDelay: TimeSpan.FromSeconds(1),
                             errorNumbersToAdd: null);
                 });
             });

@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "moex_web", "moex_web\moex_w
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "moex_web.Data", "moex_web.Data\moex_web.Data.csproj", "{3ABEDB38-DCB6-476D-B182-025F021B87EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "moex_web.Core", "moex_web.Core\moex_web.Core.csproj", "{C97DD501-9C9C-4839-B82F-EFDDE135B37F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3ABEDB38-DCB6-476D-B182-025F021B87EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3ABEDB38-DCB6-476D-B182-025F021B87EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3ABEDB38-DCB6-476D-B182-025F021B87EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C97DD501-9C9C-4839-B82F-EFDDE135B37F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C97DD501-9C9C-4839-B82F-EFDDE135B37F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C97DD501-9C9C-4839-B82F-EFDDE135B37F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C97DD501-9C9C-4839-B82F-EFDDE135B37F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

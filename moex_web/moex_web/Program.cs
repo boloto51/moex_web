@@ -30,6 +30,21 @@ namespace moex_web
                 {
                     //services.AddHostedService<Worker>();
                     services.AddHostedService<TradeCleanerSheduler>();
-                });
+                })
+            .ConfigureServices(services =>
+            {
+                services.AddHostedService<TradeUpdaterSheduler>();
+            });
+
+        //public static IHostBuilder CreateHostBuilder(string[] args) =>
+        //    Host.CreateDefaultBuilder(args)
+        //        .ConfigureWebHostDefaults(webBuilder =>
+        //        {
+        //            webBuilder.UseStartup<Startup>();
+        //        })
+        //        .ConfigureServices(services =>
+        //        {
+        //            services.AddHostedService<TradeUpdaterSheduler>();
+        //        });
     }
 }

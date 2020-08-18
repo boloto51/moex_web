@@ -38,21 +38,24 @@ namespace moex_web.Data.Repositories
         public async Task<List<Trade>> FindLastTrades()
         {
             var context = _context.GetContext();
-            return await context.Trades.GroupBy(t => t.SecId)
+            return context.Trades.ToList().GroupBy(t => t.SecId)
                         .Select(g => new Trade()
                         {
                             SecId = g.Key,
                             TradeDate = g.Select(t => t.TradeDate).LastOrDefault(),
                             Close = g.Select(t => t.Close).LastOrDefault()
-                        }).ToListAsync();
+                        }).ToList();
         }
 
         public async void DeleteOldTrades(string oldDate)
         {
             var context = _context.GetContext();
             var trades = await context.Trades.Where(t => DateTime.Compare(t.TradeDate, DateTime.Parse(oldDate)) < 0).ToListAsync();
-            context.Trades.RemoveRange(trades);
-            context.SaveChanges();
+            if (trades != null)
+            {
+                context.Trades.RemoveRange(trades);
+                context.SaveChanges();
+            }
         }
     }
 }

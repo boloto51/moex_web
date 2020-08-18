@@ -10,7 +10,6 @@ namespace moex_web.Shedulers
     {
         public void Fill(string url_init, string postfix_date_init);
         public void StartFromSpecifiedPage(string url_init, string secId, string postfix_date_init);
-        public string ConvertDate(DateTime date);
         public void UpdateTable(string url_init);
     }
 }

@@ -27,8 +27,8 @@ namespace moex_web.Controllers
             var securities = await _securityRepository.Get();
             var trades = await _tradeRepository.Get();
 
-
-
+            //if ((securities.Count != 0) && (trades.Count != 0))
+            //{
             var models = trades.Select(t => new MonitoringModel
             {
                 SecId = t.SecId,
@@ -38,6 +38,20 @@ namespace moex_web.Controllers
             });
 
             return View(models.ToList());
+            //}
+            //else
+            //{
+            //    var models = new List<MonitoringModel>();
+            //    models.Add(new MonitoringModel()
+            //    {
+            //        SecId = null,
+            //        ShortName = null,
+            //        TradeDate = DateTime.Now,
+            //        Close = null
+            //    });
+            //    return View(models.ToList());
+            //}
+
         }
 
         // GET: Monitoring/Details/5

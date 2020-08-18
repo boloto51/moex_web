@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\moex_web.Core\moex_web.Core.csproj" />
     <ProjectReference Include="..\moex_web.Data\moex_web.Data.csproj" />
   </ItemGroup>
 

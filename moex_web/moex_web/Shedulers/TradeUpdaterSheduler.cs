@@ -14,15 +14,15 @@ using moex_web.Core.Config;
 
 namespace moex_web.Shedulers
 {
-    public class TradeCleanerSheduler : IHostedService, IDisposable
+    public class TradeUpdaterSheduler : IHostedService, IDisposable
     {
         private int executionCount = 0;
-        private readonly ILogger<TradeCleanerSheduler> _logger;
+        private readonly ILogger<TradeUpdaterSheduler> _logger;
         private Timer _timer;
         private readonly IServiceScopeFactory _scopeFactory;
         private IConfigSettings _configSettings;
 
-        public TradeCleanerSheduler(ILogger<TradeCleanerSheduler> logger, IServiceScopeFactory scopeFactory,
+        public TradeUpdaterSheduler(ILogger<TradeUpdaterSheduler> logger, IServiceScopeFactory scopeFactory,
             IConfigSettings configSettings)
         {
             _logger = logger;
@@ -32,10 +32,10 @@ namespace moex_web.Shedulers
 
         public Task StartAsync(CancellationToken stoppingToken)
         {
-            var startTime = _configSettings.ApplicationKeys.TradeCleanerShedulerStartTime;
+            var startTime = _configSettings.ApplicationKeys.TradeUpdaterShedulerStartTime;
             //var dueTime = IntervalToStartTimer(startTime);
             var dueTime = TimeSpan.Parse((DateTime.Now.AddMinutes(1) - DateTime.Now).ToString());
-            _logger.LogInformation("TradeCleanerSheduler running.\t" + DateTime.Now);
+            _logger.LogInformation("TradeUpdateSheduler running.\t" + DateTime.Now);
             _timer = new Timer(DoWork, null, dueTime, TimeSpan.FromHours(24));
             return Task.CompletedTask;
         }
@@ -51,22 +51,30 @@ namespace moex_web.Shedulers
         {
             using (var scope = _scopeFactory.CreateScope())
             {
-                var _tradeRepository = scope.ServiceProvider.GetRequiredService<ITradeRepository>();
-                //var _tradeTable = scope.ServiceProvider.GetRequiredService<ITradeTable>();
-                var _dateConverter = scope.ServiceProvider.GetRequiredService<IDateConverter>();
-
                 var count = Interlocked.Increment(ref executionCount);
-
                 _logger.LogInformation("TradeCleanerSheduler is working.\t" + DateTime.Now + "\tCount: {Count}", count);
 
+                string url_init = "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities";
+                var _tradeRepository = scope.ServiceProvider.GetRequiredService<ITradeRepository>();
+                var _tradeTable = scope.ServiceProvider.GetRequiredService<ITradeTable>();
+                var _dateConverter = scope.ServiceProvider.GetRequiredService<IDateConverter>();
+
                 string postfix_date_init = _dateConverter.ConvertDate(DateTime.Now.AddYears(-5));
-                _tradeRepository.DeleteOldTrades(postfix_date_init);
+
+                if (_tradeRepository.Get().Result.Count == 0)
+                {
+                    _tradeTable.Fill(url_init, postfix_date_init);
+                }
+                else
+                {
+                    _tradeTable.UpdateTable(url_init);
+                }
             }
         }
 
         public Task StopAsync(CancellationToken stoppingToken)
         {
-            _logger.LogInformation("TradeCleanerSheduler is stopping.\t" + DateTime.Now);
+            _logger.LogInformation("TradeUpdateSheduler is stopping.\t" + DateTime.Now);
 
             _timer?.Change(Timeout.Infinite, 0);
 

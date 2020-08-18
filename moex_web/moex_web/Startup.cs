@@ -9,6 +9,8 @@ using moex_web.Data.Repositories;
 using moex_web.Converters;
 using moex_web.Shedulers;
 using moex_web.Services;
+using moex_web.Core.Config;
+using System;
 
 namespace moex_web
 {
@@ -28,9 +30,17 @@ namespace moex_web
 
             services.AddDbContextPool<DataContext>(options =>
             {
-                options.UseMySql(Configuration.GetConnectionString("DataContext"));
+                options.UseMySql(Configuration.GetConnectionString("DataContext"),
+                mySqlOptions => 
+                {
+                    mySqlOptions.EnableRetryOnFailure(
+                            maxRetryCount: 10,
+                            maxRetryDelay: TimeSpan.FromSeconds(1),
+                            errorNumbersToAdd: null);
+                });
             });
 
+            services.AddSingleton<IConfigSettings, ConfigSettings>();
             services.AddScoped<IContextFactory, ContextFactory>();
             services.AddScoped<ISecurityRepository, SecurityRepository>();
             services.AddScoped<ITradeRepository, TradeRepository>();
@@ -39,9 +49,10 @@ namespace moex_web
             services.AddScoped<ISecurityTable, SecurityTable>();
             services.AddScoped<ITradeTable, TradeTable>();
             services.AddScoped<IUriConverter, UriConverter>();
-            services.AddScoped<IDataBase, DataBase>();
             services.AddScoped<IHttpService, HttpService>();
-            services.AddSingleton<IHostedService, TradeCleanerSheduler>();
+            //services.AddSingleton<IHostedService, TradeCleanerSheduler>();
+            services.AddSingleton<IHostedService, TradeUpdaterSheduler>();
+            services.AddSingleton<IDateConverter, DateConverter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

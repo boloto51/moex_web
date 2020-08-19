@@ -12,13 +12,13 @@
             <b>SecId</b>
         </td>
         <td>
-            <b>ShortName</b>
+            <b>InitClose</b>
         </td>
         <td>
-            <b>TradeDate</b>
+            <b>CurrentClose</b>
         </td>
         <td>
-            <b>Close</b>
+            <b>Percent</b>
         </td>
     </tr>
     @if (Model.Count != 0)
@@ -30,13 +30,13 @@
                     @Model[i].SecId
                 </td>
                 <td>
-                    @Model[i].ShortName
+                    @Model[i].InitClose
                 </td>
                 <td>
-                    @Model[i].TradeDate.ToShortDateString()
+                    @Model[i].CurrentClose
                 </td>
                 <td>
-                    @Model[i].Close
+                    @Model[i].Percent
                 </td>
             </tr>
         }

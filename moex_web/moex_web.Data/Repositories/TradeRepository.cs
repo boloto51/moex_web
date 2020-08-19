@@ -47,14 +47,14 @@ namespace moex_web.Data.Repositories
                         }).ToList();
         }
 
-        public async void DeleteOldTrades(string oldDate)
+        public async Task DeleteOldTrades(string oldDate)
         {
             var context = _context.GetContext();
             var trades = await context.Trades.Where(t => DateTime.Compare(t.TradeDate, DateTime.Parse(oldDate)) < 0).ToListAsync();
             if (trades != null)
             {
                 context.Trades.RemoveRange(trades);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
     }

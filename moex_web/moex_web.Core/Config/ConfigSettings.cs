@@ -26,6 +26,10 @@ namespace moex_web.Core.Config
                 TimeSpan.Parse(temp.FirstOrDefault(e => e.Key == "TradeCleanerShedulerStartTime")?.Value ?? "0:00");
             keys.TradeUpdaterShedulerStartTime =
                 TimeSpan.Parse(temp.FirstOrDefault(e => e.Key == "TradeUpdaterShedulerStartTime")?.Value ?? "0:00");
+            keys.MonitoringUpdaterShedulerStartTime =
+                TimeSpan.Parse(temp.FirstOrDefault(e => e.Key == "MonitoringUpdaterShedulerStartTime")?.Value ?? "0:00");
+            keys.MonitoringUpdaterShedulerDaysAgo =
+                Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "MonitoringUpdaterShedulerDaysAgo")?.Value ?? "30");
             return keys;
         }
     }

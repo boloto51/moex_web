@@ -44,6 +44,7 @@ namespace moex_web
             services.AddScoped<IContextFactory, ContextFactory>();
             services.AddScoped<ISecurityRepository, SecurityRepository>();
             services.AddScoped<ITradeRepository, TradeRepository>();
+            services.AddScoped<IMonitoringRepository, MonitoringRepository>();
             services.AddScoped<ISecurityConverter, SecurityConverter>();
             services.AddScoped<ITradeConverter, TradeConverter>();
             services.AddScoped<ISecurityTable, SecurityTable>();
@@ -51,7 +52,8 @@ namespace moex_web
             services.AddScoped<IUriConverter, UriConverter>();
             services.AddScoped<IHttpService, HttpService>();
             //services.AddSingleton<IHostedService, TradeCleanerSheduler>();
-            services.AddSingleton<IHostedService, TradeUpdaterSheduler>();
+            //services.AddSingleton<IHostedService, TradeUpdaterSheduler>();
+            services.AddSingleton<IHostedService, MonitoringUpdaterSheduler>();
             services.AddSingleton<IDateConverter, DateConverter>();
         }
 

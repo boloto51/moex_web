@@ -11,5 +11,6 @@ namespace moex_web.Data.Repositories
         public Task AddRange(List<Monitoring> monitorings);
         public Task Update(Monitoring monitoring);
         public Task Delete(string SecId);
+        public Task RemoveRange(List<Monitoring> monitorings);
     }
 }

@@ -69,5 +69,12 @@ namespace moex_web.Data.Repositories
             context.Monitorings.RemoveRange(monitorings);
             await context.SaveChangesAsync();
         }
+
+        public async Task RemoveRange(List<Monitoring> monitorings)
+        {
+            var context = _context.GetContext();
+            context.Monitorings.RemoveRange(monitorings);
+            await context.SaveChangesAsync();
+        }
     }
 }

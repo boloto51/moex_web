@@ -21,26 +21,23 @@ namespace moex_web.Data.Migrations
                 {
                     b.Property<string>("SecId")
                         .HasColumnName("SecId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(36) CHARACTER SET utf8mb4");
 
                     b.Property<decimal?>("CurrentClose")
                         .HasColumnName("CurrentClose")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(14,4)");
 
                     b.Property<decimal?>("InitClose")
                         .HasColumnName("InitClose")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(14,4)");
 
                     b.Property<decimal?>("Percent")
                         .HasColumnName("Percent")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<string>("SecuritySecId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .HasColumnType("decimal(14,4)");
 
                     b.HasKey("SecId");
 
-                    b.HasIndex("SecuritySecId");
+                    b.HasIndex("SecId");
 
                     b.ToTable("monitoring");
                 });
@@ -49,11 +46,11 @@ namespace moex_web.Data.Migrations
                 {
                     b.Property<string>("SecId")
                         .HasColumnName("SecId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(36) CHARACTER SET utf8mb4");
 
                     b.Property<string>("ShortName")
                         .HasColumnName("ShortName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(189) CHARACTER SET utf8mb4");
 
                     b.HasKey("SecId");
 
@@ -64,15 +61,15 @@ namespace moex_web.Data.Migrations
                 {
                     b.Property<DateTime>("TradeDate")
                         .HasColumnName("TradeDate")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("SecId")
                         .HasColumnName("SecId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(36) CHARACTER SET utf8mb4");
 
                     b.Property<decimal?>("Close")
                         .HasColumnName("Close")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(14,4)");
 
                     b.HasKey("TradeDate", "SecId");
 
@@ -83,9 +80,9 @@ namespace moex_web.Data.Migrations
 
             modelBuilder.Entity("moex_web.Data.Entities.Monitoring", b =>
                 {
-                    b.HasOne("moex_web.Data.Entities.Security", null)
+                    b.HasOne("moex_web.Data.Entities.Security", "Security")
                         .WithMany("Monitorings")
-                        .HasForeignKey("SecuritySecId");
+                        .HasForeignKey("SecId");
                 });
 
             modelBuilder.Entity("moex_web.Data.Entities.Trade", b =>

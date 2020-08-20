@@ -28,16 +28,11 @@ namespace moex_web.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var securities = await _securityRepository.Get();
-            var trades = await _tradeRepository.Get();
+            //var securities = await _securityRepository.Get();
+            //var trades = await _tradeRepository.Get();
             var monitorings = await _monitoringRepository.Get();
 
-            ////var initClose = trades.Where(s => s.SecId == t.SecId
-            ////        && s.TradeDate <= DateTime.Now.AddDays(-30)).OrderByDescending(s => s.TradeDate)
-            ////        .Select(s => s.Close).FirstOrDefault();
-            ////var currentClose = trades.Where(s => s.SecId == t.SecId
-            ////        && s.TradeDate <= DateTime.Now.AddDays(-1)).OrderByDescending(s => s.TradeDate)
-            ////        .Select(s => s.Close).FirstOrDefault();
+            return View(monitorings.ToList());
             //if (monitorings != null)
             //{
             //    var models = monitorings.Select(m => new MonitoringModel
@@ -54,7 +49,6 @@ namespace moex_web.Controllers
             //{
             //    return View(new List<MonitoringModel>());
             //}
-            return View(new List<MonitoringModel>());
         }
 
         // GET: Monitoring/Details/5

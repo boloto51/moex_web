@@ -36,6 +36,8 @@ namespace moex_web.Shedulers
         {
             var lastTradesInDB = await _tradeRepository.FindLastTrades();
             var agoTradesInDB = await _tradeRepository.FindAgoTrades(daysAgo);
+            var monitoringForDel = await _monitoringRepository.Get();
+            await _monitoringRepository.RemoveRange(monitoringForDel);
 
             List<Monitoring> monitoring = new List<Monitoring>();
 

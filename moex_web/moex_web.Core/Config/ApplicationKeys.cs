@@ -6,5 +6,7 @@ namespace moex_web.Core.Config
     {
         public virtual TimeSpan TradeCleanerShedulerStartTime { get; set; }
         public virtual TimeSpan TradeUpdaterShedulerStartTime { get; set; }
+        public virtual TimeSpan MonitoringUpdaterShedulerStartTime { get; set; }
+        public virtual int MonitoringUpdaterShedulerDaysAgo { get; set; }
     }
 }

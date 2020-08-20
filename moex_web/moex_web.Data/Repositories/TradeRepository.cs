@@ -47,15 +47,27 @@ namespace moex_web.Data.Repositories
                         }).ToList();
         }
 
-        public async void DeleteOldTrades(string oldDate)
+        public async Task DeleteOldTrades(string oldDate)
         {
             var context = _context.GetContext();
             var trades = await context.Trades.Where(t => DateTime.Compare(t.TradeDate, DateTime.Parse(oldDate)) < 0).ToListAsync();
             if (trades != null)
             {
                 context.Trades.RemoveRange(trades);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
+        }
+
+        public async Task<List<Trade>> FindAgoTrades(int daysAgo)
+        {
+            var context = _context.GetContext();
+            return context.Trades.ToList().Where(t => t.TradeDate <= DateTime.Now.AddDays(-1 * daysAgo))
+                .OrderByDescending(t => t.TradeDate).GroupBy(t => t.SecId).Select(g => new Trade()
+                {
+                    SecId = g.Key,
+                    TradeDate = g.Select(t => t.TradeDate).FirstOrDefault(),
+                    Close = g.Select(t => t.Close).FirstOrDefault()
+                }).ToList();
         }
     }
 }

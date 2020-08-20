@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using moex_web.Data.Entities;
 using moex_web.Data.Repositories;
 using moex_web.Models;
 
@@ -13,45 +14,41 @@ namespace moex_web.Controllers
     {
         private readonly ISecurityRepository _securityRepository;
         private readonly ITradeRepository _tradeRepository;
+        private readonly IMonitoringRepository _monitoringRepository;
 
-        public MonitoringController(ISecurityRepository securityRepository, ITradeRepository tradeRepository)
+        public MonitoringController(ISecurityRepository securityRepository, ITradeRepository tradeRepository,
+            IMonitoringRepository monitoringRepository)
         {
             _securityRepository = securityRepository;
             _tradeRepository = tradeRepository;
+            _monitoringRepository = monitoringRepository;
         }
 
         // GET: Monitoring
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var securities = await _securityRepository.Get();
-            var trades = await _tradeRepository.Get();
+            //var securities = await _securityRepository.Get();
+            //var trades = await _tradeRepository.Get();
+            var monitorings = await _monitoringRepository.Get();
 
-            //if ((securities.Count != 0) && (trades.Count != 0))
+            return View(monitorings.ToList());
+            //if (monitorings != null)
             //{
-            var models = trades.Select(t => new MonitoringModel
-            {
-                SecId = t.SecId,
-                ShortName = securities.Where(s => s.SecId == t.SecId).Select(s => s.ShortName).FirstOrDefault(),
-                TradeDate = t.TradeDate.Date,
-                Close = t.Close
-            });
+            //    var models = monitorings.Select(m => new MonitoringModel
+            //    {
+            //        SecId = m.SecId,
+            //        InitClose = m.InitClose,
+            //        CurrentClose = m.CurrentClose,
+            //        Percent = m.Percent
+            //    });
 
-            return View(models.ToList());
+            //    return View(models.ToList());
             //}
             //else
             //{
-            //    var models = new List<MonitoringModel>();
-            //    models.Add(new MonitoringModel()
-            //    {
-            //        SecId = null,
-            //        ShortName = null,
-            //        TradeDate = DateTime.Now,
-            //        Close = null
-            //    });
-            //    return View(models.ToList());
+            //    return View(new List<MonitoringModel>());
             //}
-
         }
 
         // GET: Monitoring/Details/5

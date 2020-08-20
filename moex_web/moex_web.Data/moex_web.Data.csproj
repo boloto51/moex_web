@@ -1,8 +1,29 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200819201615_Monitoring.cs" />
+    <Compile Remove="Migrations\20200819201615_Monitoring.Designer.cs" />
+    <Compile Remove="Migrations\20200820151753_Monitoring.cs" />
+    <Compile Remove="Migrations\20200820151753_Monitoring.Designer.cs" />
+    <Compile Remove="Migrations\20200820152403_Monitoring.cs" />
+    <Compile Remove="Migrations\20200820152403_Monitoring.Designer.cs" />
+    <Compile Remove="Migrations\20200820152632_Monitoring.cs" />
+    <Compile Remove="Migrations\20200820152632_Monitoring.Designer.cs" />
+    <Compile Remove="Migrations\20200820152903_Monitoring.cs" />
+    <Compile Remove="Migrations\20200820152903_Monitoring.Designer.cs" />
+    <Compile Remove="Migrations\20200820153213_Monitoring.cs" />
+    <Compile Remove="Migrations\20200820153213_Monitoring.Designer.cs" />
+    <Compile Remove="Migrations\20200820153800_Monitoring.cs" />
+    <Compile Remove="Migrations\20200820153800_Monitoring.Designer.cs" />
+    <Compile Remove="Migrations\20200820154027_Monitoring.cs" />
+    <Compile Remove="Migrations\20200820154027_Monitoring.Designer.cs" />
+    <Compile Remove="Migrations\20200820154536_Monitoring.cs" />
+    <Compile Remove="Migrations\20200820154536_Monitoring.Designer.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.6" />

@@ -57,5 +57,17 @@ namespace moex_web.Data.Repositories
                 await context.SaveChangesAsync();
             }
         }
+
+        public async Task<List<Trade>> FindAgoTrades(int daysAgo)
+        {
+            var context = _context.GetContext();
+            return context.Trades.ToList().Where(t => t.TradeDate <= DateTime.Now.AddDays(-1 * daysAgo))
+                .OrderByDescending(t => t.TradeDate).GroupBy(t => t.SecId).Select(g => new Trade()
+                {
+                    SecId = g.Key,
+                    TradeDate = g.Select(t => t.TradeDate).FirstOrDefault(),
+                    Close = g.Select(t => t.Close).FirstOrDefault()
+                }).ToList();
+        }
     }
 }

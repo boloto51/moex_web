@@ -9,7 +9,7 @@ using moex_web.Data.DbContext;
 namespace moex_web.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200820154536_Monitoring")]
+    [Migration("20200820163046_Monitoring")]
     partial class Monitoring
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

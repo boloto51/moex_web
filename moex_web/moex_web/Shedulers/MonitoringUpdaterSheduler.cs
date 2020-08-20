@@ -54,21 +54,8 @@ namespace moex_web.Shedulers
                 var count = Interlocked.Increment(ref executionCount);
                 _logger.LogInformation("MonitoringUpdaterSheduler is working.\t" + DateTime.Now + "\tCount: {Count}", count);
 
-                //string url_init = "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities";
-                //var _tradeRepository = scope.ServiceProvider.GetRequiredService<ITradeRepository>();
-                //var _tradeTable = scope.ServiceProvider.GetRequiredService<ITradeTable>();
-                //var _dateConverter = scope.ServiceProvider.GetRequiredService<IDateConverter>();
-
-                //string postfix_date_init = _dateConverter.ConvertDate(DateTime.Now.AddYears(-5));
-
-                //if (_tradeRepository.Get().Result.Count == 0)
-                //{
-                //    _tradeTable.Fill(url_init, postfix_date_init);
-                //}
-                //else
-                //{
-                //    _tradeTable.UpdateTable(url_init);
-                //}
+                var monitoringTable = scope.ServiceProvider.GetRequiredService<IMonitoringTable>();
+                monitoringTable.UpdateTable(_configSettings.ApplicationKeys.MonitoringUpdaterShedulerDaysAgo);
             }
         }
 

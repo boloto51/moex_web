@@ -13,5 +13,6 @@ namespace moex_web.Data.Repositories
         public Task AddRange(List<Trade> security);
         public Task<List<Trade>> FindLastTrades();
         public Task DeleteOldTrades(string oldDate);
+        public Task<List<Trade>> FindAgoTrades(int daysAgo);
     }
 }

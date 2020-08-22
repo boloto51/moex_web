@@ -10,12 +10,12 @@ namespace moex_web.Shedulers
     public class MonitoringCleanerSheduler : IMonitoringCleanerSheduler
     {
         private int executionCount = 0;
-        private readonly ILogger<MonitoringUpdaterSheduler> _logger;
+        private readonly ILogger<MonitoringCleanerSheduler> _logger;
         private Timer _timer;
         private readonly IServiceScopeFactory _scopeFactory;
         private IConfigSettings _configSettings;
 
-        public MonitoringCleanerSheduler(ILogger<MonitoringUpdaterSheduler> logger, IServiceScopeFactory scopeFactory,
+        public MonitoringCleanerSheduler(ILogger<MonitoringCleanerSheduler> logger, IServiceScopeFactory scopeFactory,
             IConfigSettings configSettings)
         {
             _logger = logger;

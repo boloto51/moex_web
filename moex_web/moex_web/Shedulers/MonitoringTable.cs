@@ -97,7 +97,7 @@ namespace moex_web.Shedulers
 
             foreach (var monitoring in monitoringsInDB)
             {
-                if (monitoring.DeleteDate >= DateTime.Now)
+                if (monitoring.DeleteDate <= DateTime.Now)
                 {
                     await _monitoringRepository.Delete(monitoring.SecId);
                     Console.WriteLine(monitoring.SecId + "\t" + monitoring.InitClose + "\t"

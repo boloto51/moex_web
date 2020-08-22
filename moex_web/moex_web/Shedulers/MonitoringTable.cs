@@ -54,7 +54,7 @@ namespace moex_web.Shedulers
 
                 var currentDropPercent = agoTrade.Close != null ? lastTrade.Close / agoTrade.Close * 100 : null;
 
-                if (agoTrade != null && currentDropPercent >= (decimal?)thresholdDropPercent)
+                if (agoTrade != null && currentDropPercent < 100 && currentDropPercent >= thresholdDropPercent)
                 {
                     //monitorings.Add(new Monitoring()
                     //{
@@ -70,7 +70,7 @@ namespace moex_web.Shedulers
                         InitClose = agoTrade.Close,
                         CurrentClose = lastTrade.Close,
                         Percent = -1 * Math.Round((decimal)(1 - lastTrade.Close / agoTrade.Close), 4) * 100,
-                        DeleteDate = DateTime.Now.AddDays(daysRecordStorage)
+                        DeleteDate = DateTime.Now.AddDays(daysRecordStorage).Date
                     };
 
                     var monitoringInDB = monitoringsInDB.Find(m => m.SecId == agoTrade.SecId);

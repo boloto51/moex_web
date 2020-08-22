@@ -36,6 +36,10 @@ namespace moex_web.Core.Config
                 Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "ThresholdDropPercent")?.Value ?? "10");
             keys.MonitoringDaysRecordStorage =
                 Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "MonitoringDaysRecordStorage")?.Value ?? "7");
+            keys.UrlInit = temp.FirstOrDefault(e => e.Key == "UrlInit")?.Value ?? 
+                "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities";
+            keys.NumberYearsAgo =
+                Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "NumberYearsAgo")?.Value ?? "5");
             return keys;
         }
     }

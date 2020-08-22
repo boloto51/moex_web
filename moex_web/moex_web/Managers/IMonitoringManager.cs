@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace moex_web.Shedulers
+namespace moex_web.Managers
 {
-    public interface IMonitoringTable
+    public interface IMonitoringManager
     {
         public Task UpdateTable();
         public Task DeleteOldRecords();

@@ -11,6 +11,7 @@ using moex_web.Shedulers;
 using moex_web.Services;
 using moex_web.Core.Config;
 using System;
+using moex_web.Managers;
 
 namespace moex_web
 {
@@ -47,9 +48,9 @@ namespace moex_web
             services.AddScoped<IMonitoringRepository, MonitoringRepository>();
             services.AddScoped<ISecurityConverter, SecurityConverter>();
             services.AddScoped<ITradeConverter, TradeConverter>();
-            services.AddScoped<ISecurityTable, SecurityTable>();
-            services.AddScoped<ITradeTable, TradeTable>();
-            services.AddScoped<IMonitoringTable, MonitoringTable>();
+            services.AddScoped<ISecurityManager, SecurityManager>();
+            services.AddScoped<ITradeManager, TradeManager>();
+            services.AddScoped<IMonitoringManager, MonitoringManager>();
             services.AddScoped<IUriConverter, UriConverter>();
             services.AddScoped<IHttpService, HttpService>();
             services.AddSingleton<ITradeCleanerSheduler, TradeCleanerSheduler>();

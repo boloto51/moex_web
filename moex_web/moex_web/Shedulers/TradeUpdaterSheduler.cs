@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using moex_web.Data.Repositories;
 using moex_web.Converters;
 using moex_web.Core.Config;
+using moex_web.Managers;
 
 namespace moex_web.Shedulers
 {
@@ -49,12 +50,13 @@ namespace moex_web.Shedulers
                 var count = Interlocked.Increment(ref executionCount);
                 _logger.LogInformation("TradeCleanerSheduler is working.\t" + DateTime.Now + "\tCount: {Count}", count);
 
-                string url_init = "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities";
+                string url_init = _configSettings.ApplicationKeys.UrlInit;
+                int numberYearsAgo = -1 * _configSettings.ApplicationKeys.NumberYearsAgo;
                 var _tradeRepository = scope.ServiceProvider.GetRequiredService<ITradeRepository>();
-                var _tradeTable = scope.ServiceProvider.GetRequiredService<ITradeTable>();
+                var _tradeTable = scope.ServiceProvider.GetRequiredService<ITradeManager>();
                 var _dateConverter = scope.ServiceProvider.GetRequiredService<IDateConverter>();
 
-                string postfix_date_init = _dateConverter.ConvertDate(DateTime.Now.AddYears(-5));
+                string postfix_date_init = _dateConverter.ConvertDate(DateTime.Now.AddYears(numberYearsAgo));
 
                 if (_tradeRepository.Get().Result.Count == 0)
                 {

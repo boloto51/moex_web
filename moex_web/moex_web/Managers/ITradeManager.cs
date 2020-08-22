@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace moex_web.Shedulers
+namespace moex_web.Managers
 {
-    public interface ITradeTable
+    public interface ITradeManager
     {
         public void Fill(string url_init, string postfix_date_init);
         public void StartFromSpecifiedPage(string url_init, string secId, string postfix_date_init);

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using moex_web.Core.Config;
+using moex_web.Managers;
 
 namespace moex_web.Shedulers
 {
@@ -47,7 +48,7 @@ namespace moex_web.Shedulers
                 var count = Interlocked.Increment(ref executionCount);
                 _logger.LogInformation("MonitoringCleanerSheduler is working.\t" + DateTime.Now + "\tCount: {Count}", count);
 
-                var monitoringTable = scope.ServiceProvider.GetRequiredService<IMonitoringTable>();
+                var monitoringTable = scope.ServiceProvider.GetRequiredService<IMonitoringManager>();
                 monitoringTable.DeleteOldRecords();
             }
         }

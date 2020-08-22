@@ -7,19 +7,24 @@ namespace moex_web.Converters
     public class UriConverter : IUriConverter
     {
         IHttpService _httpService;
+        const int numberLinesOnPage = 100;
 
         public UriConverter(IHttpService httpService)
         {
             _httpService = httpService;
         }
-        public string ConcatenateUrlStart(string url, string json, string postfix, int i = 0)
+        public string ConcatenateUrlStart(string url, int i = 0)
         {
-            return (url + json + postfix + Convert.ToString(i * 100));
+            string json = ".json";
+            string start = "?start=";
+            return (url + json + start + Convert.ToString(i * numberLinesOnPage));
         }
 
-        public string ConcatenateUrlFrom(string url, string secId, string json, string postfix, string date)
+        public string ConcatenateUrlFrom(string url, string secId, string date)
         {
-            return (url + "/" + secId + json + postfix + date);
+            string json = ".json";
+            string from = "?from=";
+            return (url + "/" + secId + json + from + date);
         }
 
         public int GetCountHundredsPages(string url)

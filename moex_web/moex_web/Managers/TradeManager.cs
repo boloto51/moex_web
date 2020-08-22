@@ -5,9 +5,9 @@ using moex_web.Services;
 using System;
 using System.Threading.Tasks;
 
-namespace moex_web.Shedulers
+namespace moex_web.Managers
 {
-    class TradeTable : ITradeTable
+    class TradeManager : ITradeManager
     {
         IUriConverter uriConverter;
         IHttpService httpService;
@@ -16,7 +16,7 @@ namespace moex_web.Shedulers
         IDateConverter _dateConverter;
         ITradeConverter _tradeConverter;
 
-        public TradeTable(IUriConverter _uriConverter, IHttpService _httpService, ISecurityRepository securityRepository,
+        public TradeManager(IUriConverter _uriConverter, IHttpService _httpService, ISecurityRepository securityRepository,
              ITradeRepository tradeRepository, IDateConverter dateConverter, ITradeConverter tradeConverter)
         {
             uriConverter = _uriConverter;
@@ -39,15 +39,12 @@ namespace moex_web.Shedulers
 
         public async void StartFromSpecifiedPage(string url_init, string secId, string postfix_date_init)
         {
-            string postfix_json = ".json";
-            string postfix_from = "?from=";
-
             var date = postfix_date_init;
             var dateEnd = _dateConverter.ConvertDate(DateTime.Now.Date.AddDays(-1)).ToString();
 
             while (DateTime.Compare(DateTime.Parse(date), DateTime.Parse(dateEnd)) <= 0)
             {
-                var url = uriConverter.ConcatenateUrlFrom(url_init, secId, postfix_json, postfix_from, date);
+                var url = uriConverter.ConcatenateUrlFrom(url_init, secId, date);
                 Root root = httpService.GetAsync1<Root>(url).Result;
 
                 if (root != null)

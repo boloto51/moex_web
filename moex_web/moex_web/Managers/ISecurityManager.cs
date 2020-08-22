@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace moex_web.Shedulers
+namespace moex_web.Managers
 {
-    public interface ISecurityTable
+    public interface ISecurityManager
     {
         public void Fill(string url_init);
     }

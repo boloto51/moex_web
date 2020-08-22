@@ -8,9 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace moex_web.Shedulers
+namespace moex_web.Managers
 {
-    public class MonitoringTable : IMonitoringTable
+    public class MonitoringManager : IMonitoringManager
     {
         IUriConverter uriConverter;
         IHttpService httpService;
@@ -21,7 +21,7 @@ namespace moex_web.Shedulers
         ITradeConverter _tradeConverter;
         IConfigSettings _configSettings;
 
-        public MonitoringTable(IUriConverter _uriConverter, IHttpService _httpService, ISecurityRepository securityRepository,
+        public MonitoringManager(IUriConverter _uriConverter, IHttpService _httpService, ISecurityRepository securityRepository,
              ITradeRepository tradeRepository, IMonitoringRepository monitoringRepository,
              IDateConverter dateConverter, ITradeConverter tradeConverter, IConfigSettings configSettings)
         {

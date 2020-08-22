@@ -28,6 +28,13 @@ namespace moex_web.Data.Repositories
             return await _context.GetContext().Monitorings.FirstOrDefaultAsync(s => s.SecId == secId);
         }
 
+        public async Task Add(Monitoring monitoring)
+        {
+            var context = _context.GetContext();
+            context.Monitorings.Add(monitoring);
+            await context.SaveChangesAsync();
+        }
+
         public async Task AddRange(List<Monitoring> monitorings)
         {
             var context = _context.GetContext();
@@ -43,10 +50,16 @@ namespace moex_web.Data.Repositories
 
         public async Task Update(Monitoring monitoring)
         {
-            //security.Theme = null;
-            //var context = _context.GetContext();
-            //context.Patterns.Update(security);
-            //await context.SaveChangesAsync();
+            var context = _context.GetContext();
+            context.Monitorings.Update(monitoring);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task UpdateRange(List<Monitoring> monitoring)
+        {
+            var context = _context.GetContext();
+            context.Monitorings.UpdateRange(monitoring);
+            await context.SaveChangesAsync();
         }
 
         public async Task Delete(string SecId)

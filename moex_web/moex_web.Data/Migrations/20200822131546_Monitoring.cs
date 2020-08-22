@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace moex_web.Data.Migrations
 {
@@ -14,23 +15,12 @@ namespace moex_web.Data.Migrations
                     InitClose = table.Column<decimal>(nullable: true),
                     CurrentClose = table.Column<decimal>(nullable: true),
                     Percent = table.Column<decimal>(nullable: true),
-                    SecuritySecId = table.Column<string>(nullable: true)
+                    RemoveDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_monitoring", x => x.SecId);
-                    table.ForeignKey(
-                        name: "FK_monitoring_security_SecuritySecId",
-                        column: x => x.SecuritySecId,
-                        principalTable: "security",
-                        principalColumn: "SecId",
-                        onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_monitoring_SecuritySecId",
-                table: "monitoring",
-                column: "SecuritySecId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

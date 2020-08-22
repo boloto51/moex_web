@@ -1,20 +1,13 @@
-﻿using Microsoft.Extensions.Hosting;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using moex_web.Services;
-using moex_web.Shedulers;
-using moex_web.Data.DbContext;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using moex_web.Data.Repositories;
-using moex_web.Converters;
 using moex_web.Core.Config;
 
 namespace moex_web.Shedulers
 {
-    public class MonitoringUpdaterSheduler : IHostedService, IDisposable
+    public class MonitoringUpdaterSheduler : IMonitoringUpdaterSheduler// : IHostedService, IDisposable
     {
         private int executionCount = 0;
         private readonly ILogger<MonitoringUpdaterSheduler> _logger;
@@ -55,7 +48,10 @@ namespace moex_web.Shedulers
                 _logger.LogInformation("MonitoringUpdaterSheduler is working.\t" + DateTime.Now + "\tCount: {Count}", count);
 
                 var monitoringTable = scope.ServiceProvider.GetRequiredService<IMonitoringTable>();
-                monitoringTable.UpdateTable(_configSettings.ApplicationKeys.MonitoringUpdaterShedulerDaysAgo);
+                //var daysAgo = _configSettings.ApplicationKeys.MonitoringUpdaterShedulerDaysAgo;
+                //var thresholdDropPercent = _configSettings.ApplicationKeys.ThresholdDropPercent;
+                //var daysRecordStorage = _configSettings.ApplicationKeys.MonitoringDaysRecordStorage;
+                monitoringTable.UpdateTable();
             }
         }
 
@@ -72,6 +68,5 @@ namespace moex_web.Shedulers
         {
             _timer?.Dispose();
         }
-
     }
 }

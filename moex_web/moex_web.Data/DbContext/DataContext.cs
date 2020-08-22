@@ -18,9 +18,9 @@ namespace moex_web.Data.DbContext
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Security>().HasKey(a => new { a.SecId });
             modelBuilder.Entity<Trade>().HasKey(a => new { a.TradeDate, a.SecId });
-            //modelBuilder.Entity<Monitoring>().HasKey(a => new { a.SecId });
             modelBuilder.Entity<Security>().HasMany(s => s.Trades);
             modelBuilder.Entity<Trade>().HasOne(t => t.Security);
+            //modelBuilder.Entity<Monitoring>().HasKey(a => new { a.SecId });
             //modelBuilder.Entity<Monitoring>().HasOne(t => t.Security);
             //modelBuilder.Entity<Monitoring>().HasOne(t => t.Trade);
         }

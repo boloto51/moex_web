@@ -1,12 +1,7 @@
-﻿using Microsoft.Extensions.Hosting;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using moex_web.Services;
-using moex_web.Shedulers;
-using moex_web.Data.DbContext;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using moex_web.Data.Repositories;
 using moex_web.Converters;
@@ -14,7 +9,7 @@ using moex_web.Core.Config;
 
 namespace moex_web.Shedulers
 {
-    public class TradeCleanerSheduler : IHostedService, IDisposable
+    public class TradeCleanerSheduler : ITradeCleanerSheduler// : IHostedService, IDisposable
     {
         private int executionCount = 0;
         private readonly ILogger<TradeCleanerSheduler> _logger;

@@ -7,6 +7,7 @@ namespace moex_web.Shedulers
 {
     public interface IMonitoringTable
     {
-        public Task UpdateTable(int daysAgo);
+        public Task UpdateTable();
+        public Task DeleteOldRecords();
     }
 }

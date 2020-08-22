@@ -52,9 +52,10 @@ namespace moex_web
             services.AddScoped<IMonitoringTable, MonitoringTable>();
             services.AddScoped<IUriConverter, UriConverter>();
             services.AddScoped<IHttpService, HttpService>();
-            //services.AddSingleton<IHostedService, TradeCleanerSheduler>();
-            //services.AddSingleton<IHostedService, TradeUpdaterSheduler>();
-            services.AddSingleton<IHostedService, MonitoringUpdaterSheduler>();
+            services.AddSingleton<ITradeCleanerSheduler, TradeCleanerSheduler>();
+            services.AddSingleton<ITradeUpdaterSheduler, TradeUpdaterSheduler>();
+            services.AddSingleton<IMonitoringUpdaterSheduler, MonitoringUpdaterSheduler>();
+            services.AddSingleton<IMonitoringCleanerSheduler, MonitoringCleanerSheduler>();
             services.AddSingleton<IDateConverter, DateConverter>();
         }
 

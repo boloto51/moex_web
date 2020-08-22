@@ -27,6 +27,10 @@ namespace moex_web.Data.Migrations
                         .HasColumnName("CurrentClose")
                         .HasColumnType("decimal(65,30)");
 
+                    b.Property<DateTime>("DeleteDate")
+                        .HasColumnName("RemoveDate")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<decimal?>("InitClose")
                         .HasColumnName("InitClose")
                         .HasColumnType("decimal(65,30)");
@@ -35,12 +39,7 @@ namespace moex_web.Data.Migrations
                         .HasColumnName("Percent")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<string>("SecuritySecId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
                     b.HasKey("SecId");
-
-                    b.HasIndex("SecuritySecId");
 
                     b.ToTable("monitoring");
                 });
@@ -79,13 +78,6 @@ namespace moex_web.Data.Migrations
                     b.HasIndex("SecId");
 
                     b.ToTable("trade");
-                });
-
-            modelBuilder.Entity("moex_web.Data.Entities.Monitoring", b =>
-                {
-                    b.HasOne("moex_web.Data.Entities.Security", null)
-                        .WithMany("Monitorings")
-                        .HasForeignKey("SecuritySecId");
                 });
 
             modelBuilder.Entity("moex_web.Data.Entities.Trade", b =>

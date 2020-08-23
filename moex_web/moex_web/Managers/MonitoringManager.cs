@@ -51,10 +51,13 @@ namespace moex_web.Managers
             foreach (var lastTrade in lastTradesInDB)
             {
                 var agoTrade = agoTradesInDB.Find(t => t.SecId == lastTrade.SecId);
+                //Monitoring sameSecIdInMonitoringTable = monitoringsInDB.Find(m => m.SecId == lastTrade.SecId);
+                var monitoringInDB = monitoringsInDB.Find(m => m.SecId == lastTrade.SecId);
 
                 var currentDropPercent = agoTrade.Close != null ? lastTrade.Close / agoTrade.Close * 100 : null;
 
-                if (agoTrade != null && currentDropPercent < 100 && currentDropPercent >= thresholdDropPercent)
+                if (agoTrade != null && monitoringInDB == null 
+                    && currentDropPercent < 100 && currentDropPercent >= thresholdDropPercent)
                 {
                     //monitorings.Add(new Monitoring()
                     //{
@@ -73,16 +76,17 @@ namespace moex_web.Managers
                         DeleteDate = DateTime.Now.AddDays(daysRecordStorage).Date
                     };
 
-                    var monitoringInDB = monitoringsInDB.Find(m => m.SecId == agoTrade.SecId);
+                    //var monitoringInDB = monitoringsInDB.Find(m => m.SecId == agoTrade.SecId);
 
-                    if (monitoringInDB != null)
-                    {
-                        await _monitoringRepository.Update(updateMonitoring);
-                    }
-                    else
-                    {
-                        await _monitoringRepository.Add(updateMonitoring);
-                    }
+                    //if (monitoringInDB != null)
+                    //{
+                    //    await _monitoringRepository.Update(updateMonitoring);
+                    //}
+                    //else
+                    //{
+                    //    await _monitoringRepository.Add(updateMonitoring);
+                    //}
+                    await _monitoringRepository.Add(updateMonitoring);
 
                     Console.WriteLine(agoTrade.SecId + "\t" + agoTrade.Close + "\t"
                         + lastTrade.Close + "\t-" + Math.Round((decimal)(1 - lastTrade.Close / agoTrade.Close),4) * 100 + "%");

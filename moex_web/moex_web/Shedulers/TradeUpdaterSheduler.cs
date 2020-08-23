@@ -1,20 +1,16 @@
-﻿using Microsoft.Extensions.Hosting;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using moex_web.Services;
-using moex_web.Shedulers;
-using moex_web.Data.DbContext;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using moex_web.Data.Repositories;
 using moex_web.Converters;
 using moex_web.Core.Config;
+using moex_web.Managers;
 
 namespace moex_web.Shedulers
 {
-    public class TradeUpdaterSheduler : IHostedService, IDisposable
+    public class TradeUpdaterSheduler : ITradeUpdaterSheduler// : IHostedService, IDisposable
     {
         private int executionCount = 0;
         private readonly ILogger<TradeUpdaterSheduler> _logger;
@@ -34,7 +30,7 @@ namespace moex_web.Shedulers
         {
             var startTime = _configSettings.ApplicationKeys.TradeUpdaterShedulerStartTime;
             //var dueTime = IntervalToStartTimer(startTime);
-            var dueTime = TimeSpan.Parse((DateTime.Now.AddMinutes(1) - DateTime.Now).ToString());
+            TimeSpan dueTime = DateTime.Now.AddMinutes(1) - DateTime.Now;
             _logger.LogInformation("TradeUpdateSheduler running.\t" + DateTime.Now);
             _timer = new Timer(DoWork, null, dueTime, TimeSpan.FromHours(24));
             return Task.CompletedTask;
@@ -54,12 +50,14 @@ namespace moex_web.Shedulers
                 var count = Interlocked.Increment(ref executionCount);
                 _logger.LogInformation("TradeCleanerSheduler is working.\t" + DateTime.Now + "\tCount: {Count}", count);
 
-                string url_init = "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities";
+                string url_init = _configSettings.ApplicationKeys.UrlInit;
+                int numberYearsAgo = -1 * _configSettings.ApplicationKeys.NumberYearsAgo;
                 var _tradeRepository = scope.ServiceProvider.GetRequiredService<ITradeRepository>();
-                var _tradeTable = scope.ServiceProvider.GetRequiredService<ITradeTable>();
+                var _tradeTable = scope.ServiceProvider.GetRequiredService<ITradeManager>();
                 var _dateConverter = scope.ServiceProvider.GetRequiredService<IDateConverter>();
 
-                string postfix_date_init = _dateConverter.ConvertDate(DateTime.Now.AddYears(-5));
+                //string postfix_date_init = _dateConverter.ConvertDate(DateTime.Now.AddYears(numberYearsAgo));
+                string postfix_date_init = DateTime.Now.AddYears(numberYearsAgo).ToString("yyyy-MM-dd");
 
                 if (_tradeRepository.Get().Result.Count == 0)
                 {

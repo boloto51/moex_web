@@ -21,6 +21,9 @@
         <td>
             <b>Percent</b>
         </td>
+        <td>
+            <b>DeleteDate</b>
+        </td>
     </tr>
     @if (Model.Count != 0)
     {
@@ -39,26 +42,29 @@
                 <td>
                     @Model[i].Percent
                 </td>
+                <td>
+                    @Model[i].DeleteDate
+                </td>
             </tr>
         }
     }
     @*@foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @item.SecId
-            </td>
-            <td>
-                @item.ShortName
-            </td>
-            <td>
-                @item.TradeDate
-            </td>
-            <td>
-                @item.Close
-            </td>
-        </tr>
-    }*@
+        {
+            <tr>
+                <td>
+                    @item.SecId
+                </td>
+                <td>
+                    @item.ShortName
+                </td>
+                <td>
+                    @item.TradeDate
+                </td>
+                <td>
+                    @item.Close
+                </td>
+            </tr>
+        }*@
     @*@for (int i = 0; i <= 1000; i++)
         {
             <tr>

@@ -26,18 +26,23 @@ namespace moex_web.Converters
                 //if (!String.IsNullOrWhiteSpace(item.ToString()) && String.IsNullOrEmpty(tradeDateFromDB))
                 //{
                 var close = item[11] == null ? null : item[11].ToString();
-                var _close = String.IsNullOrWhiteSpace(close) ? (decimal?)null : Convert.ToDecimal(close.Replace(".", ","));
 
-                tradeFromConverter.Add(new Trade
+                if (close != null)
                 {
-                    TradeDate = DateTime.Parse(item[1].ToString()).Date,
-                    SecId = item[3].ToString(),
-                    Close = _close
-                    //CLOSE = String.IsNullOrWhiteSpace(close) ?
-                    //    (decimal?)null : Convert.ToDecimal(close.Replace(".", ","))
-                });
-                Console.WriteLine(DateTime.Parse(item[1].ToString()).Date + "\t" + item[3].ToString() + "\t" + _close);
-                //}
+                    //var _close = String.IsNullOrWhiteSpace(close) ? (decimal?)null : Convert.ToDecimal(close.Replace(".", ","));
+                    var _close = Convert.ToDecimal(close.Replace(".", ","));
+
+                    tradeFromConverter.Add(new Trade
+                    {
+                        TradeDate = DateTime.Parse(item[1].ToString()).Date,
+                        SecId = item[3].ToString(),
+                        Close = _close
+                        //CLOSE = String.IsNullOrWhiteSpace(close) ?
+                        //    (decimal?)null : Convert.ToDecimal(close.Replace(".", ","))
+                    });
+                    Console.WriteLine(DateTime.Parse(item[1].ToString()).Date + "\t" + item[3].ToString() + "\t" + _close);
+                    //}
+                }
             }
 
             return tradeFromConverter;

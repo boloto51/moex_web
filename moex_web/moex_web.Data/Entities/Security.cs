@@ -14,6 +14,6 @@ namespace moex_web.Data.Entities
         public string ShortName { get; set; }
 
         public virtual ICollection<Trade> Trades { get; set; }
-        public virtual ICollection<Monitoring> Monitorings { get; set; }
+        //public virtual ICollection<Monitoring> Monitorings { get; set; }
     }
 }

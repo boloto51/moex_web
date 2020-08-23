@@ -1,20 +1,14 @@
-﻿using Microsoft.Extensions.Hosting;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using moex_web.Services;
-using moex_web.Shedulers;
-using moex_web.Data.DbContext;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using moex_web.Data.Repositories;
-using moex_web.Converters;
 using moex_web.Core.Config;
+using moex_web.Managers;
 
 namespace moex_web.Shedulers
 {
-    public class MonitoringUpdaterSheduler : IHostedService, IDisposable
+    public class MonitoringUpdaterSheduler : IMonitoringUpdaterSheduler// : IHostedService, IDisposable
     {
         private int executionCount = 0;
         private readonly ILogger<MonitoringUpdaterSheduler> _logger;
@@ -34,7 +28,7 @@ namespace moex_web.Shedulers
         {
             var startTime = _configSettings.ApplicationKeys.MonitoringUpdaterShedulerStartTime;
             //var dueTime = IntervalToStartTimer(startTime);
-            var dueTime = TimeSpan.Parse((DateTime.Now.AddMinutes(1) - DateTime.Now).ToString());
+            TimeSpan dueTime = DateTime.Now.AddMinutes(1) - DateTime.Now;
             _logger.LogInformation("MonitoringUpdaterSheduler running.\t" + DateTime.Now);
             _timer = new Timer(DoWork, null, dueTime, TimeSpan.FromHours(24));
             return Task.CompletedTask;
@@ -54,8 +48,11 @@ namespace moex_web.Shedulers
                 var count = Interlocked.Increment(ref executionCount);
                 _logger.LogInformation("MonitoringUpdaterSheduler is working.\t" + DateTime.Now + "\tCount: {Count}", count);
 
-                var monitoringTable = scope.ServiceProvider.GetRequiredService<IMonitoringTable>();
-                monitoringTable.UpdateTable(_configSettings.ApplicationKeys.MonitoringUpdaterShedulerDaysAgo);
+                var monitoringTable = scope.ServiceProvider.GetRequiredService<IMonitoringManager>();
+                //var daysAgo = _configSettings.ApplicationKeys.MonitoringUpdaterShedulerDaysAgo;
+                //var thresholdDropPercent = _configSettings.ApplicationKeys.ThresholdDropPercent;
+                //var daysRecordStorage = _configSettings.ApplicationKeys.MonitoringDaysRecordStorage;
+                monitoringTable.UpdateTable();
             }
         }
 
@@ -72,6 +69,5 @@ namespace moex_web.Shedulers
         {
             _timer?.Dispose();
         }
-
     }
 }

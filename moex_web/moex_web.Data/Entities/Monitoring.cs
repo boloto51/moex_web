@@ -16,6 +16,8 @@ namespace moex_web.Data.Entities
         public decimal? CurrentClose { get; set; }
         [Column("Percent")]
         public decimal? Percent { get; set; }
+        [Column("RemoveDate")]
+        public DateTime DeleteDate { get; set; }
 
         //public virtual Security Security { get; set; }
         //public virtual Trade Trade { get; set; }

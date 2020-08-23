@@ -30,6 +30,16 @@ namespace moex_web.Core.Config
                 TimeSpan.Parse(temp.FirstOrDefault(e => e.Key == "MonitoringUpdaterShedulerStartTime")?.Value ?? "0:00");
             keys.MonitoringUpdaterShedulerDaysAgo =
                 Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "MonitoringUpdaterShedulerDaysAgo")?.Value ?? "30");
+            keys.MonitoringCleanerShedulerStartTime =
+                TimeSpan.Parse(temp.FirstOrDefault(e => e.Key == "MonitoringCleanerShedulerStartTime")?.Value ?? "0:00");
+            keys.ThresholdDropPercent =
+                Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "ThresholdDropPercent")?.Value ?? "10");
+            keys.MonitoringDaysRecordStorage =
+                Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "MonitoringDaysRecordStorage")?.Value ?? "7");
+            keys.UrlInit = temp.FirstOrDefault(e => e.Key == "UrlInit")?.Value ?? 
+                "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities";
+            keys.NumberYearsAgo =
+                Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "NumberYearsAgo")?.Value ?? "5");
             return keys;
         }
     }

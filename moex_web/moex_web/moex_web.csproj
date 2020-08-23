@@ -21,6 +21,11 @@
     <ProjectReference Include="..\moex_web.Data\moex_web.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="app\scripts\" />
+    <Folder Include="wwwroot\css\" />
+  </ItemGroup>
+
 
 
 </Project>

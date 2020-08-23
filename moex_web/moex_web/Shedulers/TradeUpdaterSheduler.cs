@@ -30,7 +30,7 @@ namespace moex_web.Shedulers
         {
             var startTime = _configSettings.ApplicationKeys.TradeUpdaterShedulerStartTime;
             //var dueTime = IntervalToStartTimer(startTime);
-            var dueTime = TimeSpan.Parse((DateTime.Now.AddMinutes(1) - DateTime.Now).ToString());
+            TimeSpan dueTime = DateTime.Now.AddMinutes(1) - DateTime.Now;
             _logger.LogInformation("TradeUpdateSheduler running.\t" + DateTime.Now);
             _timer = new Timer(DoWork, null, dueTime, TimeSpan.FromHours(24));
             return Task.CompletedTask;
@@ -56,7 +56,8 @@ namespace moex_web.Shedulers
                 var _tradeTable = scope.ServiceProvider.GetRequiredService<ITradeManager>();
                 var _dateConverter = scope.ServiceProvider.GetRequiredService<IDateConverter>();
 
-                string postfix_date_init = _dateConverter.ConvertDate(DateTime.Now.AddYears(numberYearsAgo));
+                //string postfix_date_init = _dateConverter.ConvertDate(DateTime.Now.AddYears(numberYearsAgo));
+                string postfix_date_init = DateTime.Now.AddYears(numberYearsAgo).ToString("yyyy-MM-dd");
 
                 if (_tradeRepository.Get().Result.Count == 0)
                 {

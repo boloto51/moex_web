@@ -40,7 +40,8 @@ namespace moex_web.Managers
         public async void StartFromSpecifiedPage(string url_init, string secId, string postfix_date_init)
         {
             var date = postfix_date_init;
-            var dateEnd = _dateConverter.ConvertDate(DateTime.Now.Date.AddDays(-1)).ToString();
+            //var dateEnd = _dateConverter.ConvertDate(DateTime.Now.Date.AddDays(-1)).ToString();
+            var dateEnd = DateTime.Now.Date.AddDays(-1).ToString("yyyy-MM-dd");
 
             while (DateTime.Compare(DateTime.Parse(date), DateTime.Parse(dateEnd)) <= 0)
             {
@@ -55,16 +56,19 @@ namespace moex_web.Managers
                     {
                         var pageLastData = uriConverter.GetPageLastData(root, count);
                         await Task.Run(() => ToTradeTable(root));
-                        date = _dateConverter.ConvertDate(pageLastData.Date.AddDays(1));
+                        //date = _dateConverter.ConvertDate(pageLastData.Date.AddDays(1));
+                        date = pageLastData.Date.AddDays(1).ToString("yyyy-MM-dd");
                     }
                     else
                     {
-                        date = _dateConverter.ConvertDate(DateTime.Parse(date).Date.AddDays(1));
+                        //date = _dateConverter.ConvertDate(DateTime.Parse(date).Date.AddDays(1));
+                        date = DateTime.Parse(date).Date.AddDays(1).ToString("yyyy-MM-dd");
                     }
                 }
                 else
                 {
-                    date = _dateConverter.ConvertDate(DateTime.Parse(date).Date.AddDays(1));
+                    //date = _dateConverter.ConvertDate(DateTime.Parse(date).Date.AddDays(1));
+                    date = DateTime.Parse(date).Date.AddDays(1).ToString("yyyy-MM-dd");
                 }
             }
         }
@@ -77,7 +81,8 @@ namespace moex_web.Managers
 
             foreach (var lastTrade in lastTradesInDB)
             {
-                string postfix_date_last = _dateConverter.ConvertDate(lastTrade.TradeDate.Date.AddDays(1));
+                //string postfix_date_last = _dateConverter.ConvertDate(lastTrade.TradeDate.Date.AddDays(1));
+                string postfix_date_last = lastTrade.TradeDate.Date.AddDays(1).ToString("yyyy-MM-dd");
                 await Task.Run(() => StartFromSpecifiedPage(url_init, lastTrade.SecId, postfix_date_last));
                 //StartFromSpecifiedPage(url_init, lastTrade.SecId, postfix_date_last);
             }

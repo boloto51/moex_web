@@ -29,7 +29,7 @@ namespace moex_web.Shedulers
         {
             var startTime = _configSettings.ApplicationKeys.TradeCleanerShedulerStartTime;
             //var dueTime = IntervalToStartTimer(startTime);
-            var dueTime = TimeSpan.Parse((DateTime.Now.AddMinutes(1) - DateTime.Now).ToString());
+            TimeSpan dueTime = DateTime.Now.AddMinutes(1) - DateTime.Now;
             _logger.LogInformation("TradeCleanerSheduler running.\t" + DateTime.Now);
             _timer = new Timer(DoWork, null, dueTime, TimeSpan.FromHours(24));
             return Task.CompletedTask;
@@ -54,7 +54,8 @@ namespace moex_web.Shedulers
 
                 _logger.LogInformation("TradeCleanerSheduler is working.\t" + DateTime.Now + "\tCount: {Count}", count);
 
-                string postfix_date_init = _dateConverter.ConvertDate(DateTime.Now.AddYears(-5));
+                //string postfix_date_init = _dateConverter.ConvertDate(DateTime.Now.AddYears(-5));
+                string postfix_date_init = DateTime.Now.AddYears(-5).ToString("yyyy-MM-dd");
                 _tradeRepository.DeleteOldTrades(postfix_date_init);
             }
         }

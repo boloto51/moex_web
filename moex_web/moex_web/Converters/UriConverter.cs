@@ -8,6 +8,9 @@ namespace moex_web.Converters
     {
         IHttpService _httpService;
         const int numberLinesOnPage = 100;
+        string json = ".json";
+        string start = "?start=";
+        string from = "?from=";
 
         public UriConverter(IHttpService httpService)
         {
@@ -15,17 +18,13 @@ namespace moex_web.Converters
         }
         public string ConcatenateUrlStart(string url, int i = 0)
         {
-            string json = ".json";
-            string start = "?start=";
             return (url + json + start + Convert.ToString(i * numberLinesOnPage));
         }
 
-        public string ConcatenateUrlFrom(string url, string secId, string date)
-        {
-            string json = ".json";
-            string from = "?from=";
-            return (url + "/" + secId + json + from + date);
-        }
+        //public string ConcatenateUrlFrom(string url, string secId, string date)
+        //{
+        //    return (url + "/" + secId + json + from + date);
+        //}
 
         public int GetCountHundredsPages(string url)
         {
@@ -33,14 +32,14 @@ namespace moex_web.Converters
             return (int)Math.Truncate(Convert.ToDecimal(root.history_cursor.data[0][1] / 100));
         }
 
-        public int GetPageLastDataCount(Root root)
-        {
-            return root.history.data.Count;
-        }
+        //public int GetPageLastDataCount(Root root)
+        //{
+        //    return root.history.data.Count;
+        //}
 
-        public DateTime GetPageLastData(Root root, int count)
-        {
-            return DateTime.Parse(root.history.data[count - 1][1].ToString());
-        }
+        //public DateTime GetPageLastData(Root root, int count)
+        //{
+        //    return DateTime.Parse(root.history.data[count - 1][1].ToString());
+        //}
     }
 }

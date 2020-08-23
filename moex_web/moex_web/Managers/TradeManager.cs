@@ -15,6 +15,8 @@ namespace moex_web.Managers
         ITradeRepository _tradeRepository;
         IDateConverter _dateConverter;
         ITradeConverter _tradeConverter;
+        string json = ".json";
+        string from = "?from=";
 
         public TradeManager(IUriConverter _uriConverter, IHttpService _httpService, ISecurityRepository securityRepository,
              ITradeRepository tradeRepository, IDateConverter dateConverter, ITradeConverter tradeConverter)
@@ -41,20 +43,23 @@ namespace moex_web.Managers
         {
             var date = postfix_date_init;
             //var dateEnd = _dateConverter.ConvertDate(DateTime.Now.Date.AddDays(-1)).ToString();
-            var dateEnd = DateTime.Now.Date.AddDays(-1).ToString("yyyy-MM-dd");
+            var dateEnd = DateTime.Now.Date.AddDays(-1);
 
-            while (DateTime.Compare(DateTime.Parse(date), DateTime.Parse(dateEnd)) <= 0)
+            while (DateTime.Compare(DateTime.Parse(date), dateEnd) <= 0)
             {
-                var url = uriConverter.ConcatenateUrlFrom(url_init, secId, date);
+                //var url = uriConverter.ConcatenateUrlFrom(url_init, secId, date);
+                var url = url_init + "/" + secId + json + from + date;
                 Root root = httpService.GetAsync1<Root>(url).Result;
 
                 if (root != null)
                 {
-                    int count = uriConverter.GetPageLastDataCount(root);
+                    //int count = uriConverter.GetPageLastDataCount(root);
+                    int count = root.history.data.Count;
 
                     if (count != 0)
                     {
-                        var pageLastData = uriConverter.GetPageLastData(root, count);
+                        //var pageLastData = uriConverter.GetPageLastData(root, count);
+                        var pageLastData = DateTime.Parse(root.history.data[count - 1][1].ToString());
                         await Task.Run(() => ToTradeTable(root));
                         //date = _dateConverter.ConvertDate(pageLastData.Date.AddDays(1));
                         date = pageLastData.Date.AddDays(1).ToString("yyyy-MM-dd");

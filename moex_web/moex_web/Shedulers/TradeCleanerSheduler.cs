@@ -55,7 +55,8 @@ namespace moex_web.Shedulers
                 _logger.LogInformation("TradeCleanerSheduler is working.\t" + DateTime.Now + "\tCount: {Count}", count);
 
                 //string postfix_date_init = _dateConverter.ConvertDate(DateTime.Now.AddYears(-5));
-                string postfix_date_init = DateTime.Now.AddYears(-5).ToString("yyyy-MM-dd");
+                //string postfix_date_init = DateTime.Now.AddYears(-5).ToString("yyyy-MM-dd");
+                var postfix_date_init = DateTime.Now.AddYears(-5);
                 _tradeRepository.DeleteOldTrades(postfix_date_init);
             }
         }

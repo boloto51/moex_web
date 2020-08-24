@@ -5,10 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - moex_web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/General.css" />
 </head>
 <body>
-    <header>
+    <div class="content-wrapper">
+        <div class="main-menu">
+            <div>
+                <a asp-area="" asp-controller="Monitoring" asp-action="Index">Monitoring</a>
+            </div>
+            <div>
+                <a asp-area="" asp-controller="Monitoring" asp-action="Index">In progress</a>
+            </div>
+        </div>
+        <div class="page-content">
+            @RenderBody()
+        </div>
+    </div>
+    @*<header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">moex_web</a>
@@ -44,5 +57,6 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
+        *@
 </body>
 </html>

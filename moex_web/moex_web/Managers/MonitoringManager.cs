@@ -54,7 +54,7 @@ namespace moex_web.Managers
                 //Monitoring sameSecIdInMonitoringTable = monitoringsInDB.Find(m => m.SecId == lastTrade.SecId);
                 var monitoringInDB = monitoringsInDB.Find(m => m.SecId == lastTrade.SecId);
 
-                var currentDropPercent = agoTrade.Close != null ? lastTrade.Close / agoTrade.Close * 100 : null;
+                var currentDropPercent = agoTrade.Close != null ? (1 - lastTrade.Close / agoTrade.Close) * 100 : null;
 
                 if (agoTrade != null && monitoringInDB == null 
                     && currentDropPercent < 100 && currentDropPercent >= thresholdDropPercent)

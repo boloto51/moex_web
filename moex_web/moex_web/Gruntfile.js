@@ -61,7 +61,8 @@ module.exports = function (grunt) {
                     sourceMapRootpath: '../../../../'   // to bubble up from wwwroot/themes/paper/css/site.css
                 },
                 files: {
-                    '<%= paths.cssOut %>/Monitoring.css': '<%= paths.styles %>/Monitoring.less'
+                    '<%= paths.cssOut %>/Monitoring.css': '<%= paths.styles %>/Monitoring.less',
+                    '<%= paths.cssOut %>/General.css': '<%= paths.styles %>/General.less'
                 }
             }
         },

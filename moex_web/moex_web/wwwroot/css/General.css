@@ -1,12 +1,22 @@
 .content-wrapper {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 200px 1fr;
   width: 100%;
   height: 100%;
+}
+.content-wrapper .main-menu {
+  background-color: #4e73df;
 }
 .content-wrapper .main-menu div {
   text-align: center;
   padding: 20px;
+  color: #858796;
+  font-size: 20px;
+  font-family: Calibri;
+}
+.content-wrapper .main-menu div a {
+  color: #ffffff;
+  text-decoration: none;
 }
 .content-wrapper .page-content {
   padding: 35px;

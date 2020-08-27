@@ -24,8 +24,23 @@
         <td>
             <b>DeleteDate</b>
         </td>
+        <td>
+            <b>Sell</b>
+        </td>
     </tr>
-    @if (Model.Count != 0)
+</table>
+<script src="~/js/MonitoringIndexManager.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    $(function () {
+        new MonitoringIndexManagerPack(
+            @Html.Raw(JsonConvert.SerializeObject(Model)),
+            '@Url.Action("Index", "Patterns")?id=',
+            '@(User?.Identity?.IsAuthenticated)',
+            '@Url.Action("SetLearnedState")',
+            '@Url.Action("Index", "Faq")?id=');
+    });
+</script>
+@*@if (Model.Count != 0)
     {
         @for (int i = 0; i < (Model.Count < 100 ? Model.Count : 100); i++)
         {
@@ -47,44 +62,55 @@
                 </td>
             </tr>
         }
-    }
-    @*@foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @item.SecId
-                </td>
-                <td>
-                    @item.ShortName
-                </td>
-                <td>
-                    @item.TradeDate
-                </td>
-                <td>
-                    @item.Close
-                </td>
-            </tr>
-        }*@
-    @*@for (int i = 0; i <= 1000; i++)
-        {
-            <tr>
-                <td>
-                    @(i+1)
-                </td>
-                <td>
-                    @Model[i].SecId
-                </td>
-                <td>
-                    @Model[i].ShortName
-                </td>
-                <td>
-                    @Model[i].TradeDate.ToShortDateString()
-                </td>
-                <td>
-                    @Model[i].Close
-                </td>
-            </tr>
-        }*@
-    @**@
-</table>
-
+    }*@
+@*@foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.SecId
+            </td>
+            <td>
+                @item.ShortName
+            </td>
+            <td>
+                @item.TradeDate
+            </td>
+            <td>
+                @item.Close
+            </td>
+        </tr>
+    }*@
+@*@for (int i = 0; i <= 1000; i++)
+    {
+        <tr>
+            <td>
+                @(i+1)
+            </td>
+            <td>
+                @Model[i].SecId
+            </td>
+            <td>
+                @Model[i].ShortName
+            </td>
+            <td>
+                @Model[i].TradeDate.ToShortDateString()
+            </td>
+            <td>
+                @Model[i].Close
+            </td>
+        </tr>
+    }*@
+@**@
+@*</table>*@
+@*<script src="~/js/ThemesIndex.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        $(function () {
+            new ThemesIndexPack.ThemeManager(
+                @Html.Raw(JsonConvert.SerializeObject(Model)),
+                '@Url.Action("Index", "Patterns")?id=',
+                '@(User?.Identity?.IsAuthenticated)',
+                '@Url.Action("SetLearnedState")',
+                '@Url.Action("Index", "Faq")?id=');
+        });
+    </script>
+*@

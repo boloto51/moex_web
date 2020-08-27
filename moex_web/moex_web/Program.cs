@@ -28,21 +28,20 @@ namespace moex_web
         //        })
         //        .ConfigureServices(services =>
         //        {
-        //            //services.AddHostedService<Worker>();
         //            services.AddHostedService<TradeCleanerSheduler>();
         //        })
         //        .ConfigureServices(services =>
         //        {
         //            services.AddHostedService<TradeUpdaterSheduler>();
         //        })
-        //    .ConfigureServices(services =>
-        //    {
-        //        services.AddHostedService<MonitoringCleanerSheduler>();
-        //    })
-        //    .ConfigureServices(services =>
-        //    {
-        //        services.AddHostedService<MonitoringUpdaterSheduler>();
-        //    });
+        //        .ConfigureServices(services =>
+        //        {
+        //            services.AddHostedService<MonitoringCleanerSheduler>();
+        //        })
+        //        .ConfigureServices(services =>
+        //        {
+        //            services.AddHostedService<MonitoringUpdaterSheduler>();
+        //        });
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)

@@ -5,7 +5,7 @@ module.exports = (env) => {
     return {
         mode: env && env.prod ? "production" : "development",
         entry: {
-            //ThemesIndex: './app/scripts/ThemeManager.ts',
+            MonitoringIndexManager: './app/scripts/MonitoringIndexManager.ts'
         },
         devtool: env && env.prod ? false : "inline-source-map",
         devServer: {

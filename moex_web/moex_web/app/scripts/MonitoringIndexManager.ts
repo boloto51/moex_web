@@ -1,0 +1,124 @@
+﻿import { NetSender } from "./NetSender";
+import { MonitoringIndexModel } from "./MonitoringIndexModel";
+import { EditFieldManager } from "./EditFieldManager";
+
+export class MonitoringIndexManager {
+    deleteUrl: string;
+    editUrl: string;
+    createUrl: string;
+    monitoringUrl: string;
+    createBtnSelector: JQuery;
+    tableBodySelector: JQuery;
+    creationFromSelector: JQuery;
+    creationOkSelector: JQuery;
+    creationInputSelector: JQuery;
+    monitorings: MonitoringIndexModel[];
+
+    constructor(monitorings: MonitoringIndexModel[], deleteUrl: string, editUrl: string, createUrl: string, monitoringUrl: string) {
+        this.deleteUrl = deleteUrl;
+        this.editUrl = editUrl;
+        this.createUrl = createUrl;
+        this.monitoringUrl = monitoringUrl;
+        this.createBtnSelector = $(".create-button");
+        this.creationFromSelector = $(".creation-form");
+        this.creationOkSelector = $(".creation-submit");
+        this.creationInputSelector = $(".creation-form input");
+        this.tableBodySelector = $(".admin-theme-index-page");
+        this.initTable();
+        //this.initCreation();
+    }
+
+    private initTable() {
+        this.monitorings.forEach(monitoring => {
+            this.addElement(monitoring);
+            monitoring.editSelector.on("click", () => {
+                new EditFieldManager(monitoring.nameSelector, monitoring.editSelector, (val) => {
+                    monitoring.SecId = val;
+                    this.updateMonitoring(monitoring);
+                });
+            });
+            //if (monitoring.deleteSelector)
+            //    monitoring.deleteSelector.on("click", () => this.deleteTheme(monitoring));
+        });
+    }
+
+    private updateMonitoring(monitoring: MonitoringIndexModel) {
+        NetSender.post(this.editUrl, monitoring, () => { });
+    }
+
+    private addElement(monitoring: MonitoringIndexModel) {
+        const tr = document.createElement("tr");
+        this.tableBodySelector.append(tr);
+        monitoring.rowSelector = $(tr);
+        //const idTd = document.createElement("td");
+        const secId = document.createElement("td");
+        secId.innerText = monitoring.SecId + "";
+        monitoring.rowSelector.append(secId);
+        monitoring.nameSelector = $(secId);
+        const initClose = document.createElement("td");
+        initClose.innerText = monitoring.InitClose + "";
+        monitoring.rowSelector.append(initClose);
+        const currentClose = document.createElement("td");
+        currentClose.innerText = monitoring.CurrentClose + "";
+        monitoring.rowSelector.append(currentClose);
+        const percent = document.createElement("td");
+        percent.innerText = monitoring.Percent + "";
+        monitoring.rowSelector.append(percent);
+        const deleteDate = document.createElement("td");
+        deleteDate.innerText = monitoring.DeleteDate + "";
+        monitoring.rowSelector.append(deleteDate);
+        const manageTd = document.createElement("td");
+        monitoring.rowSelector.append(manageTd);
+        //this.setManangeButtons(monitoring, $(manageTd));
+    }
+
+    /*private setManangeButtons(monitoring: MonitoringIndexModel, tdSelector: JQuery) {
+        let toPatterns = document.createElement("a");
+        toPatterns.href = this.monitoringUrl + monitoring.Id;
+        tdSelector.append(toPatterns);
+        let element = document.createElement("span");
+        element.classList.add("mid-icon", "list-span");
+        toPatterns.append(element);
+
+        element = document.createElement("span");
+        element.classList.add("mid-icon", "edit-span");
+        tdSelector.append(element);
+        monitoring.editSelector = $(element);
+        if (monitoring.PatternCount !== 0) return;
+        element = document.createElement("span");
+        element.classList.add("mid-icon", "delete-span");
+        tdSelector.append(element);
+        monitoring.deleteSelector = $(element);
+    }
+
+    private initCreation() {
+        this.creationInputSelector.val("");
+        const theme = new ThemeIndexModel();
+        theme.Name = "";
+        theme.PatternCount = 0;
+        this.creationInputSelector.on("input", () => theme.Name = this.creationInputSelector.val() as string);
+        this.createBtnSelector.on("click", () => {
+            this.creationFromSelector.removeClass("hidden-element");
+            this.createBtnSelector.addClass("hidden-element");
+        });
+        this.creationOkSelector.on("click", () => {
+            if (theme.Name.length === 0) return;
+            this.creationFromSelector.addClass("hidden-element");
+            this.createBtnSelector.removeClass("hidden-element");
+            NetSender.post(this.createUrl, theme, (res) => {
+                theme.Id = Number(res);
+                this.addElement(theme);
+            });
+        });
+    }
+
+    private deleteTheme(theme: ThemeIndexModel) {
+        const conf = confirm(`Delete "${theme.Name}"?`);
+        if (conf) {
+            NetSender.post(this.deleteUrl + theme.Id, {}, (r) => {
+                theme.rowSelector.remove();
+                this.themes = this.themes.filter(t => t.Id !== theme.Id);
+            });
+        }
+    }*/
+}

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using moex_web.Core.Config;
 using Microsoft.Extensions.DependencyInjection;
+using moex_web.Config;
 using moex_web.Shedulers;
 
 namespace moex_web

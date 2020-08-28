@@ -33,22 +33,6 @@ namespace moex_web.Controllers
             var monitorings = await _monitoringRepository.Get();
 
             return View(monitorings.ToList());
-            //if (monitorings != null)
-            //{
-            //    var models = monitorings.Select(m => new MonitoringModel
-            //    {
-            //        SecId = m.SecId,
-            //        InitClose = m.InitClose,
-            //        CurrentClose = m.CurrentClose,
-            //        Percent = m.Percent
-            //    });
-
-            //    return View(models.ToList());
-            //}
-            //else
-            //{
-            //    return View(new List<MonitoringModel>());
-            //}
         }
 
         // GET: Monitoring/Details/5

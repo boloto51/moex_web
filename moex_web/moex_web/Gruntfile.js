@@ -62,6 +62,7 @@ module.exports = function (grunt) {
                 },
                 files: {
                     '<%= paths.cssOut %>/Monitoring.css': '<%= paths.styles %>/Monitoring.less',
+                    '<%= paths.cssOut %>/Fonts.css': '<%= paths.styles %>/Fonts.less',
                     '<%= paths.cssOut %>/General.css': '<%= paths.styles %>/General.less'
                 }
             }

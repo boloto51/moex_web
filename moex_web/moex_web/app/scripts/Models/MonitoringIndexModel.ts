@@ -5,9 +5,7 @@ export class MonitoringIndexModel {
     InitClose: number;
     CurrentClose: number;
     Percent: number;
-    DeleteDate: Date = new Date();
+    DeleteDate: Date;
     rowSelector: JQuery;
-    editSelector: JQuery;
-    deleteSelector: JQuery;
-    nameSelector: JQuery;
+    buySelector: JQuery;
 }

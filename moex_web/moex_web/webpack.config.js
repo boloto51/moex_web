@@ -5,7 +5,7 @@ module.exports = (env) => {
     return {
         mode: env && env.prod ? "production" : "development",
         entry: {
-            MonitoringIndexManager: './app/scripts/MonitoringIndexManager.ts'
+            MonitoringIndexManager: './app/scripts/Monitoring/MonitoringIndexManager.ts'
         },
         devtool: env && env.prod ? false : "inline-source-map",
         devServer: {

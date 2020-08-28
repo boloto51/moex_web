@@ -31,8 +31,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="app\scripts\MonitoringIndexManager.ts" />
-    <TypeScriptCompile Include="app\scripts\MonitoringIndexModel.ts" />
+    <TypeScriptCompile Include="app\scripts\Models\MonitoringIndexModel.ts" />
+    <TypeScriptCompile Include="app\scripts\Monitoring\MonitoringIndexManager.ts" />
   </ItemGroup>
 
 

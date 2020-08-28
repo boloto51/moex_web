@@ -1,12 +1,7 @@
-﻿import { NetSender } from "./NetSender";
-import { MonitoringIndexModel } from "./MonitoringIndexModel";
-import { EditFieldManager } from "./EditFieldManager";
+﻿import { NetSender } from "../NetSender";
+import { MonitoringIndexModel } from "../Models/MonitoringIndexModel";
 
 export class MonitoringIndexManager {
-    deleteUrl: string;
-    editUrl: string;
-    createUrl: string;
-    monitoringUrl: string;
     createBtnSelector: JQuery;
     tableBodySelector: JQuery;
     creationFromSelector: JQuery;
@@ -14,16 +9,13 @@ export class MonitoringIndexManager {
     creationInputSelector: JQuery;
     monitorings: MonitoringIndexModel[];
 
-    constructor(monitorings: MonitoringIndexModel[], deleteUrl: string, editUrl: string, createUrl: string, monitoringUrl: string) {
-        this.deleteUrl = deleteUrl;
-        this.editUrl = editUrl;
-        this.createUrl = createUrl;
-        this.monitoringUrl = monitoringUrl;
+    constructor(monitorings: MonitoringIndexModel[],monitoringUrl: string) {
+        this.monitorings = monitorings;
         this.createBtnSelector = $(".create-button");
         this.creationFromSelector = $(".creation-form");
         this.creationOkSelector = $(".creation-submit");
         this.creationInputSelector = $(".creation-form input");
-        this.tableBodySelector = $(".admin-theme-index-page");
+        this.tableBodySelector = $(".monitoring-index-table tbody");
         this.initTable();
         //this.initCreation();
     }
@@ -31,30 +23,20 @@ export class MonitoringIndexManager {
     private initTable() {
         this.monitorings.forEach(monitoring => {
             this.addElement(monitoring);
-            monitoring.editSelector.on("click", () => {
-                new EditFieldManager(monitoring.nameSelector, monitoring.editSelector, (val) => {
-                    monitoring.SecId = val;
-                    this.updateMonitoring(monitoring);
-                });
-            });
-            //if (monitoring.deleteSelector)
-            //    monitoring.deleteSelector.on("click", () => this.deleteTheme(monitoring));
         });
     }
 
     private updateMonitoring(monitoring: MonitoringIndexModel) {
-        NetSender.post(this.editUrl, monitoring, () => { });
+       // NetSender.post(this.editUrl, monitoring, () => { });
     }
 
     private addElement(monitoring: MonitoringIndexModel) {
         const tr = document.createElement("tr");
         this.tableBodySelector.append(tr);
         monitoring.rowSelector = $(tr);
-        //const idTd = document.createElement("td");
         const secId = document.createElement("td");
         secId.innerText = monitoring.SecId + "";
         monitoring.rowSelector.append(secId);
-        monitoring.nameSelector = $(secId);
         const initClose = document.createElement("td");
         initClose.innerText = monitoring.InitClose + "";
         monitoring.rowSelector.append(initClose);
@@ -65,7 +47,7 @@ export class MonitoringIndexManager {
         percent.innerText = monitoring.Percent + "";
         monitoring.rowSelector.append(percent);
         const deleteDate = document.createElement("td");
-        deleteDate.innerText = monitoring.DeleteDate + "";
+        deleteDate.innerText = new Intl.DateTimeFormat('ru', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(monitoring.DeleteDate)) ;
         monitoring.rowSelector.append(deleteDate);
         const manageTd = document.createElement("td");
         monitoring.rowSelector.append(manageTd);

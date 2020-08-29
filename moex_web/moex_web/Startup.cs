@@ -58,7 +58,7 @@ namespace moex_web
             services.AddSingleton<ITradeUpdaterSheduler, TradeUpdaterSheduler>();
             services.AddSingleton<IMonitoringUpdaterSheduler, MonitoringUpdaterSheduler>();
             services.AddSingleton<IMonitoringCleanerSheduler, MonitoringCleanerSheduler>();
-            //services.AddSingleton<IDateConverter, DateConverter>();
+            services.AddSingleton<IDateConverter, DateConverter>();
             services.AddSingleton<IMonitoringConverter, MonitoringConverter>();
             services.AddAntiforgery(options =>
             {

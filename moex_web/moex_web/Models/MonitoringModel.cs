@@ -11,7 +11,7 @@ namespace moex_web.Models
         public string SecName { get; set; }
         public decimal? InitClose { get; set; }
         public decimal? CurrentClose { get; set; }
-        public decimal? Percent => CurrentClose / InitClose * 100;
+        public string Percent => String.Format("{0:0.##}", (-1 * (1 - CurrentClose / InitClose) * 100));
         //public DateTime DeleteDate { get; set; }
         public DateTime ToBuyDate { get; set; }
     }

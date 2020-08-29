@@ -42,7 +42,26 @@ var MonitoringIndexManager = /** @class */ (function () {
         monitoring.rowSelector.append(toByDateDate);
         var manageTd = document.createElement("td");
         monitoring.rowSelector.append(manageTd);
-        //this.setManangeButtons(monitoring, $(manageTd));
+        this.setManangeButtons(monitoring, $(manageTd));
+    };
+    MonitoringIndexManager.prototype.setManangeButtons = function (monitoring, tdSelector) {
+        var toInProgress = document.createElement("button");
+        tdSelector.append(toInProgress);
+        //let toInProgress = document.createElement("a");
+        //toInProgress.href = this.monitoringUrl + monitoring.SecId;
+        //tdSelector.append(toInProgress);
+        //let element = document.createElement("span");
+        //element.classList.add("mid-icon", "list-span");
+        //toInProgress.append(element);
+        //element = document.createElement("span");
+        //element.classList.add("mid-icon", "edit-span");
+        //tdSelector.append(element);
+        //monitoring.editSelector = $(element);
+        //if (monitoring.PatternCount !== 0) return;
+        //element = document.createElement("span");
+        //element.classList.add("mid-icon", "delete-span");
+        //tdSelector.append(element);
+        //monitoring.deleteSelector = $(element);
     };
     return MonitoringIndexManager;
 }());

@@ -54,29 +54,32 @@ export class MonitoringIndexManager {
         monitoring.rowSelector.append(toByDateDate);
         const manageTd = document.createElement("td");
         monitoring.rowSelector.append(manageTd);
-        //this.setManangeButtons(monitoring, $(manageTd));
+        this.setManangeButtons(monitoring, $(manageTd));
     }
 
-    /*private setManangeButtons(monitoring: MonitoringIndexModel, tdSelector: JQuery) {
-        let toPatterns = document.createElement("a");
-        toPatterns.href = this.monitoringUrl + monitoring.Id;
-        tdSelector.append(toPatterns);
-        let element = document.createElement("span");
-        element.classList.add("mid-icon", "list-span");
-        toPatterns.append(element);
+    private setManangeButtons(monitoring: MonitoringIndexModel, tdSelector: JQuery) {
+        let toInProgress = document.createElement("button");
+        tdSelector.append(toInProgress);
 
-        element = document.createElement("span");
-        element.classList.add("mid-icon", "edit-span");
-        tdSelector.append(element);
-        monitoring.editSelector = $(element);
-        if (monitoring.PatternCount !== 0) return;
-        element = document.createElement("span");
-        element.classList.add("mid-icon", "delete-span");
-        tdSelector.append(element);
-        monitoring.deleteSelector = $(element);
+        //let toInProgress = document.createElement("a");
+        //toInProgress.href = this.monitoringUrl + monitoring.SecId;
+        //tdSelector.append(toInProgress);
+        //let element = document.createElement("span");
+        //element.classList.add("mid-icon", "list-span");
+        //toInProgress.append(element);
+
+        //element = document.createElement("span");
+        //element.classList.add("mid-icon", "edit-span");
+        //tdSelector.append(element);
+        //monitoring.editSelector = $(element);
+        //if (monitoring.PatternCount !== 0) return;
+        //element = document.createElement("span");
+        //element.classList.add("mid-icon", "delete-span");
+        //tdSelector.append(element);
+        //monitoring.deleteSelector = $(element);
     }
 
-    private initCreation() {
+    /*private initCreation() {
         this.creationInputSelector.val("");
         const theme = new ThemeIndexModel();
         theme.Name = "";

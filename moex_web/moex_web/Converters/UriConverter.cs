@@ -10,7 +10,7 @@ namespace moex_web.Converters
         const int numberLinesOnPage = 100;
         string json = ".json";
         string start = "?start=";
-        string from = "?from=";
+        //string from = "?from=";
 
         public UriConverter(IHttpService httpService)
         {

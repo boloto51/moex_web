@@ -8,9 +8,11 @@ namespace moex_web.Models
     public class MonitoringModel
     {
         public string SecId { get; set; }
+        public string SecName { get; set; }
         public decimal? InitClose { get; set; }
         public decimal? CurrentClose { get; set; }
-        public decimal? Percent { get; set; }
-        public DateTime DeleteDate { get; set; }
+        public decimal? Percent => CurrentClose / InitClose * 100;
+        //public DateTime DeleteDate { get; set; }
+        public DateTime ToBuyDate { get; set; }
     }
 }

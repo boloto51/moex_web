@@ -1,7 +1,8 @@
 ﻿@using moex_web.Data.Entities
+@using moex_web.Models
 @using Newtonsoft.Json
 @using JsonSerializer = System.Text.Json.JsonSerializer
-@model List<Monitoring>
+@model List<MonitoringModel>
 
 @{
     <link rel="stylesheet" href="~/css/Monitoring.css" />
@@ -13,36 +14,34 @@
     <h1>Monitoring</h1>
     <table class="table table-bordered monitoring-index-table">
         <thead>
-        <tr>
-            <th>
-                <b>SecId</b>
-            </th>
-            <th>
-                <b>InitClose</b>
-            </th>
-            <th>
-                <b>CurrentClose</b>
-            </th>
-            <th>
-                <b>Percent</b>
-            </th>
-            <th>
-                <b>DeleteDate</b>
-            </th>
-            <th>
-                <b>Sell</b>
-            </th>
-        </tr>
+            <tr>
+                <th>
+                    <b>Id</b>
+                </th>
+                <th>
+                    <b>Name</b>
+                </th>
+                <th>
+                    <b>Init price</b>
+                </th>
+                <th>
+                    <b>Current price</b>
+                </th>
+                <th>
+                    <b>Percent</b>
+                </th>
+                <th>
+                    <b>To by date</b>
+                </th>
+                <th>
+                    <b>Sell</b>
+                </th>
+            </tr>
         </thead>
         <tbody>
         </tbody>
     </table>
 </div>
-
-<script type="text/javascript">
-    document.getElementById('monitoring-link').style.color = "red";
-    document.getElementById('inprogress-link').style.color = "rgb(255, 255, 255)";
-</script>
 
 <script src="~/js/MonitoringIndexManager.js" asp-append-version="true"></script>
 <script type="text/javascript">
@@ -96,37 +95,3 @@
             </td>
         </tr>
     }*@
-@*@for (int i = 0; i <= 1000; i++)
-    {
-        <tr>
-            <td>
-                @(i+1)
-            </td>
-            <td>
-                @Model[i].SecId
-            </td>
-            <td>
-                @Model[i].ShortName
-            </td>
-            <td>
-                @Model[i].TradeDate.ToShortDateString()
-            </td>
-            <td>
-                @Model[i].Close
-            </td>
-        </tr>
-    }*@
-@**@
-@*</table>*@
-@*<script src="~/js/ThemesIndex.js" asp-append-version="true"></script>
-    <script type="text/javascript">
-        $(function () {
-            new ThemesIndexPack.ThemeManager(
-                @Html.Raw(JsonConvert.SerializeObject(Model)),
-                '@Url.Action("Index", "Patterns")?id=',
-                '@(User?.Identity?.IsAuthenticated)',
-                '@Url.Action("SetLearnedState")',
-                '@Url.Action("Index", "Faq")?id=');
-        });
-    </script>
-*@

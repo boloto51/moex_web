@@ -2,10 +2,11 @@
 
 export class MonitoringIndexModel {
     SecId: string;
+    SecName: string;
     InitClose: number;
     CurrentClose: number;
     Percent: number;
-    DeleteDate: Date;
+    ToBuyDate: Date;
     rowSelector: JQuery;
     buySelector: JQuery;
 }

@@ -12,15 +12,19 @@
     <script src="~/js/raw/lib/jquery.validate.js"></script>
     <script src="~/js/raw/lib/jquery.validate.unobtrusive.js"></script>
     <script src="~/js/raw/lib/bootstrap.bundle.min.js"></script>
+    @{ 
+        var action = ViewContext.RouteData.Values["action"].ToString().ToLower(); 
+        var controller = ViewContext.RouteData.Values["controller"].ToString().ToLower(); 
+    }
 </head>
 <body>
     <div class="content-wrapper">
         <div class="main-menu">
-            <div>
-                <a id="monitoring-link" asp-area="" asp-controller="Monitoring" asp-action="Index">Monitoring</a>
+            <div class="@(action.Equals("index") && controller.Equals("monitoring") ? "active" : null)">
+                <a asp-area="" asp-controller="Monitoring" asp-action="Index">Monitoring</a>
             </div>
-            <div>
-                <a id="inprogress-link" asp-area="" asp-controller="InProgress" asp-action="Index">In progress</a>
+            <div class="@(action.Equals("index") && controller.Equals("inprogress") ? "active" : null)">
+                <a asp-area="" asp-controller="InProgress" asp-action="Index">In progress</a>
             </div>
         </div>
         <div class="page-content">

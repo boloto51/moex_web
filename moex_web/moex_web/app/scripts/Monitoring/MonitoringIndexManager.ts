@@ -37,6 +37,9 @@ export class MonitoringIndexManager {
         const secId = document.createElement("td");
         secId.innerText = monitoring.SecId + "";
         monitoring.rowSelector.append(secId);
+        const secName = document.createElement("td");
+        secName.innerText = monitoring.SecName + "";
+        monitoring.rowSelector.append(secName);
         const initClose = document.createElement("td");
         initClose.innerText = monitoring.InitClose + "";
         monitoring.rowSelector.append(initClose);
@@ -46,9 +49,9 @@ export class MonitoringIndexManager {
         const percent = document.createElement("td");
         percent.innerText = monitoring.Percent + "";
         monitoring.rowSelector.append(percent);
-        const deleteDate = document.createElement("td");
-        deleteDate.innerText = new Intl.DateTimeFormat('ru', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(monitoring.DeleteDate)) ;
-        monitoring.rowSelector.append(deleteDate);
+        const toByDateDate = document.createElement("td");
+        toByDateDate.innerText = new Intl.DateTimeFormat('ru', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(monitoring.ToBuyDate));
+        monitoring.rowSelector.append(toByDateDate);
         const manageTd = document.createElement("td");
         monitoring.rowSelector.append(manageTd);
         //this.setManangeButtons(monitoring, $(manageTd));

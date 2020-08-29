@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using moex_web.Core.Config;
 using Microsoft.Extensions.DependencyInjection;
+using moex_web.Config;
 using moex_web.Shedulers;
 
 namespace moex_web
@@ -28,21 +29,20 @@ namespace moex_web
         //        })
         //        .ConfigureServices(services =>
         //        {
-        //            //services.AddHostedService<Worker>();
         //            services.AddHostedService<TradeCleanerSheduler>();
         //        })
         //        .ConfigureServices(services =>
         //        {
         //            services.AddHostedService<TradeUpdaterSheduler>();
         //        })
-        //    .ConfigureServices(services =>
-        //    {
-        //        services.AddHostedService<MonitoringCleanerSheduler>();
-        //    })
-        //    .ConfigureServices(services =>
-        //    {
-        //        services.AddHostedService<MonitoringUpdaterSheduler>();
-        //    });
+        //        .ConfigureServices(services =>
+        //        {
+        //            services.AddHostedService<MonitoringCleanerSheduler>();
+        //        })
+        //        .ConfigureServices(services =>
+        //        {
+        //            services.AddHostedService<MonitoringUpdaterSheduler>();
+        //        });
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)

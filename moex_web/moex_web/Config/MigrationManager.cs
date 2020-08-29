@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using moex_web.Data.DbContext;
 
-namespace moex_web.Core.Config
+namespace moex_web.Config
 {
     public static class MigrationManager
     {

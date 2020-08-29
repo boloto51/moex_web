@@ -28,7 +28,7 @@ namespace moex_web.Shedulers
         {
             var startTime = _configSettings.ApplicationKeys.MonitoringCleanerShedulerStartTime;
             //var dueTime = IntervalToStartTimer(startTime);
-            TimeSpan dueTime = DateTime.Now.AddMinutes(1) - DateTime.Now;
+            TimeSpan dueTime = DateTime.Now.AddSeconds(1) - DateTime.Now;
             _logger.LogInformation("MonitoringCleanerSheduler running.\t" + DateTime.Now);
             _timer = new Timer(DoWork, null, dueTime, TimeSpan.FromHours(24));
             return Task.CompletedTask;

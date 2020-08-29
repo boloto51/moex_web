@@ -72,8 +72,9 @@ namespace moex_web.Managers
                         SecId = agoTrade.SecId,
                         InitClose = agoTrade.Close,
                         CurrentClose = lastTrade.Close,
-                        Percent = -1 * Math.Round((decimal)(1 - lastTrade.Close / agoTrade.Close), 4) * 100,
-                        DeleteDate = DateTime.Now.AddDays(daysRecordStorage).Date
+                        //Percent = -1 * Math.Round((decimal)(1 - lastTrade.Close / agoTrade.Close), 4) * 100,
+                        //DeleteDate = DateTime.Now.AddDays(daysRecordStorage).Date
+                        ToBuyDate = DateTime.Now.Date
                     };
 
                     //var monitoringInDB = monitoringsInDB.Find(m => m.SecId == agoTrade.SecId);
@@ -97,15 +98,16 @@ namespace moex_web.Managers
 
         public async Task DeleteOldRecords()
         {
+            var daysRecordStorage = _configSettings.ApplicationKeys.MonitoringDaysRecordStorage;
             var monitoringsInDB = await _monitoringRepository.Get();
 
             foreach (var monitoring in monitoringsInDB)
             {
-                if (monitoring.DeleteDate <= DateTime.Now)
+                if (monitoring.ToBuyDate.AddDays(daysRecordStorage) <= DateTime.Now)
                 {
                     await _monitoringRepository.Delete(monitoring.SecId);
                     Console.WriteLine(monitoring.SecId + "\t" + monitoring.InitClose + "\t"
-                        + monitoring.CurrentClose + "\t" + monitoring.Percent + "\t" + monitoring.DeleteDate);
+                        + monitoring.CurrentClose + "\t" + monitoring.ToBuyDate);
                 }
             }
         }

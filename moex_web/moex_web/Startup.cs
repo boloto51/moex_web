@@ -12,6 +12,7 @@ using moex_web.Services;
 using moex_web.Core.Config;
 using System;
 using moex_web.Managers;
+using moex_web.Middleware;
 
 namespace moex_web
 {
@@ -58,6 +59,11 @@ namespace moex_web
             services.AddSingleton<IMonitoringUpdaterSheduler, MonitoringUpdaterSheduler>();
             services.AddSingleton<IMonitoringCleanerSheduler, MonitoringCleanerSheduler>();
             services.AddSingleton<IDateConverter, DateConverter>();
+            services.AddSingleton<IMonitoringConverter, MonitoringConverter>();
+            services.AddAntiforgery(options =>
+            {
+                options.HeaderName = "X-XSRF-TOKEN";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,6 +85,7 @@ namespace moex_web
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAntiforgeryToken();
 
             app.UseEndpoints(endpoints =>
             {

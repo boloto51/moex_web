@@ -1,31 +1,61 @@
 ﻿@using moex_web.Data.Entities
-@model List<Monitoring>
+@using moex_web.Models
+@using Newtonsoft.Json
+@using JsonSerializer = System.Text.Json.JsonSerializer
+@model List<MonitoringModel>
 
 @{
+    <link rel="stylesheet" href="~/css/Monitoring.css" />
     ViewData["Title"] = "Monitoring";
 }
 
-<h1>Monitoring</h1>
 
-<table class="table table-bordered">
-    <tr>
-        <td>
-            <b>SecId</b>
-        </td>
-        <td>
-            <b>InitClose</b>
-        </td>
-        <td>
-            <b>CurrentClose</b>
-        </td>
-        <td>
-            <b>Percent</b>
-        </td>
-        <td>
-            <b>DeleteDate</b>
-        </td>
-    </tr>
-    @if (Model.Count != 0)
+<div class="monitoring-index-page">
+    <h1>Monitoring</h1>
+    <table class="table table-bordered monitoring-index-table">
+        <thead>
+            <tr>
+                <th>
+                    <b>Id</b>
+                </th>
+                <th>
+                    <b>Name</b>
+                </th>
+                <th>
+                    <b>Init price</b>
+                </th>
+                <th>
+                    <b>Current price</b>
+                </th>
+                <th>
+                    <b>Percent</b>
+                </th>
+                <th>
+                    <b>To by date</b>
+                </th>
+                <th>
+                    <b>Sell</b>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<script src="~/js/MonitoringIndexManager.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    $(function () {
+        new MonitoringIndexManagerPack.MonitoringIndexManager(
+            @Html.Raw(JsonSerializer.Serialize(Model)),
+            @*'@Url.Action("Index", "Patterns")?id=',
+            '@(User?.Identity?.IsAuthenticated)',
+            '@Url.Action("SetLearnedState")',
+            '@Url.Action("Index", "Faq")?id='*@
+            );
+    });
+</script>
+@*@if (Model.Count != 0)
     {
         @for (int i = 0; i < (Model.Count < 100 ? Model.Count : 100); i++)
         {
@@ -47,44 +77,21 @@
                 </td>
             </tr>
         }
-    }
-    @*@foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @item.SecId
-                </td>
-                <td>
-                    @item.ShortName
-                </td>
-                <td>
-                    @item.TradeDate
-                </td>
-                <td>
-                    @item.Close
-                </td>
-            </tr>
-        }*@
-    @*@for (int i = 0; i <= 1000; i++)
-        {
-            <tr>
-                <td>
-                    @(i+1)
-                </td>
-                <td>
-                    @Model[i].SecId
-                </td>
-                <td>
-                    @Model[i].ShortName
-                </td>
-                <td>
-                    @Model[i].TradeDate.ToShortDateString()
-                </td>
-                <td>
-                    @Model[i].Close
-                </td>
-            </tr>
-        }*@
-    @**@
-</table>
-
+    }*@
+@*@foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.SecId
+            </td>
+            <td>
+                @item.ShortName
+            </td>
+            <td>
+                @item.TradeDate
+            </td>
+            <td>
+                @item.Close
+            </td>
+        </tr>
+    }*@

@@ -59,6 +59,8 @@ export class MonitoringIndexManager {
 
     private setManangeButtons(monitoring: MonitoringIndexModel, tdSelector: JQuery) {
         let toInProgress = document.createElement("button");
+        toInProgress.name = monitoring.SecId;
+        toInProgress.innerText = "Buy";
         tdSelector.append(toInProgress);
 
         //let toInProgress = document.createElement("a");

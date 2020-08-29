@@ -48,6 +48,7 @@ var MonitoringIndexManager = /** @class */ (function () {
         var toInProgress = document.createElement("button");
         toInProgress.name = monitoring.SecId;
         toInProgress.innerText = "Buy";
+        toInProgress.classList.add("monitoring-button-buy");
         tdSelector.append(toInProgress);
         //let toInProgress = document.createElement("a");
         //toInProgress.href = this.monitoringUrl + monitoring.SecId;

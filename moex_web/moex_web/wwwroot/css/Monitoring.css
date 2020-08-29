@@ -3,4 +3,14 @@
   width: 30px;
   font-family: Nunito, serif;
 }
+.monitoring-button-buy {
+  color: #ffffff;
+  background-color: #265999;
+  width: 90px;
+  height: 38px;
+  margin: 0px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 10px;
+}
 /*# sourceMappingURL=Monitoring.css.map */

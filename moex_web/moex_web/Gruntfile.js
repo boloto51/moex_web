@@ -63,7 +63,10 @@ module.exports = function (grunt) {
                 files: {
                     '<%= paths.cssOut %>/Monitoring.css': '<%= paths.styles %>/Monitoring.less',
                     '<%= paths.cssOut %>/Fonts.css': '<%= paths.styles %>/Fonts.less',
-                    '<%= paths.cssOut %>/General.css': '<%= paths.styles %>/General.less'
+                    '<%= paths.cssOut %>/General.css': '<%= paths.styles %>/General.less',
+                    '<%= paths.cssOut %>/Login.css': '<%= paths.styles %>/Login.less',
+                    '<%= paths.cssOut %>/Reset.css': '<%= paths.styles %>/Reset.less',
+                    '<%= paths.cssOut %>/ForgotPassword.css': '<%= paths.styles %>/ForgotPassword.less'
                 }
             }
         },

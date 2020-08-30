@@ -19,9 +19,9 @@ namespace moex_web.Managers
         {
             await _inProgressRepository.Add(new InProgress()
             {
-                SecId = monitoringBuyModel.SecId,
-                BuyPrice = monitoringBuyModel.BuyPrice,
-                BuyDate = monitoringBuyModel.BuyDate
+                SecId = monitoringBuyModel.Id,
+                BuyPrice = monitoringBuyModel.Price,
+                BuyDate = monitoringBuyModel.Date
             });
         }
     }

@@ -51,7 +51,7 @@ namespace moex_web.Controllers
         [HttpPost]
         public async Task Index([FromBody]MonitoringBuyModel monitoringBuyModel)
         {
-            await _monitoringManager.DeleteRecord(monitoringBuyModel.SecId);
+            await _monitoringManager.DeleteRecord(monitoringBuyModel.Id);
             await _inProgressManager.UpdateTable(monitoringBuyModel);
         }
 

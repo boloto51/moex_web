@@ -12,6 +12,8 @@ namespace moex_web.Data.DbContext
         public DbSet<Security> Securities { get; set; }
         public DbSet<Trade> Trades { get; set; }
         public DbSet<Monitoring> Monitorings { get; set; }
+        public DbSet<InProgress> InProgresses { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -22,6 +24,8 @@ namespace moex_web.Data.DbContext
             modelBuilder.Entity<Trade>().HasOne(t => t.Security);
             //modelBuilder.Entity<Monitoring>().HasKey(a => new { a.SecId });
             //modelBuilder.Entity<Monitoring>().HasOne(t => t.Security);
+            //modelBuilder.Entity<InProgress>().HasKey(a => new { a.SecId });
+            //modelBuilder.Entity<InProgress>().HasOne(t => t.Security);
             //modelBuilder.Entity<Monitoring>().HasOne(t => t.Trade);
         }
     }

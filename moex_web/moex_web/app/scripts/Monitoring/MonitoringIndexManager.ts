@@ -1,17 +1,17 @@
 ﻿import { NetSender } from "../NetSender";
 import { MonitoringIndexModel } from "../Models/MonitoringIndexModel";
-import {TooltipBuyManager} from "./TooltipBuyManager";
+import { TooltipBuyManager } from "./TooltipBuyManager";
 
 export class MonitoringIndexManager {
-   private createBtnSelector: JQuery;
-   private tableBodySelector: JQuery;
-   private creationFromSelector: JQuery;
-   private creationOkSelector: JQuery;
-   private creationInputSelector: JQuery;
-   private monitorings: MonitoringIndexModel[];
+    private createBtnSelector: JQuery;
+    private tableBodySelector: JQuery;
+    private creationFromSelector: JQuery;
+    private creationOkSelector: JQuery;
+    private creationInputSelector: JQuery;
+    private monitorings: MonitoringIndexModel[];
     private buyTooltip: TooltipBuyManager;
 
-    constructor(monitorings: MonitoringIndexModel[],buySecurityUrl: string) {
+    constructor(monitorings: MonitoringIndexModel[], buySecurityUrl: string) {
         this.monitorings = monitorings;
         this.createBtnSelector = $(".create-button");
         this.creationFromSelector = $(".creation-form");
@@ -30,7 +30,7 @@ export class MonitoringIndexManager {
     }
 
     private updateMonitoring(monitoring: MonitoringIndexModel) {
-       // NetSender.post(this.editUrl, monitoring, () => { });
+        // NetSender.post(this.editUrl, monitoring, () => { });
     }
 
     private addElement(monitoring: MonitoringIndexModel) {

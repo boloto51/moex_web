@@ -32,8 +32,7 @@
             <th>
                 <b>To by date</b>
             </th>
-            <th>
-                <b>Sell</b>
+            <th>                
             </th>
         </tr>
         </thead>
@@ -47,7 +46,7 @@
     $(function () {
         new MonitoringIndexManagerPack.MonitoringIndexManager(
             @Html.Raw(JsonSerializer.Serialize(Model)),
-            '@Url.Action("Index", "InProgress")',
+            '@Url.Action("Index", "Monitoring")',
             @*'@(User?.Identity?.IsAuthenticated)',
             '@Url.Action("SetLearnedState")',
             '@Url.Action("Index", "Faq")?id='*@

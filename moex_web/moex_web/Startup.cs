@@ -47,11 +47,13 @@ namespace moex_web
             services.AddScoped<ISecurityRepository, SecurityRepository>();
             services.AddScoped<ITradeRepository, TradeRepository>();
             services.AddScoped<IMonitoringRepository, MonitoringRepository>();
+            services.AddScoped<IInProgressRepository, InProgressRepository>();
             services.AddScoped<ISecurityConverter, SecurityConverter>();
             services.AddScoped<ITradeConverter, TradeConverter>();
             services.AddScoped<ISecurityManager, SecurityManager>();
             services.AddScoped<ITradeManager, TradeManager>();
             services.AddScoped<IMonitoringManager, MonitoringManager>();
+            services.AddScoped<IInProgressManager, InProgressManager>();
             services.AddScoped<IUriConverter, UriConverter>();
             services.AddScoped<IHttpService, HttpService>();
             services.AddSingleton<ITradeCleanerSheduler, TradeCleanerSheduler>();

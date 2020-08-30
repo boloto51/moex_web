@@ -111,5 +111,10 @@ namespace moex_web.Managers
                 }
             }
         }
+
+        public async Task DeleteRecord(string secId)
+        {
+            await _monitoringRepository.Delete(secId);
+        }
     }
 }

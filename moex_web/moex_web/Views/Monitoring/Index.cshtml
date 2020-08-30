@@ -1,6 +1,4 @@
-﻿@using moex_web.Data.Entities
-@using moex_web.Models
-@using Newtonsoft.Json
+﻿
 @using JsonSerializer = System.Text.Json.JsonSerializer
 @model List<MonitoringModel>
 
@@ -10,33 +8,34 @@
 }
 
 
+    <partial name="_BuyTooltip"/>
 <div class="monitoring-index-page">
     <h1>Monitoring</h1>
     <table class="table table-bordered monitoring-index-table">
         <thead>
-            <tr>
-                <th>
-                    <b>Id</b>
-                </th>
-                <th>
-                    <b>Name</b>
-                </th>
-                <th>
-                    <b>Init price</b>
-                </th>
-                <th>
-                    <b>Current price</b>
-                </th>
-                <th>
-                    <b>Percent</b>
-                </th>
-                <th>
-                    <b>To by date</b>
-                </th>
-                <th>
-                    <b>Sell</b>
-                </th>
-            </tr>
+        <tr>
+            <th>
+                <b>Id</b>
+            </th>
+            <th>
+                <b>Name</b>
+            </th>
+            <th>
+                <b>Init price</b>
+            </th>
+            <th>
+                <b>Current price</b>
+            </th>
+            <th>
+                <b>Percent</b>
+            </th>
+            <th>
+                <b>To by date</b>
+            </th>
+            <th>
+                <b>Sell</b>
+            </th>
+        </tr>
         </thead>
         <tbody>
         </tbody>
@@ -48,8 +47,8 @@
     $(function () {
         new MonitoringIndexManagerPack.MonitoringIndexManager(
             @Html.Raw(JsonSerializer.Serialize(Model)),
-            @*'@Url.Action("Index", "Patterns")?id=',
-            '@(User?.Identity?.IsAuthenticated)',
+            '@Url.Action("Index", "InProgress")',
+            @*'@(User?.Identity?.IsAuthenticated)',
             '@Url.Action("SetLearnedState")',
             '@Url.Action("Index", "Faq")?id='*@
             );

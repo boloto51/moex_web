@@ -1,21 +1,24 @@
 ﻿import { NetSender } from "../NetSender";
 import { MonitoringIndexModel } from "../Models/MonitoringIndexModel";
+import {TooltipBuyManager} from "./TooltipBuyManager";
 
 export class MonitoringIndexManager {
-    createBtnSelector: JQuery;
-    tableBodySelector: JQuery;
-    creationFromSelector: JQuery;
-    creationOkSelector: JQuery;
-    creationInputSelector: JQuery;
-    monitorings: MonitoringIndexModel[];
+   private createBtnSelector: JQuery;
+   private tableBodySelector: JQuery;
+   private creationFromSelector: JQuery;
+   private creationOkSelector: JQuery;
+   private creationInputSelector: JQuery;
+   private monitorings: MonitoringIndexModel[];
+    private buyTooltip: TooltipBuyManager;
 
-    constructor(monitorings: MonitoringIndexModel[],monitoringUrl: string) {
+    constructor(monitorings: MonitoringIndexModel[],buySecurityUrl: string) {
         this.monitorings = monitorings;
         this.createBtnSelector = $(".create-button");
         this.creationFromSelector = $(".creation-form");
         this.creationOkSelector = $(".creation-submit");
         this.creationInputSelector = $(".creation-form input");
         this.tableBodySelector = $(".monitoring-index-table tbody");
+        this.buyTooltip = new TooltipBuyManager(buySecurityUrl);
         this.initTable();
         //this.initCreation();
     }
@@ -58,18 +61,19 @@ export class MonitoringIndexManager {
     }
 
     private setManangeButtons(monitoring: MonitoringIndexModel, tdSelector: JQuery) {
-        let toInProgress = document.createElement("button");
-        toInProgress.name = monitoring.SecId;
-        toInProgress.innerText = "Buy";
-        toInProgress.classList.add("monitoring-button-buy");
-        tdSelector.append(toInProgress);
+        let showBuyTooltip = document.createElement("button");
+        showBuyTooltip.name = monitoring.SecId;
+        showBuyTooltip.innerText = "Buy";
+        showBuyTooltip.classList.add("monitoring-button-buy");
+        tdSelector.append(showBuyTooltip);
+        $(showBuyTooltip).on("click", () => this.buyTooltip.show(monitoring));
 
-        //let toInProgress = document.createElement("a");
-        //toInProgress.href = this.monitoringUrl + monitoring.SecId;
-        //tdSelector.append(toInProgress);
+        //let showBuyTooltip = document.createElement("a");
+        //showBuyTooltip.href = this.monitoringUrl + monitoring.SecId;
+        //tdSelector.append(showBuyTooltip);
         //let element = document.createElement("span");
         //element.classList.add("mid-icon", "list-span");
-        //toInProgress.append(element);
+        //showBuyTooltip.append(element);
 
         //element = document.createElement("span");
         //element.classList.add("mid-icon", "edit-span");

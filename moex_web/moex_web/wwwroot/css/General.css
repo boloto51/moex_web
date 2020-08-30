@@ -13,18 +13,13 @@
   color: #858796;
   font-size: 20px;
   font-family: Nunito, serif;
+  text-decoration: none;
 }
 .content-wrapper .main-menu div.active {
   background-color: #b7b7b7;
-}
-.content-wrapper .main-menu div.active a {
   color: #000;
 }
-.content-wrapper .main-menu div a {
-  color: #ffffff;
-  text-decoration: none;
-}
-.content-wrapper .page-content {
-  padding: 35px;
+.hidden-element {
+  display: none !important;
 }
 /*# sourceMappingURL=General.css.map */

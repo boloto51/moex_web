@@ -1,11 +1,13 @@
+import { TooltipBuyManager } from "./TooltipBuyManager";
 var MonitoringIndexManager = /** @class */ (function () {
-    function MonitoringIndexManager(monitorings, monitoringUrl) {
+    function MonitoringIndexManager(monitorings, buySecurityUrl) {
         this.monitorings = monitorings;
         this.createBtnSelector = $(".create-button");
         this.creationFromSelector = $(".creation-form");
         this.creationOkSelector = $(".creation-submit");
         this.creationInputSelector = $(".creation-form input");
         this.tableBodySelector = $(".monitoring-index-table tbody");
+        this.buyTooltip = new TooltipBuyManager(buySecurityUrl);
         this.initTable();
         //this.initCreation();
     }
@@ -45,17 +47,19 @@ var MonitoringIndexManager = /** @class */ (function () {
         this.setManangeButtons(monitoring, $(manageTd));
     };
     MonitoringIndexManager.prototype.setManangeButtons = function (monitoring, tdSelector) {
-        var toInProgress = document.createElement("button");
-        toInProgress.name = monitoring.SecId;
-        toInProgress.innerText = "Buy";
-        toInProgress.classList.add("monitoring-button-buy");
-        tdSelector.append(toInProgress);
-        //let toInProgress = document.createElement("a");
-        //toInProgress.href = this.monitoringUrl + monitoring.SecId;
-        //tdSelector.append(toInProgress);
+        var _this = this;
+        var showBuyTooltip = document.createElement("button");
+        showBuyTooltip.name = monitoring.SecId;
+        showBuyTooltip.innerText = "Buy";
+        showBuyTooltip.classList.add("monitoring-button-buy");
+        tdSelector.append(showBuyTooltip);
+        $(showBuyTooltip).on("click", function () { return _this.buyTooltip.show(monitoring); });
+        //let showBuyTooltip = document.createElement("a");
+        //showBuyTooltip.href = this.monitoringUrl + monitoring.SecId;
+        //tdSelector.append(showBuyTooltip);
         //let element = document.createElement("span");
         //element.classList.add("mid-icon", "list-span");
-        //toInProgress.append(element);
+        //showBuyTooltip.append(element);
         //element = document.createElement("span");
         //element.classList.add("mid-icon", "edit-span");
         //tdSelector.append(element);

@@ -31,8 +31,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="app\scripts\Components\UtcZone.ts" />
+    <TypeScriptCompile Include="app\scripts\Models\BuySecurityModel.ts" />
     <TypeScriptCompile Include="app\scripts\Models\MonitoringIndexModel.ts" />
     <TypeScriptCompile Include="app\scripts\Monitoring\MonitoringIndexManager.ts" />
+    <TypeScriptCompile Include="app\scripts\Monitoring\TooltipBuyManager.ts" />
   </ItemGroup>
 
 

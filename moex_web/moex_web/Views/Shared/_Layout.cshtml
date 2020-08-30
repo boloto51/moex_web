@@ -1,37 +1,43 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - moex_web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/Fonts.css" />
-    <link rel="stylesheet" href="~/css/General.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/bootstrap-datepicker.css"/>
+    <link rel="stylesheet" href="~/css/Fonts.css"/>
+    <link rel="stylesheet" href="~/css/General.css"/>
     <script src="~/js/raw/lib/jquery.js"></script>
     <script src="~/js/raw/lib/jquery.unobtrusive-ajax.js"></script>
     <script src="~/js/raw/lib/jquery.validate.js"></script>
     <script src="~/js/raw/lib/jquery.validate.unobtrusive.js"></script>
     <script src="~/js/raw/lib/bootstrap.bundle.min.js"></script>
+    <script src="~/js/raw/lib/bootstrap-datepicker.min.js"></script>
 </head>
 @{
     var action = ViewContext.RouteData.Values["action"].ToString().ToLower();
     var controller = ViewContext.RouteData.Values["controller"].ToString().ToLower();
 }
 <body>
-    <div class="content-wrapper">
-        <div class="main-menu">
+<div class="content-wrapper">
+    <div class="main-menu">
+        <a asp-area="" asp-controller="Monitoring" asp-action="Index">
             <div class="@(action.Equals("index") && controller.Equals("monitoring") ? "active" : null)">
-                <a asp-area="" asp-controller="Monitoring" asp-action="Index">Monitoring</a>
+                Monitoring
             </div>
+        </a>
+        <a asp-area="" asp-controller="InProgress" asp-action="Index">
             <div class="@(action.Equals("index") && controller.Equals("inprogress") ? "active" : null)">
-                <a asp-area="" asp-controller="InProgress" asp-action="Index">In progress</a>
+                In progress
             </div>
-        </div>
-        <div class="page-content">
-            @RenderBody()
-        </div>
+        </a>
     </div>
-    @*<header>
+    <div class="page-content">
+        @RenderBody()
+    </div>
+</div>
+@*<header>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <div class="container">
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">moex_web</a>

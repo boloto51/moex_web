@@ -88,6 +88,7 @@ module.exports = function (grunt) {
                         flatten: true,
                         src: [
                             'node_modules/bootstrap/dist/js/bootstrap.bundle.min*',
+                            'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min*',
                             'node_modules/jquery/dist/jquery.js',
                             'node_modules/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.js',
                             'node_modules/jquery-validation/dist/jquery.validate.js',
@@ -99,7 +100,8 @@ module.exports = function (grunt) {
                         dest: '<%= paths.scriptOut %>/lib/'
                     },
                     { expand: true, cwd: 'node_modules/bootstrap/dist', src: ['fonts/*.*'], dest: '<%= paths.staticOut %>/' },
-                    { expand: true, cwd: 'node_modules/bootstrap/dist/css', src: ['bootstrap.min.*'], dest: '<%= paths.cssOut %>/' }
+                    { expand: true, cwd: 'node_modules/bootstrap/dist/css', src: ['bootstrap.min.*'], dest: '<%= paths.cssOut %>/' },
+                    { expand: true, cwd: 'node_modules/bootstrap-datepicker/dist/css', src: ['bootstrap-datepicker.css'], dest: '<%= paths.cssOut %>/' }
                 ]
             },
             images: {

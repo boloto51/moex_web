@@ -9,7 +9,7 @@ using moex_web.Data.DbContext;
 namespace moex_web.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200830182425_Users")]
+    [Migration("20200830185134_Users")]
     partial class Users
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,8 @@ namespace moex_web.Data.Migrations
                         .HasColumnType("decimal(65,30)");
 
                     b.HasKey("UserId", "SecId");
+
+                    b.HasIndex("SecId");
 
                     b.ToTable("inprogress");
                 });
@@ -170,6 +172,21 @@ namespace moex_web.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("user");
+                });
+
+            modelBuilder.Entity("moex_web.Data.Entities.InProgress", b =>
+                {
+                    b.HasOne("moex_web.Data.Entities.Security", "Security")
+                        .WithMany()
+                        .HasForeignKey("SecId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("moex_web.Data.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("moex_web.Data.Entities.ResetEntry", b =>

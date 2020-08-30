@@ -76,13 +76,42 @@ namespace moex_web.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_inprogress_SecId",
+                table: "inprogress",
+                column: "SecId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ResetEntries_UserId",
                 table: "ResetEntries",
                 column: "UserId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_inprogress_security_SecId",
+                table: "inprogress",
+                column: "SecId",
+                principalTable: "security",
+                principalColumn: "SecId",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_inprogress_user_UserId",
+                table: "inprogress",
+                column: "UserId",
+                principalTable: "user",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_inprogress_security_SecId",
+                table: "inprogress");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_inprogress_user_UserId",
+                table: "inprogress");
+
             migrationBuilder.DropTable(
                 name: "LoginAttempts");
 
@@ -94,6 +123,10 @@ namespace moex_web.Data.Migrations
 
             migrationBuilder.DropPrimaryKey(
                 name: "PK_inprogress",
+                table: "inprogress");
+
+            migrationBuilder.DropIndex(
+                name: "IX_inprogress_SecId",
                 table: "inprogress");
 
             migrationBuilder.DropColumn(

@@ -18,7 +18,7 @@ namespace moex_web.Data.Entities
         [Key]
         public int UserId { get; set; }
 
-        //public virtual Security Security { get; set; }
-        //public virtual User User { get; set; }
+        public virtual Security Security { get; set; }
+        public virtual User User { get; set; }
     }
 }

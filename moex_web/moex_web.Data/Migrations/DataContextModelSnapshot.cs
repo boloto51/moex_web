@@ -37,6 +37,8 @@ namespace moex_web.Data.Migrations
 
                     b.HasKey("UserId", "SecId");
 
+                    b.HasIndex("SecId");
+
                     b.ToTable("inprogress");
                 });
 
@@ -168,6 +170,21 @@ namespace moex_web.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("user");
+                });
+
+            modelBuilder.Entity("moex_web.Data.Entities.InProgress", b =>
+                {
+                    b.HasOne("moex_web.Data.Entities.Security", "Security")
+                        .WithMany()
+                        .HasForeignKey("SecId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("moex_web.Data.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("moex_web.Data.Entities.ResetEntry", b =>

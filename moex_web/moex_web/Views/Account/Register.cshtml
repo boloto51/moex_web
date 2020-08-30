@@ -1,0 +1,28 @@
+﻿@model moex_web.Models.RegisterModel
+<link rel="stylesheet" href="~/css/Login.css" />
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="register-page">
+    <div class="register-form">
+        <label class="validation validation-register hidden-element"></label>
+        <input type="text" name="Name" id="Name" placeholder="Имя" />
+        <label class="validation validation-name hidden-element">Необходимо указать имя</label>
+        <input type="email" name="Email" id="Email" placeholder="e-mail" />
+        <label class="validation validation-email hidden-element">Необходимо указать e-mail</label>
+        <input type="password" name="Password" id="Password" placeholder="пароль" />
+        <label class="validation validation-password hidden-element">Необходимо указать пароль</label>
+        <label class="validation validation-password-strength hidden-element">6-20 символов,заглавные/строчные буквы + иные символы</label>
+        <input type="password" name="ConfirmPassword" id="ConfirmPassword" placeholder="Подтверждение пароля" />
+        <label class="validation validation-confirm-password hidden-element">Необходимо подтвердить пароль</label>
+
+        <button class="register-button">Регистрация</button>
+    </div>
+</div>
+<script src="~/js/register.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    $(function () {
+        new registerPack.RegisterManager('@Url.Action("Register")');
+    });
+</script>

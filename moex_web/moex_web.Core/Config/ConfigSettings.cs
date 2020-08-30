@@ -42,6 +42,11 @@ namespace moex_web.Core.Config
                 Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "NumberYearsAgo")?.Value ?? "5");
             keys.DaysToSell =
                 Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "DaysToSell")?.Value ?? "50");
+            keys.CacheLifeTime = Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "CacheLifeTime")?.Value ?? "500");
+            keys.MailFrom = temp.FirstOrDefault(e => e.Key == "MailFrom")?.Value;
+            keys.MailPass = temp.FirstOrDefault(e => e.Key == "MailPass")?.Value;
+            keys.MailServer = temp.FirstOrDefault(e => e.Key == "MailServer")?.Value;
+
             return keys;
         }
     }

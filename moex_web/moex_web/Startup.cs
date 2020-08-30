@@ -13,6 +13,7 @@ using moex_web.Core.Config;
 using System;
 using moex_web.Managers;
 using moex_web.Middleware;
+using moex_web.Core.RemoteAgents;
 
 namespace moex_web
 {
@@ -48,6 +49,7 @@ namespace moex_web
             services.AddScoped<ITradeRepository, TradeRepository>();
             services.AddScoped<IMonitoringRepository, MonitoringRepository>();
             services.AddScoped<IInProgressRepository, InProgressRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISecurityConverter, SecurityConverter>();
             services.AddScoped<ITradeConverter, TradeConverter>();
             services.AddScoped<ISecurityManager, SecurityManager>();
@@ -56,6 +58,7 @@ namespace moex_web
             services.AddScoped<IInProgressManager, InProgressManager>();
             services.AddScoped<IUriConverter, UriConverter>();
             services.AddScoped<IHttpService, HttpService>();
+            services.AddScoped<IMailAgent, MailAgent>();
             services.AddSingleton<ITradeCleanerSheduler, TradeCleanerSheduler>();
             services.AddSingleton<ITradeUpdaterSheduler, TradeUpdaterSheduler>();
             services.AddSingleton<IMonitoringUpdaterSheduler, MonitoringUpdaterSheduler>();
@@ -93,7 +96,8 @@ namespace moex_web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Monitoring}/{action=Index}/{id?}");
+                    //pattern: "{controller=Monitoring}/{action=Index}/{id?}");
+                    pattern: "{controller=Account}/{action=Login}/{id?}");
             });
         }
     }

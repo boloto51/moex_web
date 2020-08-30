@@ -9,7 +9,7 @@ using moex_web.Data.DbContext;
 namespace moex_web.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200830143155_Users")]
+    [Migration("20200830182425_Users")]
     partial class Users
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,9 +21,9 @@ namespace moex_web.Data.Migrations
 
             modelBuilder.Entity("moex_web.Data.Entities.InProgress", b =>
                 {
-                    b.Property<string>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnName("UserId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .HasColumnType("int");
 
                     b.Property<string>("SecId")
                         .HasColumnName("SecId")
@@ -40,6 +40,23 @@ namespace moex_web.Data.Migrations
                     b.HasKey("UserId", "SecId");
 
                     b.ToTable("inprogress");
+                });
+
+            modelBuilder.Entity("moex_web.Data.Entities.LoginAttempt", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LastTry")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LoginAttempts");
                 });
 
             modelBuilder.Entity("moex_web.Data.Entities.Monitoring", b =>
@@ -63,6 +80,28 @@ namespace moex_web.Data.Migrations
                     b.HasKey("SecId");
 
                     b.ToTable("monitoring");
+                });
+
+            modelBuilder.Entity("moex_web.Data.Entities.ResetEntry", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Expires")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Token")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ResetEntries");
                 });
 
             modelBuilder.Entity("moex_web.Data.Entities.Security", b =>
@@ -103,17 +142,43 @@ namespace moex_web.Data.Migrations
 
             modelBuilder.Entity("moex_web.Data.Entities.User", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnName("UserId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnName("Created")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Email")
+                        .HasColumnName("Email")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Name")
+                        .HasColumnName("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Password")
                         .HasColumnName("Password")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.HasKey("UserId");
+                    b.Property<int>("Role")
+                        .HasColumnName("Role")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.ToTable("user");
+                });
+
+            modelBuilder.Entity("moex_web.Data.Entities.ResetEntry", b =>
+                {
+                    b.HasOne("moex_web.Data.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("moex_web.Data.Entities.Trade", b =>

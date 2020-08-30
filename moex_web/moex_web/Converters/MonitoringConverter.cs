@@ -9,7 +9,7 @@ namespace moex_web.Converters
 {
     public class MonitoringConverter : IMonitoringConverter
     {
-        public List<MonitoringModel> ToListModels(string userId, List<Monitoring> monitorings, List<Security> securities)
+        public List<MonitoringModel> ToListModels(List<Monitoring> monitorings, List<Security> securities)
         {
             var monitoringModel = new List<MonitoringModel>();             
 
@@ -17,7 +17,6 @@ namespace moex_web.Converters
             {
                 monitoringModel.Add(new MonitoringModel 
                 {
-                    UserId = userId,
                     SecId = monitoring.SecId,
                     SecName = securities.Find(s => s.SecId == monitoring.SecId).ShortName,
                     InitClose = monitoring.InitClose,

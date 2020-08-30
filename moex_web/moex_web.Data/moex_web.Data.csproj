@@ -27,6 +27,16 @@
     <Compile Remove="Migrations\20200820163046_Monitoring.Designer.cs" />
     <Compile Remove="Migrations\20200830120036_InProgress.cs" />
     <Compile Remove="Migrations\20200830120036_InProgress.Designer.cs" />
+    <Compile Remove="Migrations\20200830143155_Users.cs" />
+    <Compile Remove="Migrations\20200830143155_Users.Designer.cs" />
+    <Compile Remove="Migrations\20200830173628_Users.cs" />
+    <Compile Remove="Migrations\20200830173628_Users.Designer.cs" />
+    <Compile Remove="Migrations\20200830174249_Users.cs" />
+    <Compile Remove="Migrations\20200830174249_Users.Designer.cs" />
+    <Compile Remove="Migrations\20200830180822_Users.cs" />
+    <Compile Remove="Migrations\20200830180822_Users.Designer.cs" />
+    <Compile Remove="Migrations\20200830182058_Users.cs" />
+    <Compile Remove="Migrations\20200830182058_Users.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

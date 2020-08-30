@@ -42,7 +42,7 @@ namespace moex_web.Controllers
             string userId = User.Identity.Name;
             var monitorings = await _monitoringRepository.Get();
             var securities = await _securityRepository.Get();
-            var monitoringModels = _monitoringConverter.ToListModels(userId, monitorings, securities);
+            var monitoringModels = _monitoringConverter.ToListModels(monitorings, securities);
 
             return View(monitoringModels);
         }

@@ -1,0 +1,21 @@
+@model ResetModel
+<link rel="stylesheet" href="~/css/Login.css" />
+
+<div class="reset-page">
+    <div class="reset-form">
+        <input type="password" name="Password" id="Password" placeholder="пароль" />
+        <label class="validation validation-password hidden-element">Необходимо указать пароль</label>
+        <label class="validation validation-password-strength hidden-element">6-20 символов,заглавные/строчные буквы + иные символы</label>
+        <input type="password" name="ConfirmPassword" id="ConfirmPassword" placeholder="Подтверждение пароля" />
+        <label class="validation validation-confirm-password hidden-element">Необходимо подтвердить пароль</label>
+
+        <button class="reset-button">СОХРАНИТЬ</button>
+    </div>
+</div>
+<script src="~/js/reset.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    $(function () {
+        new resetPack.ResetManager('@Url.Action("Reset")', '@Model.Token');
+    });
+</script>
+

@@ -5,6 +5,6 @@ namespace moex_web.Managers
 {
     public interface IInProgressManager
     {
-        public Task UpdateTable(MonitoringBuyModel monitoringBuyModel);
+        public Task UpdateTable(string userId, MonitoringBuyModel monitoringBuyModel);
     }
 }

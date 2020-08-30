@@ -7,7 +7,10 @@ namespace moex_web.Data.Entities
     [Table("inprogress")]
     public class InProgress
     {
-        [Column("SecId")]
+        [Column("UserId", Order = 0)]
+        [Key]
+        public string UserId { get; set; }
+        [Column("SecId", Order = 1)]
         [Key]
         public string SecId { get; set; }
         [Column("BuyPrice")]

@@ -9,6 +9,6 @@ namespace moex_web.Converters
 {
     public interface IMonitoringConverter
     {
-        public List<MonitoringModel> ToListModels(List<Monitoring> monitorings, List<Security> securities);
+        public List<MonitoringModel> ToListModels(string userId, List<Monitoring> monitorings, List<Security> securities);
     }
 }

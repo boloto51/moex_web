@@ -13,5 +13,6 @@ namespace moex_web.Core.Config
         public virtual int MonitoringDaysRecordStorage { get; set; }
         public virtual string UrlInit { get; set; }
         public virtual int NumberYearsAgo { get; set; }
+        public virtual int DaysToSell { get; set; }
     }
 }

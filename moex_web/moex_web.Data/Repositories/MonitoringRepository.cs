@@ -25,7 +25,7 @@ namespace moex_web.Data.Repositories
 
         public async Task<Monitoring> Get(string secId)
         {
-            return await _context.GetContext().Monitorings.FirstOrDefaultAsync(s => s.SecId == secId);
+            return await _context.GetContext().Monitorings.FirstOrDefaultAsync(m => m.SecId == secId);
         }
 
         public async Task Add(Monitoring monitoring)
@@ -62,10 +62,10 @@ namespace moex_web.Data.Repositories
             await context.SaveChangesAsync();
         }
 
-        public async Task Delete(string SecId)
+        public async Task Delete(string secId)
         {
             var context = _context.GetContext();
-            var toDelete = await context.Monitorings.FirstOrDefaultAsync(p => p.SecId == SecId);
+            var toDelete = await context.Monitorings.FirstOrDefaultAsync(m => m.SecId == secId);
             context.Monitorings.Remove(toDelete);
             await context.SaveChangesAsync();
         }

@@ -15,7 +15,7 @@ namespace moex_web.Managers
             _inProgressRepository = inProgressRepository;
         }
 
-        public async Task UpdateTable(MonitoringBuyModel monitoringBuyModel)
+        public async Task UpdateTable(string userId, MonitoringBuyModel monitoringBuyModel)
         {
             await _inProgressRepository.Add(new InProgress()
             {

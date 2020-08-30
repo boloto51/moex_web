@@ -7,6 +7,7 @@ namespace moex_web.Models
 {
     public class MonitoringModel
     {
+        public string UserId { get; set; }
         public string SecId { get; set; }
         public string SecName { get; set; }
         public decimal? InitClose { get; set; }

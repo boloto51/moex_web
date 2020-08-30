@@ -13,7 +13,7 @@ namespace moex_web.Data.DbContext
         public DbSet<Trade> Trades { get; set; }
         public DbSet<Monitoring> Monitorings { get; set; }
         public DbSet<InProgress> InProgresses { get; set; }
-
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -22,6 +22,8 @@ namespace moex_web.Data.DbContext
             modelBuilder.Entity<Trade>().HasKey(a => new { a.TradeDate, a.SecId });
             modelBuilder.Entity<Security>().HasMany(s => s.Trades);
             modelBuilder.Entity<Trade>().HasOne(t => t.Security);
+            modelBuilder.Entity<InProgress>().HasKey(a => new { a.UserId, a.SecId });
+            modelBuilder.Entity<User>().HasKey(a => new { a.UserId });
             //modelBuilder.Entity<Monitoring>().HasKey(a => new { a.SecId });
             //modelBuilder.Entity<Monitoring>().HasOne(t => t.Security);
             //modelBuilder.Entity<InProgress>().HasKey(a => new { a.SecId });

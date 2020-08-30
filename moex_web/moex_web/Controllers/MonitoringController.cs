@@ -39,11 +39,10 @@ namespace moex_web.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            //var securities = await _securityRepository.Get();
-            //var trades = await _tradeRepository.Get();
+            string userId = User.Identity.Name;
             var monitorings = await _monitoringRepository.Get();
             var securities = await _securityRepository.Get();
-            var monitoringModels = _monitoringConverter.ToListModels(monitorings, securities);
+            var monitoringModels = _monitoringConverter.ToListModels(userId, monitorings, securities);
 
             return View(monitoringModels);
         }
@@ -51,8 +50,9 @@ namespace moex_web.Controllers
         [HttpPost]
         public async Task Index([FromBody]MonitoringBuyModel monitoringBuyModel)
         {
+            string userId = User.Identity.Name;
             await _monitoringManager.DeleteRecord(monitoringBuyModel.Id);
-            await _inProgressManager.UpdateTable(monitoringBuyModel);
+            await _inProgressManager.UpdateTable(userId, monitoringBuyModel);
         }
 
         // GET: Monitoring/Details/5

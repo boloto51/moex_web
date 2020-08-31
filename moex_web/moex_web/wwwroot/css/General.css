@@ -7,15 +7,17 @@
 .content-wrapper .main-menu {
   background-color: #4e73df;
 }
-.content-wrapper .main-menu div {
-  text-align: center;
-  padding: 20px;
-  color: #858796;
-  font-size: 20px;
-  font-family: Nunito, serif;
+.content-wrapper .main-menu a {
   text-decoration: none;
 }
-.content-wrapper .main-menu div.active {
+.content-wrapper .main-menu a div {
+  text-align: center;
+  padding: 20px;
+  color: #ffffff;
+  font-size: 20px;
+  font-family: Nunito, serif;
+}
+.content-wrapper .main-menu a div.active {
   background-color: #b7b7b7;
   color: #000;
 }

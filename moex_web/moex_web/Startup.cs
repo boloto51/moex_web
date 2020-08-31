@@ -14,6 +14,7 @@ using System;
 using moex_web.Managers;
 using moex_web.Middleware;
 using moex_web.Core.RemoteAgents;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace moex_web
 {
@@ -65,6 +66,13 @@ namespace moex_web
             services.AddSingleton<IMonitoringCleanerSheduler, MonitoringCleanerSheduler>();
             services.AddSingleton<IDateConverter, DateConverter>();
             services.AddSingleton<IMonitoringConverter, MonitoringConverter>();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => //CookieAuthenticationOptions
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                    options.ExpireTimeSpan = TimeSpan.FromDays(5);
+                    options.Cookie.HttpOnly = true;
+                });
             services.AddAntiforgery(options =>
             {
                 options.HeaderName = "X-XSRF-TOKEN";
@@ -86,18 +94,19 @@ namespace moex_web
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseCookiePolicy();
             app.UseRouting();
-
             app.UseAuthorization();
             app.UseAntiforgeryToken();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    //pattern: "{controller=Monitoring}/{action=Index}/{id?}");
-                    pattern: "{controller=Account}/{action=Login}/{id?}");
+                    pattern: "{controller=Monitoring}/{action=Index}/{id?}");
+                    //pattern: "{controller=Account}/{action=Login}/{id?}");
             });
         }
     }

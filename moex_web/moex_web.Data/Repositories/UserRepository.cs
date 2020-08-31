@@ -34,8 +34,8 @@ namespace moex_web.Data.Repositories
         public async Task Add(User user)
         {
             user.Password = PasswordHashHelper.HashPassword(user.Password);
-            //user.Created = DateTime.Now;
-            //user.Role = Role.User;
+            user.Created = DateTime.Now;
+            user.Role = Role.User;
             var context = _context.GetContext();
             context.Users.Add(user);
             await context.SaveChangesAsync();

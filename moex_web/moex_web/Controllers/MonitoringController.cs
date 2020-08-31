@@ -13,7 +13,7 @@ using moex_web.Models;
 
 namespace moex_web.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class MonitoringController : Controller
     {
         private readonly ISecurityRepository _securityRepository;
@@ -52,9 +52,10 @@ namespace moex_web.Controllers
         [HttpPost]
         public async Task Index([FromBody]MonitoringBuyModel monitoringBuyModel)
         {
-            string userId = User.Identity.Name;
-            await _monitoringManager.DeleteRecord(monitoringBuyModel.Id);
-            await _inProgressManager.UpdateTable(userId, monitoringBuyModel);
+            //string userName = User.Identity.Name;
+            string userName = "abc";
+            //await _monitoringManager.DeleteRecord(monitoringBuyModel.Id);
+            await _inProgressManager.UpdateTable(userName, monitoringBuyModel);
         }
 
         // GET: Monitoring/Details/5

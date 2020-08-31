@@ -9,20 +9,29 @@ namespace moex_web.Managers
     public class InProgressManager : IInProgressManager
     {
         IInProgressRepository _inProgressRepository;
+        IUserRepository _userRepository;
 
-        public InProgressManager(IInProgressRepository inProgressRepository)
+        public InProgressManager(IInProgressRepository inProgressRepository, IUserRepository userRepository)
         {
             _inProgressRepository = inProgressRepository;
+            _userRepository = userRepository;
         }
 
-        public async Task UpdateTable(string userId, MonitoringBuyModel monitoringBuyModel)
+        public async Task UpdateTable(string userName, MonitoringBuyModel monitoringBuyModel)
         {
             await _inProgressRepository.Add(new InProgress()
             {
+                UserId = FindIdByName(userName).Result,
                 SecId = monitoringBuyModel.Id,
                 BuyPrice = monitoringBuyModel.Price,
                 BuyDate = monitoringBuyModel.Date
             });
+        }
+
+        public async Task<int> FindIdByName(string name)
+        {
+            var users = await _userRepository.Get();
+            return users.Find(u => u.Name == name).Id;
         }
     }
 }

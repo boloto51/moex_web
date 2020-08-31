@@ -53,6 +53,7 @@ namespace moex_web
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISecurityConverter, SecurityConverter>();
             services.AddScoped<ITradeConverter, TradeConverter>();
+            services.AddScoped<IInProgressConverter, InProgressConverter>();
             services.AddScoped<ISecurityManager, SecurityManager>();
             services.AddScoped<ITradeManager, TradeManager>();
             services.AddScoped<IMonitoringManager, MonitoringManager>();

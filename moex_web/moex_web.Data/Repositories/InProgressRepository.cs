@@ -23,6 +23,12 @@ namespace moex_web.Data.Repositories
             return await _context.GetContext().InProgresses.ToListAsync();
         }
 
+        public async Task<List<InProgress>> Get(string userName)
+        {
+            var userId = await _context.GetContext().Users.Where(u => u.Name == userName).Select(u => u.Id).FirstOrDefaultAsync();
+            return await _context.GetContext().InProgresses.Where(i => i.UserId == userId).ToListAsync();
+        }
+
         public async Task Delete(string SecId)
         {
             var context = _context.GetContext();

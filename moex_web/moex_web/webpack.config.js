@@ -6,6 +6,7 @@ module.exports = (env) => {
         mode: env && env.prod ? "production" : "development",
         entry: {
             MonitoringIndexManager: './app/scripts/Monitoring/MonitoringIndexManager.ts',
+            InProgressIndexManager: './app/scripts/InProgress/InProgressIndexManager.ts',
             login: './app/scripts/LoginManager.ts',
             reset: './app/scripts/ResetManager.ts',
             register: './app/scripts/RegisterManager.ts',

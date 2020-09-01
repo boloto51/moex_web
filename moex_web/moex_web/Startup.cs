@@ -97,10 +97,9 @@ namespace moex_web
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseRouting();
-            app.UseAuthorization();
-            app.UseAntiforgeryToken();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseAntiforgeryToken();
 
             app.UseEndpoints(endpoints =>
             {

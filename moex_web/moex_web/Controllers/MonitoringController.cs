@@ -13,7 +13,7 @@ using moex_web.Models;
 
 namespace moex_web.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class MonitoringController : Controller
     {
         private readonly ISecurityRepository _securityRepository;

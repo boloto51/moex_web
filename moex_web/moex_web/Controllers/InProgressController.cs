@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using moex_web.Converters;
 using moex_web.Core.Config;
@@ -11,6 +12,7 @@ using moex_web.Models;
 
 namespace moex_web.Controllers
 {
+    [Authorize]
     public class InProgressController : Controller
     {
         private readonly ISecurityRepository _securityRepository;

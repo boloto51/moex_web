@@ -23,9 +23,9 @@ namespace moex_web.Data.Repositories
             return await _context.GetContext().InProgresses.ToListAsync();
         }
 
-        public async Task<List<InProgress>> Get(string userName)
+        public async Task<List<InProgress>> Get(string userEmail)
         {
-            var userId = await _context.GetContext().Users.Where(u => u.Name == userName).Select(u => u.Id).FirstOrDefaultAsync();
+            var userId = await _context.GetContext().Users.Where(u => u.Email == userEmail).Select(u => u.Id).FirstOrDefaultAsync();
             return await _context.GetContext().InProgresses.Where(i => i.UserId == userId).ToListAsync();
         }
 

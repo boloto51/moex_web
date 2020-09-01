@@ -21,29 +21,6 @@ namespace moex_web
             CreateHostBuilder(args).Build().MigrateDatabase().Run();
         }
 
-        //public static IHostBuilder CreateHostBuilder(string[] args) =>
-        //    Host.CreateDefaultBuilder(args)
-        //        .ConfigureWebHostDefaults(webBuilder =>
-        //        {
-        //            webBuilder.UseStartup<Startup>();
-        //        })
-        //        .ConfigureServices(services =>
-        //        {
-        //            services.AddHostedService<TradeCleanerSheduler>();
-        //        })
-        //        .ConfigureServices(services =>
-        //        {
-        //            services.AddHostedService<TradeUpdaterSheduler>();
-        //        })
-        //        .ConfigureServices(services =>
-        //        {
-        //            services.AddHostedService<MonitoringCleanerSheduler>();
-        //        })
-        //        .ConfigureServices(services =>
-        //        {
-        //            services.AddHostedService<MonitoringUpdaterSheduler>();
-        //        });
-
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
@@ -52,7 +29,30 @@ namespace moex_web
                 })
                 .ConfigureServices(services =>
                 {
+                    services.AddHostedService<TradeCleanerSheduler>();
+                })
+                .ConfigureServices(services =>
+                {
+                    services.AddHostedService<TradeUpdaterSheduler>();
+                })
+                .ConfigureServices(services =>
+                {
+                    services.AddHostedService<MonitoringCleanerSheduler>();
+                })
+                .ConfigureServices(services =>
+                {
                     services.AddHostedService<MonitoringUpdaterSheduler>();
                 });
+
+        //public static IHostBuilder CreateHostBuilder(string[] args) =>
+        //    Host.CreateDefaultBuilder(args)
+        //        .ConfigureWebHostDefaults(webBuilder =>
+        //        {
+        //            webBuilder.UseStartup<Startup>();
+        //        })
+        //        .ConfigureServices(services =>
+        //        {
+        //            services.AddHostedService<MonitoringUpdaterSheduler>();
+        //        });
     }
 }

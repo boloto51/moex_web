@@ -32,11 +32,11 @@ namespace moex_web.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            //string userName = User.Identity.Name;
-            string userName = "abc";
+            string userEmail = User.Identity.Name;
+            //string userEmail = "abc";
             var securities = await _securityRepository.Get();
             var trades = await _tradeRepository.FindLastTrades();
-            var inProgresses = await _inProgressRepository.Get(userName);
+            var inProgresses = await _inProgressRepository.Get(userEmail);
             var daysToSell = _configSettings.ApplicationKeys.DaysToSell;
             var inProgressModel = _inProgressConverter.ToListModels(inProgresses, securities, trades, daysToSell);
             return View(inProgressModel);

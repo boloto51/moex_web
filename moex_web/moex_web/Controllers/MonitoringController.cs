@@ -41,9 +41,10 @@ namespace moex_web.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            string userId = User.Identity.Name;
-            var monitorings = await _monitoringRepository.Get();
-            var securities = await _securityRepository.Get();
+            string userEmaIL = User.Identity.Name;
+            var inProgress = await _inProgressRepository.Get(userEmaIL);
+            var monitorings = await _monitoringRepository.Get(inProgress);
+            var securities = await _securityRepository.Get();            
             var monitoringModels = _monitoringConverter.ToListModels(monitorings, securities);
 
             return View(monitoringModels);

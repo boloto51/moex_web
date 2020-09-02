@@ -50,7 +50,7 @@ export class InProgressIndexManager {
         currentClose.innerText = inprogress.CurrentClose + "";
         inprogress.rowSelector.append(currentClose);
         const percent = document.createElement("td");
-        percent.innerText = inprogress.Percent + "";
+        percent.innerText = inprogress.Percent + " %";
         inprogress.rowSelector.append(percent);
         const BuyDate = document.createElement("td");
         BuyDate.innerText = new Intl.DateTimeFormat('ru', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(inprogress.BuyDate));
@@ -62,39 +62,6 @@ export class InProgressIndexManager {
         inprogress.rowSelector.append(manageTd);
         this.setManangeButtons(inprogress, $(manageTd));
     }
-
-    //private addElement(inprogress: InProgressIndexModel) {
-    //    const tr = document.createElement("tr");
-    //    this.tableBodySelector.append(tr);
-    //    inprogress.rowSelector = $(tr);
-    //    const secId = document.createElement("td");
-    //    secId.innerText = inprogress.SecId + "";
-    //    inprogress.rowSelector.append(secId);
-    //    const secName = document.createElement("td");
-    //    secName.innerText = inprogress.SecName + "";
-    //    inprogress.rowSelector.append(secName);
-    //    const percent = document.createElement("td");
-    //    percent.innerText = inprogress.Percent + " %";
-    //    inprogress.rowSelector.append(percent);
-    //    const DaysToSell = document.createElement("td");
-    //    DaysToSell.innerText = inprogress.DaysToSell + "";
-    //    inprogress.rowSelector.append(DaysToSell);
-    //    const BuyDate = document.createElement("td");
-    //    BuyDate.innerText = new Intl.DateTimeFormat('ru', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(inprogress.BuyDate));
-    //    inprogress.rowSelector.append(BuyDate);
-
-
-
-    //    const BuyPrice = document.createElement("td");
-    //    BuyPrice.innerText = inprogress.BuyPrice + "";
-    //    inprogress.rowSelector.append(BuyPrice);
-    //    const currentClose = document.createElement("td");
-    //    currentClose.innerText = inprogress.CurrentClose + "";
-    //    inprogress.rowSelector.append(currentClose);
-    //    const manageTd = document.createElement("td");
-    //    inprogress.rowSelector.append(manageTd);
-    //    this.setManangeButtons(inprogress, $(manageTd));
-    //}
 
     private setManangeButtons(inprogress: InProgressIndexModel, tdSelector: JQuery) {
         let showSellTooltip = document.createElement("button");

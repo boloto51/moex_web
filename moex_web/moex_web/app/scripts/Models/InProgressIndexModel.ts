@@ -5,9 +5,9 @@ export class InProgressIndexModel {
     SecName: string;
     BuyPrice: number;
     CurrentClose: number;
+    Percent: number;
     BuyDate: Date;
     DaysToSell: number;
-    Percent: number;
     rowSelector: JQuery;
     buySelector: JQuery;
 }

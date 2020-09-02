@@ -5,6 +5,19 @@
     padding: 35px;
 
     table {
+        tbody {
+            tr {
+                td {
+                    &.positive-percent {
+                        color: green;
+                    }
+
+                    &.negative-percent {
+                        color: red;
+                    }
+                }
+            }
+        }
     }
 
     .inprogress-button-sell {

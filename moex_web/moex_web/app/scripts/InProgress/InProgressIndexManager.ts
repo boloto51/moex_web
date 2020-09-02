@@ -10,6 +10,7 @@ export class InProgressIndexManager {
     private creationInputSelector: JQuery;
     private inProgresses: InProgressIndexModel[];
     private sellTooltip: TooltipSellManager;
+    //private percentClass: string;
 
     constructor(inProgresses: InProgressIndexModel[], sellSecurityUrl: string) {
         this.inProgresses = inProgresses;
@@ -49,9 +50,14 @@ export class InProgressIndexManager {
         const currentClose = document.createElement("td");
         currentClose.innerText = inprogress.CurrentClose + "";
         inprogress.rowSelector.append(currentClose);
+
+        const percentClass = inprogress.Percent >= 0 ? "positive-percent" : "negative-percent";
+
         const percent = document.createElement("td");
+        percent.className = percentClass;
         percent.innerText = inprogress.Percent + " %";
         inprogress.rowSelector.append(percent);
+
         const BuyDate = document.createElement("td");
         BuyDate.innerText = new Intl.DateTimeFormat('ru', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(inprogress.BuyDate));
         inprogress.rowSelector.append(BuyDate);

@@ -73,7 +73,12 @@ export class InProgressIndexManager {
         let showSellTooltip = document.createElement("button");
         showSellTooltip.name = inprogress.SecId;
         showSellTooltip.innerText = "Sell";
-        showSellTooltip.classList.add("inprogress-button-sell");
+
+        inprogress.Percent >= 0 ?
+            showSellTooltip.classList.add("inprogress-button-sell","positive-percent")
+            : showSellTooltip.classList.add("inprogress-button-sell","negative-percent");
+
+        //showSellTooltip.classList.add("inprogress-button-sell-negative-percent");
         tdSelector.append(showSellTooltip);
         $(showSellTooltip).on("click", () => this.sellTooltip.show(inprogress));
 

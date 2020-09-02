@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <None Remove="app\scripts\InProgress\InProgressIndexManager.ts" />
+    <None Remove="app\scripts\InProgress\TooltipSellManager.ts" />
     <None Remove="app\scripts\Models\InProgressIndexModel.ts" />
     <None Remove="app\scripts\MonitoringIndexManager.ts" />
     <None Remove="app\scripts\MonitoringIndexModel.ts" />
@@ -35,6 +36,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="app\scripts\Components\UtcZone.ts" />
     <TypeScriptCompile Include="app\scripts\InProgress\InProgressIndexManager.ts" />
+    <TypeScriptCompile Include="app\scripts\InProgress\TooltipSellManager.ts" />
     <TypeScriptCompile Include="app\scripts\Models\BuySecurityModel.ts" />
     <TypeScriptCompile Include="app\scripts\Models\InProgressIndexModel.ts" />
     <TypeScriptCompile Include="app\scripts\Models\MonitoringIndexModel.ts" />

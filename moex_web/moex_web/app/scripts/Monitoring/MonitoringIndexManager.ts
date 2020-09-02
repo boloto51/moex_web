@@ -50,7 +50,7 @@ export class MonitoringIndexManager {
         currentClose.innerText = monitoring.CurrentClose + "";
         monitoring.rowSelector.append(currentClose);
         const percent = document.createElement("td");
-        percent.innerText = monitoring.Percent + "";
+        percent.innerText = monitoring.Percent + " %";
         monitoring.rowSelector.append(percent);
         const toByDateDate = document.createElement("td");
         toByDateDate.innerText = new Intl.DateTimeFormat('ru', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(monitoring.ToBuyDate));

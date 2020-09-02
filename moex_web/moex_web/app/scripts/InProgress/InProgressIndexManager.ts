@@ -1,6 +1,6 @@
 ﻿import { NetSender } from "../NetSender";
 import { InProgressIndexModel } from "../Models/InProgressIndexModel";
-//import { TooltipBuyManager } from "./TooltipBuyManager";
+import { TooltipSellManager } from "./TooltipSellManager";
 
 export class InProgressIndexManager {
     private createBtnSelector: JQuery;
@@ -9,16 +9,16 @@ export class InProgressIndexManager {
     private creationOkSelector: JQuery;
     private creationInputSelector: JQuery;
     private inProgresses: InProgressIndexModel[];
-    //private buyTooltip: TooltipBuyManager;
+    private sellTooltip: TooltipSellManager;
 
-    constructor(inProgresses: InProgressIndexModel[]) {
+    constructor(inProgresses: InProgressIndexModel[], sellSecurityUrl: string) {
         this.inProgresses = inProgresses;
         this.createBtnSelector = $(".create-button");
         this.creationFromSelector = $(".creation-form");
         this.creationOkSelector = $(".creation-submit");
         this.creationInputSelector = $(".creation-form input");
         this.tableBodySelector = $(".inprogress-index-table tbody");
-        //this.buyTooltip = new TooltipBuyManager(buySecurityUrl);
+        this.sellTooltip = new TooltipSellManager(sellSecurityUrl);
         this.initTable();
         //this.initCreation();
     }
@@ -29,8 +29,8 @@ export class InProgressIndexManager {
         });
     }
 
-    private updateMonitoring(monitoring: InProgressIndexModel) {
-        // NetSender.post(this.editUrl, monitoring, () => { });
+    private updateInProgress(inprogress: InProgressIndexModel) {
+        // NetSender.post(this.editUrl, inprogress, () => { });
     }
 
     private addElement(inprogress: InProgressIndexModel) {
@@ -49,27 +49,60 @@ export class InProgressIndexManager {
         const currentClose = document.createElement("td");
         currentClose.innerText = inprogress.CurrentClose + "";
         inprogress.rowSelector.append(currentClose);
+        const percent = document.createElement("td");
+        percent.innerText = inprogress.Percent + "";
+        inprogress.rowSelector.append(percent);
         const BuyDate = document.createElement("td");
         BuyDate.innerText = new Intl.DateTimeFormat('ru', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(inprogress.BuyDate));
         inprogress.rowSelector.append(BuyDate);
         const DaysToSell = document.createElement("td");
         DaysToSell.innerText = inprogress.DaysToSell + "";
         inprogress.rowSelector.append(DaysToSell);
-        const percent = document.createElement("td");
-        percent.innerText = inprogress.Percent + "";
-        inprogress.rowSelector.append(percent);
         const manageTd = document.createElement("td");
         inprogress.rowSelector.append(manageTd);
         this.setManangeButtons(inprogress, $(manageTd));
     }
 
+    //private addElement(inprogress: InProgressIndexModel) {
+    //    const tr = document.createElement("tr");
+    //    this.tableBodySelector.append(tr);
+    //    inprogress.rowSelector = $(tr);
+    //    const secId = document.createElement("td");
+    //    secId.innerText = inprogress.SecId + "";
+    //    inprogress.rowSelector.append(secId);
+    //    const secName = document.createElement("td");
+    //    secName.innerText = inprogress.SecName + "";
+    //    inprogress.rowSelector.append(secName);
+    //    const percent = document.createElement("td");
+    //    percent.innerText = inprogress.Percent + " %";
+    //    inprogress.rowSelector.append(percent);
+    //    const DaysToSell = document.createElement("td");
+    //    DaysToSell.innerText = inprogress.DaysToSell + "";
+    //    inprogress.rowSelector.append(DaysToSell);
+    //    const BuyDate = document.createElement("td");
+    //    BuyDate.innerText = new Intl.DateTimeFormat('ru', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(inprogress.BuyDate));
+    //    inprogress.rowSelector.append(BuyDate);
+
+
+
+    //    const BuyPrice = document.createElement("td");
+    //    BuyPrice.innerText = inprogress.BuyPrice + "";
+    //    inprogress.rowSelector.append(BuyPrice);
+    //    const currentClose = document.createElement("td");
+    //    currentClose.innerText = inprogress.CurrentClose + "";
+    //    inprogress.rowSelector.append(currentClose);
+    //    const manageTd = document.createElement("td");
+    //    inprogress.rowSelector.append(manageTd);
+    //    this.setManangeButtons(inprogress, $(manageTd));
+    //}
+
     private setManangeButtons(inprogress: InProgressIndexModel, tdSelector: JQuery) {
-        //let showBuyTooltip = document.createElement("button");
-        //showBuyTooltip.name = inprogress.SecId;
-        //showBuyTooltip.innerText = "Buy";
-        //showBuyTooltip.classList.add("monitoring-button-buy");
-        //tdSelector.append(showBuyTooltip);
-        //$(showBuyTooltip).on("click", () => this.buyTooltip.show(inprogress));
+        let showSellTooltip = document.createElement("button");
+        showSellTooltip.name = inprogress.SecId;
+        showSellTooltip.innerText = "Sell";
+        showSellTooltip.classList.add("inprogress-button-sell");
+        tdSelector.append(showSellTooltip);
+        $(showSellTooltip).on("click", () => this.sellTooltip.show(inprogress));
 
         //let showBuyTooltip = document.createElement("a");
         //showBuyTooltip.href = this.monitoringUrl + monitoring.SecId;

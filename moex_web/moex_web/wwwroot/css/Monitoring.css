@@ -32,10 +32,15 @@
 .buy-tooltip-wrapper .buy-tooltip input {
   width: 100px;
 }
-.buy-tooltip-wrapper .buy-tooltip .manage-buttons .confirm {
-  color: white;
-  background-color: rgba(38, 83, 212, 0.83);
-  border-width: 0px;
+.buy-tooltip-wrapper .buy-tooltip .input-group .date-input {
+  border-radius: 5px;
+  border-width: 1px;
+}
+.buy-tooltip-wrapper .buy-tooltip .input-group .price-input {
+  border-radius: 5px;
+  border-width: 1px;
+}
+.buy-tooltip-wrapper .buy-tooltip .manage-buttons {
   border-radius: 10px;
   width: 90px;
   height: 38px;
@@ -43,16 +48,19 @@
   padding: 6px 12px;
   vertical-align: bottom;
 }
+.buy-tooltip-wrapper .buy-tooltip .manage-buttons .confirm {
+  color: white;
+  background-color: rgba(38, 83, 212, 0.83);
+  border-width: 0px;
+}
 .buy-tooltip-wrapper .buy-tooltip .manage-buttons .cancel {
   color: black;
   background-color: rgba(128, 128, 128, 0.53);
   border-color: rgba(38, 83, 212, 0.83);
   border-width: 1px;
-  border-radius: 10px;
-  width: 90px;
-  height: 38px;
-  margin: 0px 0px 0px 15px;
-  padding: 6px 12px;
-  vertical-align: bottom;
+}
+.buy-tooltip-wrapper .buy-tooltip .date .date-input {
+  border-radius: 5px;
+  border-width: 1px;
 }
 /*# sourceMappingURL=Monitoring.css.map */

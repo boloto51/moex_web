@@ -1,6 +1,85 @@
-﻿
+﻿@using JsonSerializer = System.Text.Json.JsonSerializer
+@model List<InProgressModel>
+
 @{
-    ViewData["Title"] = "Index";
+    <link rel="stylesheet" href="~/css/InProgress.css" />
+    ViewData["Title"] = "InProgress";
 }
 
-<h1>In Progress</h1>
+<partial name="_SellTooltip" />
+
+<div class="inprogress-index-page">
+    <h1>In Progress</h1>
+    <table class="table table-bordered inprogress-index-table">
+        <thead>
+            <tr>
+                <th>
+                    <b>SecId</b>
+                </th>
+                <th>
+                    <b>Name</b>
+                </th>
+                <th>
+                    <b>Buy price</b>
+                </th>
+                <th>
+                    <b>Current price</b>
+                </th>
+                <th>
+                    <b>Current state</b>
+                </th>
+                <th>
+                    <b>Bought date</b>
+                </th>
+                <th>
+                    <b>Days to sell</b>
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<script src="~/js/InProgressIndexManager.js" asp-append-version="true"></script>
+<script type="text/javascript">
+        $(function () {
+            new InProgressIndexManagerPack.InProgressIndexManager(
+                @Html.Raw(JsonSerializer.Serialize(Model)),
+                '@Url.Action("Index", "InProgress")',
+                @*'@(User?.Identity?.IsAuthenticated)',
+                '@Url.Action("SetLearnedState")',
+                '@Url.Action("Index", "Faq")?id='*@
+            );
+        });
+</script>
+
+@*
+    @if (Model.Count != 0)
+                {
+                    @for (int i = 0; i < (Model.Count < 100 ? Model.Count : 100); i++)
+                    {
+                        <tr>
+                            <td>
+                                @Model[i].SecId
+                            </td>
+                            <td>
+                                @Model[i].SecName
+                            </td>
+                            <td>
+                                @Model[i].Percent
+                            </td>
+                            <td>
+                                @Model[i].DaysToSell
+                            </td>
+                            <td>
+                                @Model[i].BuyDate
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    }
+                }
+*@

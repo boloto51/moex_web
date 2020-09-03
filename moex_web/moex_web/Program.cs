@@ -52,7 +52,7 @@ namespace moex_web
                 })
                 .ConfigureServices(services =>
                 {
-                    services.AddHostedService<MonitoringUpdaterSheduler>();
+                    services.AddHostedService<MonitoringCleanerSheduler>();
                 });
     }
 }

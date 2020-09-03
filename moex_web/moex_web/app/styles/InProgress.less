@@ -1,0 +1,62 @@
+﻿.inprogress-index-page {
+    height: 100%;
+    width: 100%;
+    font-family: Nunito, serif;
+    padding: 35px;
+
+    table {
+        tbody {
+            tr {
+                td {
+                    &.positive-percent {
+                        color: green;
+                    }
+
+                    &.negative-percent {
+                        color: red;
+                    }
+                }
+            }
+        }
+    }
+
+    .inprogress-button-sell {
+        color: rgb(255, 255, 255);
+        //background-color: #265999;
+        width: 90px;
+        height: 38px;
+        margin: 0;
+        padding: 6px 12px;
+        border: none;
+        border-radius: 10px;
+
+        &.positive-percent {
+            background-color: green;
+        }
+
+        &.negative-percent {
+            background-color: rgba(38,83,212,0.5);
+        }
+    }
+}
+
+.sell-tooltip-wrapper {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+    align-items: center;
+    display: flex;
+
+    .sell-tooltip {
+        width: 400px;
+        height: 300px;
+        background-color: #fff;
+        border-radius: 15px;
+        margin: 0 auto;
+
+        input {
+            width: 100px;
+        }
+    }
+}

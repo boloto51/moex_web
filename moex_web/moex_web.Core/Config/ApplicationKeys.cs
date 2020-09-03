@@ -13,5 +13,10 @@ namespace moex_web.Core.Config
         public virtual int MonitoringDaysRecordStorage { get; set; }
         public virtual string UrlInit { get; set; }
         public virtual int NumberYearsAgo { get; set; }
+        public virtual int DaysToSell { get; set; }
+        public virtual int CacheLifeTime { get; set; }
+        public virtual string MailFrom { get; set; }
+        public virtual string MailServer { get; set; }
+        public virtual string MailPass { get; set; }
     }
 }

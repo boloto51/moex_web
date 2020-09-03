@@ -1,11 +1,13 @@
+import { TooltipBuyManager } from "./TooltipBuyManager";
 var MonitoringIndexManager = /** @class */ (function () {
-    function MonitoringIndexManager(monitorings, monitoringUrl) {
+    function MonitoringIndexManager(monitorings, buySecurityUrl) {
         this.monitorings = monitorings;
         this.createBtnSelector = $(".create-button");
         this.creationFromSelector = $(".creation-form");
         this.creationOkSelector = $(".creation-submit");
         this.creationInputSelector = $(".creation-form input");
         this.tableBodySelector = $(".monitoring-index-table tbody");
+        this.buyTooltip = new TooltipBuyManager(buySecurityUrl);
         this.initTable();
         //this.initCreation();
     }
@@ -35,14 +37,38 @@ var MonitoringIndexManager = /** @class */ (function () {
         currentClose.innerText = monitoring.CurrentClose + "";
         monitoring.rowSelector.append(currentClose);
         var percent = document.createElement("td");
-        percent.innerText = monitoring.Percent + "";
+        percent.innerText = monitoring.Percent + " %";
         monitoring.rowSelector.append(percent);
         var toByDateDate = document.createElement("td");
         toByDateDate.innerText = new Intl.DateTimeFormat('ru', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(monitoring.ToBuyDate));
         monitoring.rowSelector.append(toByDateDate);
         var manageTd = document.createElement("td");
         monitoring.rowSelector.append(manageTd);
-        //this.setManangeButtons(monitoring, $(manageTd));
+        this.setManangeButtons(monitoring, $(manageTd));
+    };
+    MonitoringIndexManager.prototype.setManangeButtons = function (monitoring, tdSelector) {
+        var _this = this;
+        var showBuyTooltip = document.createElement("button");
+        showBuyTooltip.name = monitoring.SecId;
+        showBuyTooltip.innerText = "Buy";
+        showBuyTooltip.classList.add("monitoring-button-buy");
+        tdSelector.append(showBuyTooltip);
+        $(showBuyTooltip).on("click", function () { return _this.buyTooltip.show(monitoring); });
+        //let showBuyTooltip = document.createElement("a");
+        //showBuyTooltip.href = this.monitoringUrl + monitoring.SecId;
+        //tdSelector.append(showBuyTooltip);
+        //let element = document.createElement("span");
+        //element.classList.add("mid-icon", "list-span");
+        //showBuyTooltip.append(element);
+        //element = document.createElement("span");
+        //element.classList.add("mid-icon", "edit-span");
+        //tdSelector.append(element);
+        //monitoring.editSelector = $(element);
+        //if (monitoring.PatternCount !== 0) return;
+        //element = document.createElement("span");
+        //element.classList.add("mid-icon", "delete-span");
+        //tdSelector.append(element);
+        //monitoring.deleteSelector = $(element);
     };
     return MonitoringIndexManager;
 }());

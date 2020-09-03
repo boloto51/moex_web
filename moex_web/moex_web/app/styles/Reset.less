@@ -1,0 +1,96 @@
+body {
+  background-color: ghostwhite;
+}
+
+.reset-page {
+    height: calc(~'100vh - 50px');
+    display: flex;
+    align-items: center;
+
+    .reset-form {
+        display: inline;
+        align-items: center;
+        margin: 0 auto;
+        background-color: #fff;
+        width: 300px;
+        height: 250px;
+        padding: 30px;
+        position: relative;
+        box-shadow: 5px 5px 15px #b3b7bb;
+
+        input {
+            display: block;
+            width: 100%;
+            background-color: #f5f5f5;
+            border: none;
+            height: 50px;
+            margin-bottom: 15px;
+            padding-left: 15px;
+
+            &::placeholder {
+                color: #b3b7bb;
+            }
+        }
+
+        .reset-button {
+            color: #fff;
+            cursor: pointer;
+            height: 50px;
+            width: 100%;
+            grid-gap: 20px;
+            background-color: #1e7e34;
+            text-transform: uppercase;
+        }
+    }
+}
+
+
+.register-page {
+    height: calc(~'100vh - 50px');
+    display: flex;
+    align-items: center;
+
+    .register-form {
+        display: inline;
+        align-items: center;
+        margin: 0 auto;
+        background-color: #fff;
+        width: 300px;
+        height: 370px;
+        padding: 30px;
+        position: relative;
+        box-shadow: 5px 5px 15px #b3b7bb;
+
+        input {
+            display: block;
+            width: 100%;
+            background-color: #f5f5f5;
+            border: none;
+            height: 50px;
+            margin-bottom: 15px;
+            padding-left: 15px;
+
+            &::placeholder {
+                color: #b3b7bb;
+            }
+        }
+
+        .register-button {
+            color: #fff;
+            cursor: pointer;
+            height: 50px;
+            width: 100%;
+            grid-gap: 20px;
+            background-color: #1e7e34;
+            text-transform: uppercase;
+        }
+    }
+}
+
+.validation{
+    font-size: 12px;
+    color: #c24a4a;
+    margin-top: -15px;
+    margin-bottom: 0;
+    display: block;
+}

@@ -1,0 +1,24 @@
+@model LoginModel
+<link rel="stylesheet" href="~/css/Login.css" />
+
+<div class="login-page">
+    <div class="login-form">
+        <label class="validation validation-login hidden-element"></label>
+        <input type="email" name="Email" id="Email" value="@Model.Email" placeholder="e-mail" />
+        <label class="validation validation-email hidden-element">Необходимо указать e-mail</label>
+        <input type="password" name="Password" , id="Password" placeholder="password" />
+        <label class="validation validation-password hidden-element">Необходимо указать пароль</label>
+
+        <button class="login-button">ВХОД</button>
+        <a href="@Url.Action("ForgotPassword")"><button class="forgot-button hidden-element">ВОССТАНОВИТь</button></a>
+
+        <div class="register-message">Нет аккаунта? <a href="@Url.Action("Register")">Создать</a></div>
+    </div>
+</div>
+<script src="~/js/login.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    $(function () {
+        new loginPack.LoginManager('@Url.Action("Login")');
+    });
+</script>
+

@@ -13,6 +13,8 @@ using moex_web.Core.Config;
 using System;
 using moex_web.Managers;
 using moex_web.Middleware;
+using moex_web.Core.RemoteAgents;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace moex_web
 {
@@ -47,19 +49,33 @@ namespace moex_web
             services.AddScoped<ISecurityRepository, SecurityRepository>();
             services.AddScoped<ITradeRepository, TradeRepository>();
             services.AddScoped<IMonitoringRepository, MonitoringRepository>();
+            services.AddScoped<IInProgressRepository, InProgressRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ITradeHistoryRepository, TradeHistoryRepository>();
             services.AddScoped<ISecurityConverter, SecurityConverter>();
             services.AddScoped<ITradeConverter, TradeConverter>();
+            services.AddScoped<IInProgressConverter, InProgressConverter>();
             services.AddScoped<ISecurityManager, SecurityManager>();
             services.AddScoped<ITradeManager, TradeManager>();
             services.AddScoped<IMonitoringManager, MonitoringManager>();
+            services.AddScoped<IInProgressManager, InProgressManager>();
+            services.AddScoped<ITradeHistoryManager, TradeHistoryManager>();
             services.AddScoped<IUriConverter, UriConverter>();
             services.AddScoped<IHttpService, HttpService>();
+            services.AddScoped<IMailAgent, MailAgent>();
             services.AddSingleton<ITradeCleanerSheduler, TradeCleanerSheduler>();
             services.AddSingleton<ITradeUpdaterSheduler, TradeUpdaterSheduler>();
             services.AddSingleton<IMonitoringUpdaterSheduler, MonitoringUpdaterSheduler>();
             services.AddSingleton<IMonitoringCleanerSheduler, MonitoringCleanerSheduler>();
             services.AddSingleton<IDateConverter, DateConverter>();
             services.AddSingleton<IMonitoringConverter, MonitoringConverter>();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => //CookieAuthenticationOptions
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                    options.ExpireTimeSpan = TimeSpan.FromDays(5);
+                    options.Cookie.HttpOnly = true;
+                });
             services.AddAntiforgery(options =>
             {
                 options.HeaderName = "X-XSRF-TOKEN";
@@ -81,9 +97,9 @@ namespace moex_web
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseCookiePolicy();
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseAntiforgeryToken();
 
@@ -92,6 +108,7 @@ namespace moex_web
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Monitoring}/{action=Index}/{id?}");
+                    //pattern: "{controller=Account}/{action=Login}/{id?}");
             });
         }
     }

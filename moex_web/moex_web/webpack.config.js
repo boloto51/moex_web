@@ -5,7 +5,12 @@ module.exports = (env) => {
     return {
         mode: env && env.prod ? "production" : "development",
         entry: {
-            MonitoringIndexManager: './app/scripts/Monitoring/MonitoringIndexManager.ts'
+            MonitoringIndexManager: './app/scripts/Monitoring/MonitoringIndexManager.ts',
+            InProgressIndexManager: './app/scripts/InProgress/InProgressIndexManager.ts',
+            login: './app/scripts/LoginManager.ts',
+            reset: './app/scripts/ResetManager.ts',
+            register: './app/scripts/RegisterManager.ts',
+            forgot: './app/scripts/ForgotPassManager.ts'
         },
         devtool: env && env.prod ? false : "inline-source-map",
         devServer: {

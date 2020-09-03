@@ -7,24 +7,21 @@
 .content-wrapper .main-menu {
   background-color: #4e73df;
 }
-.content-wrapper .main-menu div {
+.content-wrapper .main-menu a {
+  text-decoration: none;
+}
+.content-wrapper .main-menu a div {
   text-align: center;
   padding: 20px;
-  color: #858796;
+  color: #ffffff;
   font-size: 20px;
   font-family: Nunito, serif;
 }
-.content-wrapper .main-menu div.active {
+.content-wrapper .main-menu a div.active {
   background-color: #b7b7b7;
-}
-.content-wrapper .main-menu div.active a {
   color: #000;
 }
-.content-wrapper .main-menu div a {
-  color: #ffffff;
-  text-decoration: none;
-}
-.content-wrapper .page-content {
-  padding: 35px;
+.hidden-element {
+  display: none !important;
 }
 /*# sourceMappingURL=General.css.map */

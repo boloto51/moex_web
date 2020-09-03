@@ -2,42 +2,61 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using moex_web.Converters;
 using moex_web.Data.Entities;
 using moex_web.Data.Repositories;
+using moex_web.Managers;
 using moex_web.Models;
 
 namespace moex_web.Controllers
 {
+    [Authorize]
     public class MonitoringController : Controller
     {
         private readonly ISecurityRepository _securityRepository;
         private readonly ITradeRepository _tradeRepository;
         private readonly IMonitoringRepository _monitoringRepository;
+        private IInProgressRepository _inProgressRepository;
         private IMonitoringConverter _monitoringConverter;
+        private IInProgressManager _inProgressManager;
+        private IMonitoringManager _monitoringManager;
 
         public MonitoringController(ISecurityRepository securityRepository, ITradeRepository tradeRepository,
-            IMonitoringRepository monitoringRepository, IMonitoringConverter monitoringConverter)
+            IMonitoringRepository monitoringRepository, IInProgressRepository inProgressRepository, 
+            IMonitoringConverter monitoringConverter, IInProgressManager inProgressManager, IMonitoringManager monitoringManager)
         {
             _securityRepository = securityRepository;
             _tradeRepository = tradeRepository;
             _monitoringRepository = monitoringRepository;
             _monitoringConverter = monitoringConverter;
+            _inProgressRepository = inProgressRepository;
+            _inProgressManager = inProgressManager;
+            _monitoringManager = monitoringManager;
         }
 
         // GET: Monitoring
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            //var securities = await _securityRepository.Get();
-            //var trades = await _tradeRepository.Get();
-            var monitorings = await _monitoringRepository.Get();
-            var securities = await _securityRepository.Get();
+            string userEmaIL = User.Identity.Name;
+            var inProgress = await _inProgressRepository.Get(userEmaIL);
+            var monitorings = await _monitoringRepository.Get(inProgress);
+            var securities = await _securityRepository.Get();            
             var monitoringModels = _monitoringConverter.ToListModels(monitorings, securities);
 
             return View(monitoringModels);
+        }
+
+        [HttpPost]
+        public async Task Index([FromBody]MonitoringBuyModel monitoringBuyModel)
+        {
+            string userEmaIL = User.Identity.Name;
+            //string userName = "abc";
+            //await _monitoringManager.DeleteRecord(monitoringBuyModel.Id);
+            await _inProgressManager.UpdateTable(userEmaIL, monitoringBuyModel);
         }
 
         // GET: Monitoring/Details/5

@@ -1,21 +1,24 @@
 ﻿import { NetSender } from "../NetSender";
 import { MonitoringIndexModel } from "../Models/MonitoringIndexModel";
+import { TooltipBuyManager } from "./TooltipBuyManager";
 
 export class MonitoringIndexManager {
-    createBtnSelector: JQuery;
-    tableBodySelector: JQuery;
-    creationFromSelector: JQuery;
-    creationOkSelector: JQuery;
-    creationInputSelector: JQuery;
-    monitorings: MonitoringIndexModel[];
+    private createBtnSelector: JQuery;
+    private tableBodySelector: JQuery;
+    private creationFromSelector: JQuery;
+    private creationOkSelector: JQuery;
+    private creationInputSelector: JQuery;
+    private monitorings: MonitoringIndexModel[];
+    private buyTooltip: TooltipBuyManager;
 
-    constructor(monitorings: MonitoringIndexModel[],monitoringUrl: string) {
+    constructor(monitorings: MonitoringIndexModel[], buySecurityUrl: string) {
         this.monitorings = monitorings;
         this.createBtnSelector = $(".create-button");
         this.creationFromSelector = $(".creation-form");
         this.creationOkSelector = $(".creation-submit");
         this.creationInputSelector = $(".creation-form input");
         this.tableBodySelector = $(".monitoring-index-table tbody");
+        this.buyTooltip = new TooltipBuyManager(buySecurityUrl);
         this.initTable();
         //this.initCreation();
     }
@@ -27,7 +30,7 @@ export class MonitoringIndexManager {
     }
 
     private updateMonitoring(monitoring: MonitoringIndexModel) {
-       // NetSender.post(this.editUrl, monitoring, () => { });
+        // NetSender.post(this.editUrl, monitoring, () => { });
     }
 
     private addElement(monitoring: MonitoringIndexModel) {
@@ -47,36 +50,43 @@ export class MonitoringIndexManager {
         currentClose.innerText = monitoring.CurrentClose + "";
         monitoring.rowSelector.append(currentClose);
         const percent = document.createElement("td");
-        percent.innerText = monitoring.Percent + "";
+        percent.innerText = monitoring.Percent + " %";
         monitoring.rowSelector.append(percent);
         const toByDateDate = document.createElement("td");
         toByDateDate.innerText = new Intl.DateTimeFormat('ru', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(monitoring.ToBuyDate));
         monitoring.rowSelector.append(toByDateDate);
         const manageTd = document.createElement("td");
         monitoring.rowSelector.append(manageTd);
-        //this.setManangeButtons(monitoring, $(manageTd));
+        this.setManangeButtons(monitoring, $(manageTd));
     }
 
-    /*private setManangeButtons(monitoring: MonitoringIndexModel, tdSelector: JQuery) {
-        let toPatterns = document.createElement("a");
-        toPatterns.href = this.monitoringUrl + monitoring.Id;
-        tdSelector.append(toPatterns);
-        let element = document.createElement("span");
-        element.classList.add("mid-icon", "list-span");
-        toPatterns.append(element);
+    private setManangeButtons(monitoring: MonitoringIndexModel, tdSelector: JQuery) {
+        let showBuyTooltip = document.createElement("button");
+        showBuyTooltip.name = monitoring.SecId;
+        showBuyTooltip.innerText = "Buy";
+        showBuyTooltip.classList.add("monitoring-button-buy");
+        tdSelector.append(showBuyTooltip);
+        $(showBuyTooltip).on("click", () => this.buyTooltip.show(monitoring));
 
-        element = document.createElement("span");
-        element.classList.add("mid-icon", "edit-span");
-        tdSelector.append(element);
-        monitoring.editSelector = $(element);
-        if (monitoring.PatternCount !== 0) return;
-        element = document.createElement("span");
-        element.classList.add("mid-icon", "delete-span");
-        tdSelector.append(element);
-        monitoring.deleteSelector = $(element);
+        //let showBuyTooltip = document.createElement("a");
+        //showBuyTooltip.href = this.monitoringUrl + monitoring.SecId;
+        //tdSelector.append(showBuyTooltip);
+        //let element = document.createElement("span");
+        //element.classList.add("mid-icon", "list-span");
+        //showBuyTooltip.append(element);
+
+        //element = document.createElement("span");
+        //element.classList.add("mid-icon", "edit-span");
+        //tdSelector.append(element);
+        //monitoring.editSelector = $(element);
+        //if (monitoring.PatternCount !== 0) return;
+        //element = document.createElement("span");
+        //element.classList.add("mid-icon", "delete-span");
+        //tdSelector.append(element);
+        //monitoring.deleteSelector = $(element);
     }
 
-    private initCreation() {
+    /*private initCreation() {
         this.creationInputSelector.val("");
         const theme = new ThemeIndexModel();
         theme.Name = "";

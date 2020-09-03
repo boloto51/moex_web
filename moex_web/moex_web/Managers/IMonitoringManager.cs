@@ -9,5 +9,6 @@ namespace moex_web.Managers
     {
         public Task UpdateTable();
         public Task DeleteOldRecords();
+        public Task DeleteRecord(string secId);
     }
 }

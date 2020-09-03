@@ -40,6 +40,13 @@ namespace moex_web.Core.Config
                 "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities";
             keys.NumberYearsAgo =
                 Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "NumberYearsAgo")?.Value ?? "5");
+            keys.DaysToSell =
+                Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "DaysToSell")?.Value ?? "35");
+            keys.CacheLifeTime = Convert.ToInt32(temp.FirstOrDefault(e => e.Key == "CacheLifeTime")?.Value ?? "500");
+            keys.MailFrom = temp.FirstOrDefault(e => e.Key == "MailFrom")?.Value;
+            keys.MailPass = temp.FirstOrDefault(e => e.Key == "MailPass")?.Value;
+            keys.MailServer = temp.FirstOrDefault(e => e.Key == "MailServer")?.Value;
+
             return keys;
         }
     }

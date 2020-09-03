@@ -22,7 +22,7 @@ namespace moex_web.Controllers
         public async Task<ActionResult> Index()
         {
             string userEmail = User.Identity.Name;
-            var inProgressModel = _inProgressManager.GetModels(userEmail);
+            var inProgressModel = await _inProgressManager.GetModels(userEmail);
             return View(inProgressModel);
         }
 

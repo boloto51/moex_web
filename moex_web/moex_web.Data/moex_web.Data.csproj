@@ -41,6 +41,10 @@
     <Compile Remove="Migrations\20200830182425_Users.Designer.cs" />
     <Compile Remove="Migrations\20200830190007_Temp.cs" />
     <Compile Remove="Migrations\20200830190007_Temp.Designer.cs" />
+    <Compile Remove="Migrations\20200903213310_TradeHistory.cs" />
+    <Compile Remove="Migrations\20200903213310_TradeHistory.Designer.cs" />
+    <Compile Remove="Migrations\20200903214616_TradeHistory.cs" />
+    <Compile Remove="Migrations\20200903214616_TradeHistory.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

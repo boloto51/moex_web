@@ -12,7 +12,7 @@ namespace moex_web.Models
         public decimal Price { get; set; }
         [JsonPropertyName("Number")]
 
-        public decimal Number { get; set; }
+        public int Number { get; set; }
 
         [JsonPropertyName("Date")]
 

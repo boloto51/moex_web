@@ -13,7 +13,7 @@ namespace moex_web.Data.Entities
         [Column("SecId")]
         public string SecId { get; set; }
         [Column("Number")]
-        public decimal? Number { get; set; }
+        public int Number { get; set; }
         [Column("BuyPrice")]
         public decimal? BuyPrice { get; set; }
         [Column("BuyDate")]

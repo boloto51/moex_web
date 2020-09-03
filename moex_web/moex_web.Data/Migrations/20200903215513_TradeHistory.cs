@@ -8,10 +8,11 @@ namespace moex_web.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<decimal>(
+            migrationBuilder.AddColumn<int>(
                 name: "BuyNumber",
                 table: "inprogress",
-                nullable: true);
+                nullable: false,
+                defaultValue: 0);
 
             migrationBuilder.CreateTable(
                 name: "TradeHistory",
@@ -20,7 +21,7 @@ namespace moex_web.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     SecId = table.Column<string>(nullable: true),
-                    Number = table.Column<decimal>(nullable: true),
+                    Number = table.Column<int>(nullable: false),
                     BuyPrice = table.Column<decimal>(nullable: true),
                     BuyDate = table.Column<DateTime>(nullable: false),
                     SellPrice = table.Column<decimal>(nullable: true),

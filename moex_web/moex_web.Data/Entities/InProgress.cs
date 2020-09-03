@@ -13,7 +13,7 @@ namespace moex_web.Data.Entities
         [Column("BuyPrice")]
         public decimal? BuyPrice { get; set; }
         [Column("BuyNumber")]
-        public decimal? BuyNumber { get; set; }
+        public int BuyNumber { get; set; }
 
         [Column("BuyDate")]
         public DateTime BuyDate { get; set; }

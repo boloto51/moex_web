@@ -16,6 +16,7 @@ namespace moex_web.Data.DbContext
         public DbSet<User> Users { get; set; }
         public DbSet<ResetEntry> ResetEntries { get; set; }
         public DbSet<LoginAttempt> LoginAttempts { get; set; }
+        public DbSet<TradeHistory> TradeHistories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -4,21 +4,25 @@ using System.ComponentModel.DataAnnotations;
 
 namespace moex_web.Data.Entities
 {
-    [Table("inprogress")]
-    public class InProgress
+    [Table("TradeHistory")]
+    public class TradeHistory
     {
-        [Column("SecId", Order = 1)]
+        [Column("Id")]
         [Key]
+        public int Id { get; set; }
+        [Column("SecId")]
         public string SecId { get; set; }
+        [Column("Number")]
+        public decimal? Number { get; set; }
         [Column("BuyPrice")]
         public decimal? BuyPrice { get; set; }
-        [Column("BuyNumber")]
-        public decimal? BuyNumber { get; set; }
-
         [Column("BuyDate")]
         public DateTime BuyDate { get; set; }
-        [Column("UserId", Order = 0)]
-        [Key]
+        [Column("SellPrice")]
+        public decimal? SellPrice { get; set; }
+        [Column("SellDate")]
+        public DateTime SellDate { get; set; }
+        [Column("UserId")]
         public int UserId { get; set; }
 
         public virtual Security Security { get; set; }

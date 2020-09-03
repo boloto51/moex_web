@@ -51,6 +51,7 @@ namespace moex_web
             services.AddScoped<IMonitoringRepository, MonitoringRepository>();
             services.AddScoped<IInProgressRepository, InProgressRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ITradeHistoryRepository, TradeHistoryRepository>();
             services.AddScoped<ISecurityConverter, SecurityConverter>();
             services.AddScoped<ITradeConverter, TradeConverter>();
             services.AddScoped<IInProgressConverter, InProgressConverter>();
@@ -58,6 +59,7 @@ namespace moex_web
             services.AddScoped<ITradeManager, TradeManager>();
             services.AddScoped<IMonitoringManager, MonitoringManager>();
             services.AddScoped<IInProgressManager, InProgressManager>();
+            services.AddScoped<ITradeHistoryManager, TradeHistoryManager>();
             services.AddScoped<IUriConverter, UriConverter>();
             services.AddScoped<IHttpService, HttpService>();
             services.AddScoped<IMailAgent, MailAgent>();

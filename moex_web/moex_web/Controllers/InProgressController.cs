@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using moex_web.Converters;
-using moex_web.Core.Config;
-using moex_web.Data.Repositories;
 using moex_web.Managers;
 using moex_web.Models;
 
@@ -15,33 +9,29 @@ namespace moex_web.Controllers
     [Authorize]
     public class InProgressController : Controller
     {
-        private readonly ISecurityRepository _securityRepository;
-        private readonly ITradeRepository _tradeRepository;
-        private IInProgressRepository _inProgressRepository;
-        private IInProgressConverter _inProgressConverter;
-        private IConfigSettings _configSettings;
+        private ITradeHistoryManager _tradeHistoryManager;
+        private IInProgressManager _inProgressManager;
 
-        public InProgressController(ISecurityRepository securityRepository, ITradeRepository tradeRepository,
-    IInProgressRepository inProgressRepository, IConfigSettings configSettings, IInProgressConverter inProgressConverter)
+        public InProgressController(ITradeHistoryManager tradeHistoryManager, IInProgressManager inProgressManager)
         {
-            _securityRepository = securityRepository;
-            _tradeRepository = tradeRepository;
-            _inProgressRepository = inProgressRepository;
-            _configSettings = configSettings;
-            _inProgressConverter = inProgressConverter;
+            _tradeHistoryManager = tradeHistoryManager;
+            _inProgressManager = inProgressManager;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index()
         {
             string userEmail = User.Identity.Name;
-            //string userEmail = "abc";
-            var securities = await _securityRepository.Get();
-            var trades = await _tradeRepository.FindLastTrades();
-            var inProgresses = await _inProgressRepository.Get(userEmail);
-            var daysToSell = _configSettings.ApplicationKeys.DaysToSell;
-            var inProgressModel = _inProgressConverter.ToListModels(inProgresses, securities, trades, daysToSell);
+            var inProgressModel = _inProgressManager.GetModels(userEmail);
             return View(inProgressModel);
+        }
+
+        [HttpPost]
+        public async Task Index([FromBody]InProgressSellModel inProgressSellModel)
+        {
+            string userEmaIL = User.Identity.Name;
+            await _tradeHistoryManager.UpdateTable(userEmaIL, inProgressSellModel);
+            await _inProgressManager.Delete(userEmaIL, inProgressSellModel.Id);
         }
     }
 }

@@ -8,6 +8,7 @@ export class TooltipSellManager {
     confirmSelector: JQuery;
     dateSelector: JQuery;
     priceSelector: JQuery;
+    numberSelector: JQuery;
     titleSelector: JQuery;
     currentEntity: InProgressIndexModel;
     private sellSecurityUrl: string;
@@ -19,6 +20,7 @@ export class TooltipSellManager {
         this.confirmSelector = this.wrapperSelector.find(".confirm");
         this.dateSelector = this.wrapperSelector.find(".date-input");
         this.priceSelector = this.wrapperSelector.find(".price-input");
+        this.numberSelector = this.wrapperSelector.find(".number-input");
         this.titleSelector = this.wrapperSelector.find(".title");
         this.initEvents();
     }
@@ -38,7 +40,8 @@ export class TooltipSellManager {
             NetSender.post(this.sellSecurityUrl, {
                 Id: this.currentEntity.SecId,
                 Date: UtcZone.getUtc(new Date(this.dateSelector.val() as string)),
-                Price: Number(this.priceSelector.val())
+                Price: Number(this.priceSelector.val()),
+                Number: Number(this.numberSelector.val()),
             },
                 () => {
                     this.currentEntity.rowSelector.remove();

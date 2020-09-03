@@ -53,10 +53,10 @@ namespace moex_web.Controllers
         [HttpPost]
         public async Task Index([FromBody]MonitoringBuyModel monitoringBuyModel)
         {
-            //string userName = User.Identity.Name;
-            string userName = "abc";
+            string userEmaIL = User.Identity.Name;
+            //string userName = "abc";
             //await _monitoringManager.DeleteRecord(monitoringBuyModel.Id);
-            await _inProgressManager.UpdateTable(userName, monitoringBuyModel);
+            await _inProgressManager.UpdateTable(userEmaIL, monitoringBuyModel);
         }
 
         // GET: Monitoring/Details/5

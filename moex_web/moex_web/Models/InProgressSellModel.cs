@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace moex_web.Models
 {
-    public class MonitoringBuyModel
+    public class InProgressSellModel
     {
         [JsonPropertyName("Id")]
         public string Id { get; set; }
@@ -17,6 +17,6 @@ namespace moex_web.Models
         [JsonPropertyName("Date")]
 
         public DateTime Date { get; set; }
-        //public string UserId { get; set; }
+
     }
 }

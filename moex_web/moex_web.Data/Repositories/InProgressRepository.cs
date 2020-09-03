@@ -29,10 +29,16 @@ namespace moex_web.Data.Repositories
             return await _context.GetContext().InProgresses.Where(i => i.UserId == userId).ToListAsync();
         }
 
-        public async Task Delete(string SecId)
+        public async Task<InProgress> Get(string userEmail, string secId)
+        {
+            var userId = await _context.GetContext().Users.Where(u => u.Email == userEmail).Select(u => u.Id).FirstOrDefaultAsync();
+            return await _context.GetContext().InProgresses.Where(i => i.UserId == userId && i.SecId == secId).FirstOrDefaultAsync();
+        }
+
+        public async Task Delete(int userId, string secId)
         {
             var context = _context.GetContext();
-            var toDelete = await context.InProgresses.FirstOrDefaultAsync(p => p.SecId == SecId);
+            var toDelete = await context.InProgresses.FirstOrDefaultAsync(p => p.UserId == userId && p.SecId == secId);
             context.InProgresses.Remove(toDelete);
             await context.SaveChangesAsync();
         }
@@ -43,6 +49,5 @@ namespace moex_web.Data.Repositories
             context.InProgresses.Add(inProgress);
             await context.SaveChangesAsync();
         }
-
     }
 }

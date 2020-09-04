@@ -163,11 +163,8 @@ namespace moex_web.Data.Migrations
                         .HasColumnName("Number")
                         .HasColumnType("int");
 
-                    b.Property<string>("SecId")
-                        .HasColumnName("SecId")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("SecuritySecId")
+                    b.Property<string>("SecurityId")
+                        .HasColumnName("SecurityId")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("SellDate")
@@ -184,7 +181,7 @@ namespace moex_web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SecuritySecId");
+                    b.HasIndex("SecurityId");
 
                     b.HasIndex("UserId");
 
@@ -260,7 +257,7 @@ namespace moex_web.Data.Migrations
                 {
                     b.HasOne("moex_web.Data.Entities.Security", "Security")
                         .WithMany()
-                        .HasForeignKey("SecuritySecId");
+                        .HasForeignKey("SecurityId");
 
                     b.HasOne("moex_web.Data.Entities.User", "User")
                         .WithMany()

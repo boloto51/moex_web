@@ -20,21 +20,20 @@ namespace moex_web.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    SecId = table.Column<string>(nullable: true),
+                    SecurityId = table.Column<string>(nullable: true),
                     Number = table.Column<int>(nullable: false),
                     BuyPrice = table.Column<decimal>(nullable: true),
                     BuyDate = table.Column<DateTime>(nullable: false),
                     SellPrice = table.Column<decimal>(nullable: true),
                     SellDate = table.Column<DateTime>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    SecuritySecId = table.Column<string>(nullable: true)
+                    UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TradeHistory", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TradeHistory_security_SecuritySecId",
-                        column: x => x.SecuritySecId,
+                        name: "FK_TradeHistory_security_SecurityId",
+                        column: x => x.SecurityId,
                         principalTable: "security",
                         principalColumn: "SecId",
                         onDelete: ReferentialAction.Restrict);
@@ -47,9 +46,9 @@ namespace moex_web.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_TradeHistory_SecuritySecId",
+                name: "IX_TradeHistory_SecurityId",
                 table: "TradeHistory",
-                column: "SecuritySecId");
+                column: "SecurityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TradeHistory_UserId",

@@ -26,7 +26,7 @@ namespace moex_web.Data.DbContext
             modelBuilder.Entity<Security>().HasMany(s => s.Trades);
             modelBuilder.Entity<Trade>().HasOne(t => t.Security);
             modelBuilder.Entity<InProgress>().HasKey(a => new { a.UserId, a.SecId });
-            modelBuilder.Entity<TradeHistory>().HasKey(a => new { a.Id });
+            //modelBuilder.Entity<TradeHistory>().HasKey(a => new { a.Id });
             //modelBuilder.Entity<User>().HasKey(a => new { a.Id });
             //modelBuilder.Entity<Monitoring>().HasKey(a => new { a.SecId });
             //modelBuilder.Entity<Monitoring>().HasOne(t => t.Security);

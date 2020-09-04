@@ -44,6 +44,9 @@ export class InProgressIndexManager {
         const secName = document.createElement("td");
         secName.innerText = inprogress.SecName + "";
         inprogress.rowSelector.append(secName);
+        const buyNmber = document.createElement("td");
+        buyNmber.innerText = inprogress.Number + "";
+        inprogress.rowSelector.append(buyNmber);
         const BuyPrice = document.createElement("td");
         BuyPrice.innerText = inprogress.BuyPrice + "";
         inprogress.rowSelector.append(BuyPrice);

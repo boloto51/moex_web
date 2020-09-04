@@ -27,7 +27,7 @@ namespace moex_web.Managers
             await _tradeHistoryRepository.Add(new TradeHistory()
             {
                 UserId = FindIdByEmail(userEmaIL).Result,
-                SecId = inProgressSellModel.Id,
+                SecurityId = inProgressSellModel.Id,
                 Number = inProgressSellModel.Number,
                 BuyPrice = inProgress.BuyPrice,
                 BuyDate = inProgress.BuyDate,

@@ -10,8 +10,8 @@ namespace moex_web.Data.Entities
         [Column("Id")]
         [Key]
         public int Id { get; set; }
-        [Column("SecId")]
-        public string SecId { get; set; }
+        [Column("SecurityId")]
+        public string SecurityId { get; set; }
         [Column("Number")]
         public int Number { get; set; }
         [Column("BuyPrice")]

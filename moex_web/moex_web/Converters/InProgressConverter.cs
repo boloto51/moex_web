@@ -20,6 +20,7 @@ namespace moex_web.Converters
                 {
                     SecId = inProgress.SecId,
                     SecName = securities.Find(s => s.SecId == inProgress.SecId).ShortName,
+                    Number = inProgress.BuyNumber,
                     BuyPrice = inProgress.BuyPrice,
                     CurrentClose = trades.Find(t => t.SecId == inProgress.SecId).Close,
                     BuyDate = inProgress.BuyDate,

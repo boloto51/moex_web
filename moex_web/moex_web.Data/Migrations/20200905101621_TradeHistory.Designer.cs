@@ -9,7 +9,7 @@ using moex_web.Data.DbContext;
 namespace moex_web.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200904181543_TradeHistory")]
+    [Migration("20200905101621_TradeHistory")]
     partial class TradeHistory
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,13 +33,13 @@ namespace moex_web.Data.Migrations
                         .HasColumnName("BuyDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("BuyNumber")
-                        .HasColumnName("BuyNumber")
-                        .HasColumnType("int");
-
                     b.Property<decimal?>("BuyPrice")
                         .HasColumnName("BuyPrice")
                         .HasColumnType("decimal(65,30)");
+
+                    b.Property<int>("LotCount")
+                        .HasColumnName("LotCount")
+                        .HasColumnType("int");
 
                     b.HasKey("UserId", "SecId");
 
@@ -161,8 +161,8 @@ namespace moex_web.Data.Migrations
                         .HasColumnName("BuyPrice")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<int>("Number")
-                        .HasColumnName("Number")
+                    b.Property<int>("LotCount")
+                        .HasColumnName("LotCount")
                         .HasColumnType("int");
 
                     b.Property<string>("SecurityId")

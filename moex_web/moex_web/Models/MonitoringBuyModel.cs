@@ -10,9 +10,9 @@ namespace moex_web.Models
         [JsonPropertyName("Price")]
 
         public decimal Price { get; set; }
-        [JsonPropertyName("Number")]
+        [JsonPropertyName("LotCount")]
 
-        public int Number { get; set; }
+        public int LotCount { get; set; }
 
         [JsonPropertyName("Date")]
 

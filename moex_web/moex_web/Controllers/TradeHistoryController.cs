@@ -12,17 +12,19 @@ namespace moex_web.Controllers
     public class TradeHistoryController : Controller
     {
         private ITradeHistoryRepository _tradeHistoryRepository;
+        private int userId;
 
         public TradeHistoryController(ITradeHistoryRepository tradeHistoryRepository)
         {
             _tradeHistoryRepository = tradeHistoryRepository;
+            //userId = Convert.ToInt32(User.Identity.Name != null ? User.Identity.Name : "0");
         }
 
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            string userEmaIL = User.Identity.Name;
-            var tradeHistories = await _tradeHistoryRepository.Get(userEmaIL);
+            userId = Convert.ToInt32(User.Identity.Name != null ? User.Identity.Name : "0");
+            var tradeHistories = await _tradeHistoryRepository.Get(userId);
             return View(tradeHistories);
         }
     }

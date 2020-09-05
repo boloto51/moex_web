@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using moex_web.Managers;
@@ -11,27 +12,29 @@ namespace moex_web.Controllers
     {
         private ITradeHistoryManager _tradeHistoryManager;
         private IInProgressManager _inProgressManager;
+        private int userId;
 
         public InProgressController(ITradeHistoryManager tradeHistoryManager, IInProgressManager inProgressManager)
         {
             _tradeHistoryManager = tradeHistoryManager;
             _inProgressManager = inProgressManager;
+            //userId = Convert.ToInt32(User.Identity.Name != null ? User.Identity.Name : "0");
         }
 
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            string userEmail = User.Identity.Name;
-            var inProgressModel = await _inProgressManager.GetModels(userEmail);
+            userId = Convert.ToInt32(User.Identity.Name != null ? User.Identity.Name : "0");
+            var inProgressModel = await _inProgressManager.GetModels(userId);
             return View(inProgressModel);
         }
 
         [HttpPost]
         public async Task Sell([FromBody]InProgressSellModel inProgressSellModel)
         {
-            string userEmaIL = User.Identity.Name;
-            await _tradeHistoryManager.UpdateTable(userEmaIL, inProgressSellModel);
-            await _inProgressManager.Delete(userEmaIL, inProgressSellModel.Id);
+            userId = Convert.ToInt32(User.Identity.Name != null ? User.Identity.Name : "0");
+            await _tradeHistoryManager.AddRecordToTable(userId, inProgressSellModel);
+            await _inProgressManager.Delete(userId, inProgressSellModel.Id);
         }
     }
 }

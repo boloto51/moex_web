@@ -21,6 +21,7 @@ namespace moex_web.Controllers
         private IInProgressRepository _inProgressRepository;
         private IMonitoringConverter _monitoringConverter;
         private IInProgressManager _inProgressManager;
+        private int userId;
 
         public MonitoringController(ISecurityRepository securityRepository, 
             IMonitoringRepository monitoringRepository, IInProgressRepository inProgressRepository, 
@@ -30,17 +31,17 @@ namespace moex_web.Controllers
             _monitoringRepository = monitoringRepository;
             _monitoringConverter = monitoringConverter;
             _inProgressRepository = inProgressRepository;
-            _inProgressManager = inProgressManager;
+            _inProgressManager = inProgressManager;            
         }
 
         // GET: Monitoring
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            string userEmaIL = User.Identity.Name;
-            var inProgress = await _inProgressRepository.GetUserSecurityIds(userEmaIL);
-            var monitorings = await _monitoringRepository.Get(inProgress);
-            var securities = await _securityRepository.Get();            
+            int userId = Convert.ToInt32(User.Identity.Name != null ? User.Identity.Name : "0");
+            var inProgressIds = await _inProgressRepository.GetUserSecurityIds(userId);
+            var monitorings = await _monitoringRepository.Get(inProgressIds);
+            var securities = await _securityRepository.Get(monitorings.Select(m => m.SecId).ToList());            
             var monitoringModels = _monitoringConverter.ToListModels(monitorings, securities);
 
             return View(monitoringModels);
@@ -49,8 +50,8 @@ namespace moex_web.Controllers
         [HttpPost]
         public async Task Index([FromBody]MonitoringBuyModel monitoringBuyModel)
         {
-            string userEmaIL = User.Identity.Name;
-            await _inProgressManager.UpdateTable(userEmaIL, monitoringBuyModel);
+            userId = Convert.ToInt32(User.Identity.Name != null ? User.Identity.Name : "0");
+            await _inProgressManager.AddRecordToTable(userId, monitoringBuyModel);
         }
     }
 }

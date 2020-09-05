@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\projects\\moex_web\\moex_web\\moex_web\\moex_web.csproj": {}
+    "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web\\moex_web.csproj": {}
   },
   "projects": {
-    "D:\\projects\\moex_web\\moex_web\\moex_web.Core\\moex_web.Core.csproj": {
+    "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Core\\moex_web.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\projects\\moex_web\\moex_web\\moex_web.Core\\moex_web.Core.csproj",
+        "projectUniqueName": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Core\\moex_web.Core.csproj",
         "projectName": "moex_web.Core",
-        "projectPath": "D:\\projects\\moex_web\\moex_web\\moex_web.Core\\moex_web.Core.csproj",
-        "packagesPath": "C:\\Users\\art\\.nuget\\packages\\",
-        "outputPath": "D:\\projects\\moex_web\\moex_web\\moex_web.Core\\obj\\",
+        "projectPath": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Core\\moex_web.Core.csproj",
+        "packagesPath": "C:\\Users\\test\\.nuget\\packages\\",
+        "outputPath": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Core\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\art\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\test\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -61,24 +58,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\projects\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj": {
+    "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\projects\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj",
+        "projectUniqueName": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj",
         "projectName": "moex_web.Data",
-        "projectPath": "D:\\projects\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj",
-        "packagesPath": "C:\\Users\\art\\.nuget\\packages\\",
-        "outputPath": "D:\\projects\\moex_web\\moex_web\\moex_web.Data\\obj\\",
+        "projectPath": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj",
+        "packagesPath": "C:\\Users\\test\\.nuget\\packages\\",
+        "outputPath": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\art\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\test\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -91,8 +85,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "D:\\projects\\moex_web\\moex_web\\moex_web.Core\\moex_web.Core.csproj": {
-                "projectPath": "D:\\projects\\moex_web\\moex_web\\moex_web.Core\\moex_web.Core.csproj"
+              "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Core\\moex_web.Core.csproj": {
+                "projectPath": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Core\\moex_web.Core.csproj"
               }
             }
           }
@@ -136,24 +130,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\projects\\moex_web\\moex_web\\moex_web\\moex_web.csproj": {
+    "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web\\moex_web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\projects\\moex_web\\moex_web\\moex_web\\moex_web.csproj",
+        "projectUniqueName": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web\\moex_web.csproj",
         "projectName": "moex_web",
-        "projectPath": "D:\\projects\\moex_web\\moex_web\\moex_web\\moex_web.csproj",
-        "packagesPath": "C:\\Users\\art\\.nuget\\packages\\",
-        "outputPath": "D:\\projects\\moex_web\\moex_web\\moex_web\\obj\\",
+        "projectPath": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web\\moex_web.csproj",
+        "packagesPath": "C:\\Users\\test\\.nuget\\packages\\",
+        "outputPath": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\art\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\test\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -166,11 +157,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "D:\\projects\\moex_web\\moex_web\\moex_web.Core\\moex_web.Core.csproj": {
-                "projectPath": "D:\\projects\\moex_web\\moex_web\\moex_web.Core\\moex_web.Core.csproj"
+              "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Core\\moex_web.Core.csproj": {
+                "projectPath": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Core\\moex_web.Core.csproj"
               },
-              "D:\\projects\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj": {
-                "projectPath": "D:\\projects\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj"
+              "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj": {
+                "projectPath": "c:\\Temp\\GitHub\\moex_web\\moex_web\\moex_web.Data\\moex_web.Data.csproj"
               }
             }
           }
@@ -229,7 +220,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

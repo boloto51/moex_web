@@ -20,13 +20,13 @@ namespace moex_web.Managers
             _tradeHistoryRepository = tradeHistoryRepository;
         }
 
-        public async Task UpdateTable(string userEmaIL, InProgressSellModel inProgressSellModel)
+        public async Task AddRecordToTable(int userId, InProgressSellModel inProgressSellModel)
         {
-            var inProgress = await _inProgressRepository.Get(userEmaIL, inProgressSellModel.Id);
+            var inProgress = await _inProgressRepository.Get(userId, inProgressSellModel.Id);
 
             await _tradeHistoryRepository.Add(new TradeHistory()
             {
-                UserId = await FindIdByEmail(userEmaIL),
+                UserId = userId,
                 SecurityId = inProgressSellModel.Id,
                 LotCount = inProgressSellModel.LotCount,
                 BuyPrice = inProgress.BuyPrice,
@@ -34,12 +34,6 @@ namespace moex_web.Managers
                 SellPrice = inProgressSellModel.Price,
                 SellDate = inProgressSellModel.Date
             });
-        }
-
-        public async Task<int> FindIdByEmail(string email)
-        {
-            var users = await _userRepository.Get();
-            return users.Find(u => u.Email == email).Id;
         }
     }
 }

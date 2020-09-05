@@ -5,6 +5,6 @@ namespace moex_web.Managers
 {
     public interface ITradeHistoryManager
     {
-        public Task UpdateTable(string userId, InProgressSellModel inProgressSellModel);
+        public Task AddRecordToTable(int userId, InProgressSellModel inProgressSellModel);
     }
 }

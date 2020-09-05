@@ -12,6 +12,7 @@ namespace moex_web.Data.Repositories
         Task<Trade> Get(DateTime tradeDate, string secId);
         public Task AddRange(List<Trade> security);
         public Task<List<Trade>> FindLastTrades();
+        public Task<List<Trade>> FindLastTrades(List<string> restrictInProgress);
         public Task DeleteOldTrades(DateTime oldDate);
         public Task<List<Trade>> FindAgoTrades(int daysAgo);
     }

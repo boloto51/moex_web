@@ -23,23 +23,22 @@ namespace moex_web.Data.Repositories
             return await _context.GetContext().InProgresses.ToListAsync();
         }
 
-        public async Task<List<InProgress>> Get(string userEmail)
+        public async Task<List<InProgress>> Get(int userId)
         {
-            var userId = await _context.GetContext().Users.Where(u => u.Email == userEmail).Select(u => u.Id).FirstOrDefaultAsync();
+            //var userId = await _context.GetContext().Users.Where(u => u.Email == userEmail).Select(u => u.Id).FirstOrDefaultAsync();
             return await _context.GetContext().InProgresses.Where(i => i.UserId == userId).ToListAsync();
         }
 
-        public async Task<List<string>> GetUserSecurityIds(string userEmail)
+        public async Task<List<string>> GetUserSecurityIds(int userId)
         {
             return await _context.GetContext().InProgresses
                 .Include(ip => ip.User)
-                .Where(i => i.User.Email == userEmail)
+                .Where(i => i.User.Id == userId)
                 .Select(ip => ip.SecId).ToListAsync();
         }
 
-        public async Task<InProgress> Get(string userEmail, string secId)
+        public async Task<InProgress> Get(int userId, string secId)
         {
-            var userId = await _context.GetContext().Users.Where(u => u.Email == userEmail).Select(u => u.Id).FirstOrDefaultAsync();
             return await _context.GetContext().InProgresses.Where(i => i.UserId == userId && i.SecId == secId).FirstOrDefaultAsync();
         }
 

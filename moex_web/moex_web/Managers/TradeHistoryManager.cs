@@ -28,7 +28,7 @@ namespace moex_web.Managers
             {
                 UserId = FindIdByEmail(userEmaIL).Result,
                 SecurityId = inProgressSellModel.Id,
-                Number = inProgressSellModel.Number,
+                LotCount = inProgressSellModel.LotCount,
                 BuyPrice = inProgress.BuyPrice,
                 BuyDate = inProgress.BuyDate,
                 SellPrice = inProgressSellModel.Price,

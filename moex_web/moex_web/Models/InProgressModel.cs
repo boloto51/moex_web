@@ -6,7 +6,7 @@ namespace moex_web.Models
     {
         public string SecId { get; set; }
         public string SecName { get; set; }
-        public int Number { get; set; }
+        public int LotCount { get; set; }
         public decimal? BuyPrice { get; set; }
         public decimal? CurrentClose { get; set; }
         public DateTime BuyDate { get; set; }

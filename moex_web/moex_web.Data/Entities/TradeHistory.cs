@@ -12,8 +12,8 @@ namespace moex_web.Data.Entities
         public int Id { get; set; }
         [Column("SecurityId")]
         public string SecurityId { get; set; }
-        [Column("Number")]
-        public int Number { get; set; }
+        [Column("LotCount")]
+        public int LotCount { get; set; }
         [Column("BuyPrice")]
         public decimal? BuyPrice { get; set; }
         [Column("BuyDate")]

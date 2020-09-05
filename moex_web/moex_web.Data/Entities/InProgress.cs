@@ -12,8 +12,8 @@ namespace moex_web.Data.Entities
         public string SecId { get; set; }
         [Column("BuyPrice")]
         public decimal? BuyPrice { get; set; }
-        [Column("BuyNumber")]
-        public int BuyNumber { get; set; }
+        [Column("LotCount")]
+        public int LotCount { get; set; }
 
         [Column("BuyDate")]
         public DateTime BuyDate { get; set; }

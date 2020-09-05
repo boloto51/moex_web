@@ -46,7 +46,7 @@ namespace moex_web.Managers
                 UserId = FindIdByEmail(userEmaiL).Result,
                 SecId = monitoringBuyModel.Id,
                 BuyPrice = monitoringBuyModel.Price,
-                BuyNumber = monitoringBuyModel.Number,
+                LotCount = monitoringBuyModel.LotCount,
                 BuyDate = monitoringBuyModel.Date
             });
         }

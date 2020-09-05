@@ -9,7 +9,7 @@ namespace moex_web.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "BuyNumber",
+                name: "LotCount",
                 table: "inprogress",
                 nullable: false,
                 defaultValue: 0);
@@ -21,7 +21,7 @@ namespace moex_web.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     SecurityId = table.Column<string>(nullable: true),
-                    Number = table.Column<int>(nullable: false),
+                    LotCount = table.Column<int>(nullable: false),
                     BuyPrice = table.Column<decimal>(nullable: true),
                     BuyDate = table.Column<DateTime>(nullable: false),
                     SellPrice = table.Column<decimal>(nullable: true),
@@ -62,7 +62,7 @@ namespace moex_web.Data.Migrations
                 name: "TradeHistory");
 
             migrationBuilder.DropColumn(
-                name: "BuyNumber",
+                name: "LotCount",
                 table: "inprogress");
         }
     }

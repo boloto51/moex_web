@@ -3,7 +3,7 @@
 export class InProgressIndexModel {
     SecId: string;
     SecName: string;
-    Number: number;
+    LotCount: number;
     BuyPrice: number;
     CurrentClose: number;
     Percent: number;

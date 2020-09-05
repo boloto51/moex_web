@@ -29,6 +29,7 @@ export class TooltipBuyManager {
         this.currentEntity = entity;
         this.titleSelector.text(entity.SecName);
         this.wrapperSelector.removeClass("hidden-element");
+        //this.lotCountSelector.val(1);
     }
 
     private initEvents() {
@@ -41,7 +42,7 @@ export class TooltipBuyManager {
                 Id: this.currentEntity.SecId,
                 Date: UtcZone.getUtc(new Date(this.dateSelector.val() as string)),
                 Price: Number(this.priceSelector.val()),
-                Number: Number(this.lotCountSelector.val())
+                LotCount: Number(this.lotCountSelector.val() > 0 ? this.lotCountSelector.val() : 1)
             },
                 () => {
                 this.currentEntity.rowSelector.remove();

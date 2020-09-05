@@ -1,0 +1,52 @@
+﻿@using JsonSerializer = System.Text.Json.JsonSerializer
+@using moex_web.Data.Entities
+@model List<TradeHistory>
+
+@{
+    <link rel="stylesheet" href="~/css/TradeHistory.css" />
+    ViewData["Title"] = "TradeHistory";
+}
+
+<div class="tradehistory-index-page">
+    <h1>TradeHistory</h1>
+    <table class="table table-bordered tradehistory-index-table">
+        <thead>
+            <tr>
+                <th>
+                    <b>SecId</b>
+                </th>
+                <th>
+                    <b>LotCount</b>
+                </th>
+                <th>
+                    <b>BuyPrice</b>
+                </th>
+                <th>
+                    <b>BuyDate</b>
+                </th>
+                <th>
+                    <b>SellPrice</b>
+                </th>
+                <th>
+                    <b>SellDate</b>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<script src="~/js/TradeHistoryIndexManager.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    $(function () {
+        new TradeHistoryIndexManagerPack.TradeHistoryIndexManager(
+            @Html.Raw(JsonSerializer.Serialize(Model)),
+            '@Url.Action("Index", "TradeHistory")',
+            @*'@(User?.Identity?.IsAuthenticated)',
+            '@Url.Action("SetLearnedState")',
+            '@Url.Action("Index", "Faq")?id='*@
+            );
+    });
+</script>
+

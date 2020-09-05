@@ -32,6 +32,11 @@
                 In progress
             </div>
         </a>
+        <a asp-area="" asp-controller="TradeHistory" asp-action="Index">
+            <div class="@(action.Equals("index") && controller.Equals("tradehistory") ? "active" : null)">
+                Trade History
+            </div>
+        </a>
     </div>
     <div class="page-content">
         @RenderBody()

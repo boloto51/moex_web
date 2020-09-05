@@ -30,6 +30,7 @@ export class TooltipSellManager {
         this.titleSelector.text(entity.SecName);
         this.wrapperSelector.removeClass("hidden-element");
         this.lotCountSelector.val(entity.LotCount);
+        this.dateSelector.val(new Date().toISOString());
     }
 
     private initEvents() {

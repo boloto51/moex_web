@@ -8,7 +8,7 @@ export class TooltipSellManager {
     confirmSelector: JQuery;
     dateSelector: JQuery;
     priceSelector: JQuery;
-    numberSelector: JQuery;
+    lotCountSelector: JQuery;
     titleSelector: JQuery;
     currentEntity: InProgressIndexModel;
     private sellSecurityUrl: string;
@@ -20,7 +20,7 @@ export class TooltipSellManager {
         this.confirmSelector = this.wrapperSelector.find(".confirm");
         this.dateSelector = this.wrapperSelector.find(".date-input");
         this.priceSelector = this.wrapperSelector.find(".price-input");
-        this.numberSelector = this.wrapperSelector.find(".number-input");
+        this.lotCountSelector = this.wrapperSelector.find(".lotcount-input");
         this.titleSelector = this.wrapperSelector.find(".title");
         this.initEvents();
     }
@@ -29,6 +29,7 @@ export class TooltipSellManager {
         this.currentEntity = entity;
         this.titleSelector.text(entity.SecName);
         this.wrapperSelector.removeClass("hidden-element");
+        this.lotCountSelector.val(entity.LotCount);
     }
 
     private initEvents() {
@@ -41,7 +42,7 @@ export class TooltipSellManager {
                 Id: this.currentEntity.SecId,
                 Date: UtcZone.getUtc(new Date(this.dateSelector.val() as string)),
                 Price: Number(this.priceSelector.val()),
-                Number: Number(this.numberSelector.val()),
+                Number: Number(this.lotCountSelector.val()),
             },
                 () => {
                     this.currentEntity.rowSelector.remove();

@@ -1,6 +1,6 @@
-﻿import { InProgressIndexModel } from "../Models/InProgressIndexModel";
-import { NetSender } from "../NetSender";
-import { UtcZone } from "../Components/UtcZone";
+﻿import {InProgressIndexModel} from "../Models/InProgressIndexModel";
+import {NetSender} from "../NetSender";
+import {UtcZone} from "../Components/UtcZone";
 
 export class TooltipSellManager {
     wrapperSelector: JQuery;
@@ -40,11 +40,11 @@ export class TooltipSellManager {
         this.confirmSelector.on("click", () => {
             this.closeTooltip();
             NetSender.post(this.sellSecurityUrl, {
-                Id: this.currentEntity.SecId,
-                Date: UtcZone.getUtc(new Date(this.dateSelector.val() as string)),
-                Price: Number(this.priceSelector.val()),
-                Number: Number(this.lotCountSelector.val()),
-            },
+                    Id: this.currentEntity.SecId,
+                    Date: UtcZone.getUtc(new Date(this.dateSelector.val() as string)),
+                    Price: Number(this.priceSelector.val()),
+                    LotCount: Number(this.lotCountSelector.val()),
+                },
                 () => {
                     this.currentEntity.rowSelector.remove();
                 })

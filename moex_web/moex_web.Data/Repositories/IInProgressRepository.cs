@@ -9,6 +9,7 @@ namespace moex_web.Data.Repositories
         public Task<List<InProgress>> Get();
         public Task<List<InProgress>> Get(string userEmail);
         public Task<InProgress> Get(string userEmail, string secId);
+        Task<List<string>> GetUserSecurityIds(string userEmail);
         public Task Delete(int userId, string SecId);
         public Task Add(InProgress inProgress);
     }

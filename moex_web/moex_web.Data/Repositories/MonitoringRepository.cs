@@ -28,14 +28,11 @@ namespace moex_web.Data.Repositories
             return await _context.GetContext().Monitorings.FirstOrDefaultAsync(m => m.SecId == secId);
         }
 
-        public async Task<List<Monitoring>> Get(List<InProgress> inProgresses)
+        public async Task<List<Monitoring>> Get(List<string> restrictSecurities)
         {
-            var allMonitorings = await _context.GetContext().Monitorings.ToListAsync();
-
-            foreach (var inProgress in inProgresses)
-            {
-                allMonitorings.RemoveAll(m => m.SecId == inProgress.SecId);
-            }
+            var allMonitorings = await _context.GetContext().Monitorings
+                .Where(m => !restrictSecurities.Contains(m.SecId))
+                .ToListAsync();
 
             return allMonitorings;
         }

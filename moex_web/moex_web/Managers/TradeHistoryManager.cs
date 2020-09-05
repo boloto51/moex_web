@@ -22,11 +22,11 @@ namespace moex_web.Managers
 
         public async Task UpdateTable(string userEmaIL, InProgressSellModel inProgressSellModel)
         {
-            var inProgress = _inProgressRepository.Get(userEmaIL, inProgressSellModel.Id).Result;
+            var inProgress = await _inProgressRepository.Get(userEmaIL, inProgressSellModel.Id);
 
             await _tradeHistoryRepository.Add(new TradeHistory()
             {
-                UserId = FindIdByEmail(userEmaIL).Result,
+                UserId = await FindIdByEmail(userEmaIL),
                 SecurityId = inProgressSellModel.Id,
                 LotCount = inProgressSellModel.LotCount,
                 BuyPrice = inProgress.BuyPrice,

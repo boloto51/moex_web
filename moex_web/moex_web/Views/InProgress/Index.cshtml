@@ -51,7 +51,7 @@
         $(function () {
             new InProgressIndexManagerPack.InProgressIndexManager(
                 @Html.Raw(JsonSerializer.Serialize(Model)),
-                '@Url.Action("Index", "InProgress")',
+                '@Url.Action("Sell", "InProgress")',
                 @*'@(User?.Identity?.IsAuthenticated)',
                 '@Url.Action("SetLearnedState")',
                 '@Url.Action("Index", "Faq")?id='*@

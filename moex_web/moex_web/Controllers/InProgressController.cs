@@ -27,7 +27,7 @@ namespace moex_web.Controllers
         }
 
         [HttpPost]
-        public async Task Index([FromBody]InProgressSellModel inProgressSellModel)
+        public async Task Sell([FromBody]InProgressSellModel inProgressSellModel)
         {
             string userEmaIL = User.Identity.Name;
             await _tradeHistoryManager.UpdateTable(userEmaIL, inProgressSellModel);

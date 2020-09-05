@@ -7,6 +7,7 @@ export class TradeHistoryIndexManager {
 
     constructor(tradeHistories: TradeHistoryIndexModel[]) {
         this.tradeHistories = tradeHistories;
+        this.tableBodySelector = $(".tradehistory-index-table tbody");
         this.initTable();
     }
 

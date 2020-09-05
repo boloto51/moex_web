@@ -6,9 +6,9 @@ namespace moex_web.Data.Repositories
 {
     public interface IMonitoringRepository
     {
-        public Task<List<Monitoring>> Get();
+        Task<List<Monitoring>> Get();
+        public Task<List<Monitoring>> Get(List<string> inProgresses);
         public Task<Monitoring> Get(string secId);
-        public Task<List<Monitoring>> Get(List<InProgress> inProgresses);
         public Task Add(Monitoring monitoring);
         public Task AddRange(List<Monitoring> monitorings);
         public Task Update(Monitoring monitoring);

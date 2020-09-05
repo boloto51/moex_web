@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using moex_web.Data.Repositories;
 
 namespace moex_web.Controllers
 {
+    [Authorize]
     public class TradeHistoryController : Controller
     {
         private ITradeHistoryRepository _tradeHistoryRepository;

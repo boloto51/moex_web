@@ -1,18 +1,18 @@
-﻿import { NetSender } from "../NetSender";
+﻿//import { NetSender } from "../NetSender";
 import { TradeHistoryIndexModel } from "../Models/TradeHistoryIndexModel";
 
-export class InProgressIndexManager {
+export class TradeHistoryIndexManager {
     private tableBodySelector: JQuery;
     private tradeHistories: TradeHistoryIndexModel[];
 
-    constructor(tradeHistories: TradeHistoryIndexModel[], sellSecurityUrl: string) {
+    constructor(tradeHistories: TradeHistoryIndexModel[]) {
         this.tradeHistories = tradeHistories;
         this.initTable();
     }
 
     private initTable() {
-        this.tradeHistories.forEach(inprogress => {
-            this.addElement(inprogress);
+        this.tradeHistories.forEach(tradeHistory => {
+            this.addElement(tradeHistory);
         });
     }
 
@@ -21,7 +21,7 @@ export class InProgressIndexManager {
         this.tableBodySelector.append(tr);
         tradeHistory.rowSelector = $(tr);
         const secId = document.createElement("td");
-        secId.innerText = tradeHistory.SecId + "";
+        secId.innerText = tradeHistory.SecurityId + "";
         tradeHistory.rowSelector.append(secId);
         const lotCount = document.createElement("td");
         lotCount.innerText = tradeHistory.LotCount + "";

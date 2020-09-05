@@ -41,8 +41,8 @@
 <script type="text/javascript">
     $(function () {
         new TradeHistoryIndexManagerPack.TradeHistoryIndexManager(
-            @Html.Raw(JsonSerializer.Serialize(Model)),
-            '@Url.Action("Index", "TradeHistory")',
+            @Html.Raw(JsonSerializer.Serialize(Model))
+            @*'@Url.Action("Index", "TradeHistory")',
             @*'@(User?.Identity?.IsAuthenticated)',
             '@Url.Action("SetLearnedState")',
             '@Url.Action("Index", "Faq")?id='*@

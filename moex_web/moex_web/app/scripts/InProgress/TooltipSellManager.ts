@@ -69,7 +69,7 @@ export class TooltipSellManager {
         });
         this.confirmSelector.on("click", () => {
             const date = this.dateSelector.val();
-            if (!date || isDate(date) || (date.valueOf() <= new Date().valueOf())) {
+            if (!date || (Object.prototype.toString.call(date) === "[object Date]") || (date.valueOf() <= new Date().valueOf())) {
                 this.dateValidationSelector.removeClass("hidden-element");
                 this.dateSelector.addClass("invalid-value");
                 return;

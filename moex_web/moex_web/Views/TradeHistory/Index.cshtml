@@ -8,37 +8,39 @@
 }
 
 <div class="tradehistory-index-page">
-    <h1>TradeHistory</h1>
-    <table class="table table-bordered tradehistory-index-table">
-        <thead>
-            <tr>
-                <th>
-                    <b>SecId</b>
-                </th>
-                <th>
-                    <b>LotCount</b>
-                </th>
-                <th>
-                    <b>BuyPrice</b>
-                </th>
-                <th>
-                    <b>BuyDate</b>
-                </th>
-                <th>
-                    <b>SellPrice</b>
-                </th>
-                <th>
-                    <b>SellDate</b>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+    <h1 class="tradehistory-index-h1">Trade History</h1>
+    <div class="tradehistory-index-content">
+        <table class="table tradehistory-index-table">
+            <thead>
+                <tr>
+                    <th>
+                        <b>SecId</b>
+                    </th>
+                    <th>
+                        <b>Lot Count</b>
+                    </th>
+                    <th>
+                        <b>Buy Price</b>
+                    </th>
+                    <th>
+                        <b>Buy Date</b>
+                    </th>
+                    <th>
+                        <b>Sell Price</b>
+                    </th>
+                    <th>
+                        <b>Sell Date</b>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 </div>
 
-<script src="~/js/TradeHistoryIndexManager.js" asp-append-version="true"></script>
-<script type="text/javascript">
+    <script src="~/js/TradeHistoryIndexManager.js" asp-append-version="true"></script>
+    <script type="text/javascript">
     $(function () {
         new TradeHistoryIndexManagerPack.TradeHistoryIndexManager(
             @Html.Raw(JsonSerializer.Serialize(Model))
@@ -48,5 +50,5 @@
             '@Url.Action("Index", "Faq")?id='*@
             );
     });
-</script>
+    </script>
 

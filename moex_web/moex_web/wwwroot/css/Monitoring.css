@@ -16,6 +16,9 @@
   background-color: white;
   border-radius: 10px;
 }
+.monitoring-index-page .monitoring-index-content .monitoring-index-table {
+  text-align: center;
+}
 .monitoring-index-page .monitoring-index-content .monitoring-button-buy {
   color: #ffffff;
   background-color: #265999;

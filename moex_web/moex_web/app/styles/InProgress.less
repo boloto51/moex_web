@@ -2,40 +2,60 @@
     height: 100%;
     width: 100%;
     font-family: Nunito, serif;
-    padding: 35px;
+    padding: 30px;
+    //padding-left: 1.5rem;
+    //padding-right: 1.5rem;
+    background-color: transparent;
+    margin: auto;
 
-    table {
-        tbody {
-            tr {
-                td {
-                    &.positive-percent {
-                        color: green;
-                    }
+    .inprogress-index-h1 {
+        margin: 0px 0px 24px;
+        padding: 0px;
+        height: 33px;
+    }
 
-                    &.negative-percent {
-                        color: red;
+    .inprogress-index-content {
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+
+        .inprogress-index-table {
+        }
+
+
+        table {
+            tbody {
+                tr {
+                    td {
+                        &.positive-percent {
+                            color: green;
+                        }
+
+                        &.negative-percent {
+                            color: red;
+                        }
                     }
                 }
             }
         }
-    }
 
-    .inprogress-button-sell {
-        color: rgb(255, 255, 255);
-        //background-color: #265999;
-        width: 90px;
-        height: 38px;
-        margin: 0;
-        padding: 6px 12px;
-        border: none;
-        border-radius: 10px;
+        .inprogress-button-sell {
+            color: rgb(255, 255, 255);
+            //background-color: #265999;
+            width: 90px;
+            height: 38px;
+            margin: 0;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 10px;
 
-        &.positive-percent {
-            background-color: green;
-        }
+            &.positive-percent {
+                background-color: green;
+            }
 
-        &.negative-percent {
-            background-color: rgba(38,83,212,0.5);
+            &.negative-percent {
+                background-color: rgba(38,83,212,0.5);
+            }
         }
     }
 }

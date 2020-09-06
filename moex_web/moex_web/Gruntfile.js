@@ -68,6 +68,7 @@ module.exports = function (grunt) {
                     '<%= paths.cssOut %>/Reset.css': '<%= paths.styles %>/Reset.less',
                     '<%= paths.cssOut %>/ForgotPassword.css': '<%= paths.styles %>/ForgotPassword.less',
                     '<%= paths.cssOut %>/InProgress.css': '<%= paths.styles %>/InProgress.less',
+                    '<%= paths.cssOut %>/TradeHistory.css': '<%= paths.styles %>/TradeHistory.less',
                 }
             }
         },

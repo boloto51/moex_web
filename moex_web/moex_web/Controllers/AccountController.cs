@@ -42,7 +42,7 @@ namespace moex_web.Controllers
                 return "Превышено количество попыток. Попробуйте зайти через 15 минут.";
             var user = await _userRepository.Get(model.Email, model.Password);
             if (user == null) return "Некорректные логин и(или) пароль";
-            await Authenticate(model.Email, user.Role);
+            await Authenticate(user.Id.ToString(), user.Role);
             await _userRepository.AttemptReset(user.Id);
             return string.Empty;
         }
@@ -61,8 +61,10 @@ namespace moex_web.Controllers
                 var existing = await _userRepository.CheckExisting(model.Email);
                 if (!existing)
                 {
-                    _userRepository.Add(new User { Email = model.Email, Password = model.Password, Name = model.Name });
-                    await Authenticate(model.Email, Role.User);
+                    await _userRepository.Add(new User { Email = model.Email, Password = model.Password, Name = model.Name });
+                    //await Authenticate(model.Email, Role.User);
+                    var user = await _userRepository.Get(model.Email);
+                    await Authenticate(user.Id.ToString(), Role.User);
                     return string.Empty;
                 }
 

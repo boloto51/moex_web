@@ -2,40 +2,61 @@
     height: 100%;
     width: 100%;
     font-family: Nunito, serif;
-    padding: 35px;
+    padding: 30px;
+    //padding-left: 1.5rem;
+    //padding-right: 1.5rem;
+    background-color: transparent;
+    margin: auto;
 
-    table {
-        tbody {
-            tr {
-                td {
-                    &.positive-percent {
-                        color: green;
-                    }
+    .inprogress-index-h1 {
+        margin: 0px 0px 24px;
+        padding: 0px;
+        height: 33px;
+    }
 
-                    &.negative-percent {
-                        color: red;
+    .inprogress-index-content {
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+
+        .inprogress-index-table {
+            text-align: center;
+        }
+
+
+        table {
+            tbody {
+                tr {
+                    td {
+                        &.positive-percent {
+                            color: green;
+                        }
+
+                        &.negative-percent {
+                            color: red;
+                        }
                     }
                 }
             }
         }
-    }
 
-    .inprogress-button-sell {
-        color: rgb(255, 255, 255);
-        //background-color: #265999;
-        width: 90px;
-        height: 38px;
-        margin: 0;
-        padding: 6px 12px;
-        border: none;
-        border-radius: 10px;
+        .inprogress-button-sell {
+            color: rgb(255, 255, 255);
+            //background-color: #265999;
+            width: 90px;
+            height: 38px;
+            margin: 0;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 10px;
 
-        &.positive-percent {
-            background-color: green;
-        }
+            &.positive-percent {
+                background-color: green;
+            }
 
-        &.negative-percent {
-            background-color: rgba(38,83,212,0.5);
+            &.negative-percent {
+                background-color: rgba(38,83,212,0.5);
+            }
         }
     }
 }
@@ -49,14 +70,117 @@
     display: flex;
 
     .sell-tooltip {
-        width: 400px;
-        height: 300px;
+        align-items: center;
+        width: 350px;
+        min-height: 350px;
         background-color: #fff;
         border-radius: 15px;
-        margin: 0 auto;
+        margin: 10% auto;
+        display: grid;
+        //padding: 20px;
+        grid-template-rows: 30px 1fr 50px;
+        grid-row-gap: 20px;
+        padding: 40px 20px;
 
-        input {
-            width: 100px;
+        .title {
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .date {
+            .date-input {
+                margin: 5px 9%;
+                margin-left: 20px;
+                color: #6e707e;
+                background-color: #fff;
+                outline: 0;
+                box-shadow: 0 .125rem .25rem 0 rgba(58,59,69,.2) !important;
+                border-radius: .35rem !important;
+                height: 30px;
+                width: 250px;
+                display: block;
+            }
+        }
+
+        .price {
+            .price-input {
+                margin: 5px 9%;
+                margin-left: 20px;
+                color: #6e707e;
+                background-color: #fff;
+                outline: 0;
+                box-shadow: 0 .125rem .25rem 0 rgba(58,59,69,.2) !important;
+                border-radius: .35rem !important;
+                height: 30px;
+                width: 250px;
+                display: block;
+            }
+        }
+
+        .lotcount {
+            .lotcount-input {
+                margin: 5px 9%;
+                margin-left: 20px;
+                color: #6e707e;
+                //background-color: #fff;
+                outline: 0;
+                box-shadow: 0 .125rem .25rem 0 rgba(58,59,69,.2) !important;
+                border-radius: .35rem !important;
+                height: 30px;
+                width: 250px;
+                display: block;
+            }
+        }
+
+        .manage-buttons {
+            border-radius: 10px;
+            width: 100%;
+            padding: 5px 0;
+
+            .confirm {
+                border-radius: 10px;
+                border-width: 0px;
+                width: 90px;
+                height: 38px;
+                float: right;
+                //margin-left: 15px;
+                margin-left: 15px;
+                margin-right: 9%;
+                //background-color: green; //rgba(38,83,212,0.83);
+                color: white;
+            }
+
+            .confirm-color-positive-percent {
+                background-color: green;
+            }
+
+            .confirm-color-negative-percent {
+                background-color: rgba(38,83,212,0.5);
+            }
+
+            .cancel {
+                border-radius: 10px;
+                border-color: rgba(38,83,212,0.83);
+                border-width: 1px;
+                width: 90px;
+                height: 38px;
+                float: left;
+                //margin-left: 15px;
+                margin-left: 15px;
+                margin-right: 9%;
+                color: black;
+                background-color: rgba(128,128,128,0.53);
+            }
+        }
+
+        .validation {
+            color: red;
+            margin: auto;
+            font-size: 13px;
+        }
+
+        .invalid-value {
+            border: 1px solid red;
         }
     }
 }

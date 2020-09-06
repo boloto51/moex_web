@@ -23,11 +23,10 @@ namespace moex_web.Data.Repositories
         //    return await _context.GetContext().InProgresses.ToListAsync();
         //}
 
-        //public async Task<List<TradeHistory>> Get(string userEmail)
-        //{
-        //    var userId = await _context.GetContext().Users.Where(u => u.Email == userEmail).Select(u => u.Id).FirstOrDefaultAsync();
-        //    return await _context.GetContext().TradeHistories.Where(i => i.UserId == userId).ToListAsync();
-        //}
+        public async Task<List<TradeHistory>> Get(int userId)
+        {
+            return await _context.GetContext().TradeHistories.Where(i => i.UserId == userId).ToListAsync();
+        }
 
         //public async Task Delete(string SecId)
         //{

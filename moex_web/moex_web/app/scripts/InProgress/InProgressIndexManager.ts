@@ -78,8 +78,8 @@ export class InProgressIndexManager {
         showSellTooltip.innerText = "Sell";
 
         inprogress.Percent >= 0 ?
-            showSellTooltip.classList.add("inprogress-button-sell","positive-percent")
-            : showSellTooltip.classList.add("inprogress-button-sell","negative-percent");
+            showSellTooltip.classList.add("inprogress-button-sell", "positive-percent")
+            : showSellTooltip.classList.add("inprogress-button-sell", "negative-percent");
 
         //showSellTooltip.classList.add("inprogress-button-sell-negative-percent");
         tdSelector.append(showSellTooltip);

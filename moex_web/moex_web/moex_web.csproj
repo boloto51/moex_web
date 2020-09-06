@@ -8,8 +8,10 @@
     <None Remove="app\scripts\InProgress\InProgressIndexManager.ts" />
     <None Remove="app\scripts\InProgress\TooltipSellManager.ts" />
     <None Remove="app\scripts\Models\InProgressIndexModel.ts" />
+    <None Remove="app\scripts\Models\TradeHistoryIndexModel.ts" />
     <None Remove="app\scripts\MonitoringIndexManager.ts" />
     <None Remove="app\scripts\MonitoringIndexModel.ts" />
+    <None Remove="app\scripts\TradeHistory\TradeHistoryIndexManager.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,8 +42,10 @@
     <TypeScriptCompile Include="app\scripts\Models\BuySecurityModel.ts" />
     <TypeScriptCompile Include="app\scripts\Models\InProgressIndexModel.ts" />
     <TypeScriptCompile Include="app\scripts\Models\MonitoringIndexModel.ts" />
+    <TypeScriptCompile Include="app\scripts\Models\TradeHistoryIndexModel.ts" />
     <TypeScriptCompile Include="app\scripts\Monitoring\MonitoringIndexManager.ts" />
     <TypeScriptCompile Include="app\scripts\Monitoring\TooltipBuyManager.ts" />
+    <TypeScriptCompile Include="app\scripts\TradeHistory\TradeHistoryIndexManager.ts" />
   </ItemGroup>
 
 

@@ -30,6 +30,5 @@ namespace moex_web.Converters
 
             return inProgressModel;
         }
-
     }
 }

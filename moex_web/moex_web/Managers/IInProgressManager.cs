@@ -7,9 +7,8 @@ namespace moex_web.Managers
 {
     public interface IInProgressManager
     {
-        public Task UpdateTable(string userId, MonitoringBuyModel monitoringBuyModel);
-        public Task<int> FindIdByEmail(string email);
-        public Task<List<InProgressModel>> GetModels(string userEmail);
-        public Task Delete(string userEmail, string secId);
+        public Task AddRecordToTable(int userId, MonitoringBuyModel monitoringBuyModel);
+        public Task<List<InProgressModel>> GetModels(int userId);
+        public Task Delete(int userId, string secId);
     }
 }

@@ -1,9 +1,10 @@
 <div class="buy-tooltip-wrapper hidden-element">
     <div class="buy-tooltip">
         <label class="title"></label>
-        <div class="input-group date" data-provide="datepicker">
+        <div class="input-group date">
             <!--<label>Buy date</label>-->
             <input type="text" class="form-control date-input">
+            <div class="validation date-validation hidden-element">Wrong date!</div>
             <div class="input-group-addon">
                 <span class="glyphicon glyphicon-th"></span>
             </div>
@@ -11,13 +12,15 @@
         <div class="input-group price">
             <!--<label>Price</label>-->
             <input type="number" class="form-control price-input" placeholder="Price">
+            <div class="validation price-validation hidden-element">Wrong price!</div>
         </div>
-        <div class="input-group number">
-            <!--<label>Number</label>-->
-            <input type="number" class="form-control number-input" placeholder="Lot count">
+        <div class="input-group lotcount">
+            <!--<label>LotCount</label>-->
+            <input type="number" class="form-control lotcount-input" placeholder="Lot count" min="1" value="1">
+            <div class="validation lotcount-validation hidden-element">Wrong count!</div>
         </div>
         <div class="manage-buttons">
-            <button class="manage-buttons confirm">Accept</button>
+            <button class="manage-buttons confirm">Buy</button>
             <button class="manage-buttons cancel">Cancel</button>
         </div>
     </div>

@@ -47,6 +47,18 @@ namespace moex_web.Data.Repositories
                         }).ToList();
         }
 
+        public async Task<List<Trade>> FindLastTrades(List<string> restrictInProgress)
+        {
+            var context = _context.GetContext();
+            return context.Trades.Where(t => restrictInProgress.Contains(t.SecId))
+                .ToList().GroupBy(t => t.SecId).Select(g => new Trade()
+                        {
+                            SecId = g.Key,
+                            TradeDate = g.Select(t => t.TradeDate).LastOrDefault(),
+                            Close = g.Select(t => t.Close).LastOrDefault()
+                        }).ToList();
+        }
+
         public async Task DeleteOldTrades(DateTime oldDate)
         {
             var context = _context.GetContext();

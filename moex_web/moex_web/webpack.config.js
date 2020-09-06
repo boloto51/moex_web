@@ -7,6 +7,7 @@ module.exports = (env) => {
         entry: {
             MonitoringIndexManager: './app/scripts/Monitoring/MonitoringIndexManager.ts',
             InProgressIndexManager: './app/scripts/InProgress/InProgressIndexManager.ts',
+            TradeHistoryIndexManager: './app/scripts/TradeHistory/TradeHistoryIndexManager.ts',
             login: './app/scripts/LoginManager.ts',
             reset: './app/scripts/ResetManager.ts',
             register: './app/scripts/RegisterManager.ts',

@@ -40,6 +40,15 @@ namespace moex_web.Data.Repositories
             return allMonitorings;
         }
 
+        public async Task<List<Monitoring>> Get(List<string> restrictSecurities)
+        {
+            var monitorings = await _context.GetContext().Monitorings
+                .Where(m => !restrictSecurities.Contains(m.SecId))
+                .ToListAsync();
+
+            return monitorings;
+        }
+
         public async Task Add(Monitoring monitoring)
         {
             var context = _context.GetContext();

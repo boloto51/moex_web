@@ -21,6 +21,23 @@
   background-color: #b7b7b7;
   color: #000;
 }
+.content-wrapper .page-content {
+  background-color: #f8f9fc;
+}
+.content-wrapper .page-content .page-content-header {
+  height: 60px;
+  padding: 8px 16px;
+  background-color: white;
+}
+.content-wrapper .page-content .page-content-header .page-content-header-copyright {
+  height: 19px;
+  margin: 0px 8px 0px 0px;
+  color: #858796 !important;
+  font-size: 12.8px;
+  text-align: right;
+  margin-left: auto !important;
+  padding: 10px;
+}
 .hidden-element {
   display: none !important;
 }

@@ -5,6 +5,7 @@ using moex_web.Data.Repositories;
 using moex_web.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace moex_web.Managers
@@ -30,20 +31,20 @@ namespace moex_web.Managers
             _inProgressConverter = inProgressConverter;
         }
 
-        public async Task<List<InProgressModel>> GetModels(string userEmail)
+        public async Task<List<InProgressModel>> GetModels(int userId)
         {
-            var securities = await _securityRepository.Get();
-            var trades = await _tradeRepository.FindLastTrades();
-            var inProgresses = await _inProgressRepository.Get(userEmail);
+            var inProgresses = await _inProgressRepository.Get(userId);
+            var securities = await _securityRepository.Get(inProgresses.Select(ip => ip.SecId).ToList());
+            var trades = await _tradeRepository.FindLastTrades(inProgresses.Select(ip => ip.SecId).ToList());            
             var daysToSell = _configSettings.ApplicationKeys.DaysToSell;
             return _inProgressConverter.ToListModels(inProgresses, securities, trades, daysToSell);
         }
 
-        public async Task UpdateTable(string userEmaiL, MonitoringBuyModel monitoringBuyModel)
+        public async Task AddRecordToTable(int userId, MonitoringBuyModel monitoringBuyModel)
         {
             await _inProgressRepository.Add(new InProgress()
             {
-                UserId = FindIdByEmail(userEmaiL).Result,
+                UserId = userId,
                 SecId = monitoringBuyModel.Id,
                 BuyPrice = monitoringBuyModel.Price,
                 LotCount = monitoringBuyModel.LotCount,
@@ -51,15 +52,8 @@ namespace moex_web.Managers
             });
         }
 
-        public async Task<int> FindIdByEmail(string email)
+        public async Task Delete(int userId, string secId)
         {
-            var users = await _userRepository.Get();
-            return users.Find(u => u.Email == email).Id;
-        }
-
-        public async Task Delete(string userEmail, string secId)
-        {
-            var userId = FindIdByEmail(userEmail).Result;
             await _inProgressRepository.Delete(userId, secId);
         }
     }

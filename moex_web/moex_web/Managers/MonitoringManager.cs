@@ -12,25 +12,15 @@ namespace moex_web.Managers
 {
     public class MonitoringManager : IMonitoringManager
     {
-        IUriConverter uriConverter;
-        IHttpService httpService;
-        ISecurityRepository _securityRepository;
         ITradeRepository _tradeRepository;
         IMonitoringRepository _monitoringRepository;
-        IDateConverter _dateConverter;
-        ITradeConverter _tradeConverter;
         IConfigSettings _configSettings;
 
-        public MonitoringManager(IUriConverter _uriConverter, IHttpService _httpService, ISecurityRepository securityRepository,
-             ITradeRepository tradeRepository, IMonitoringRepository monitoringRepository,
-             IDateConverter dateConverter, ITradeConverter tradeConverter, IConfigSettings configSettings)
+        public MonitoringManager(ITradeRepository tradeRepository, 
+            IMonitoringRepository monitoringRepository,
+            IConfigSettings configSettings)
         {
-            uriConverter = _uriConverter;
-            httpService = _httpService;
-            _securityRepository = securityRepository;
             _tradeRepository = tradeRepository;
-            _dateConverter = dateConverter;
-            _tradeConverter = tradeConverter;
             _monitoringRepository = monitoringRepository;
             _configSettings = configSettings;
         }
@@ -39,7 +29,6 @@ namespace moex_web.Managers
         {
             var daysAgo = _configSettings.ApplicationKeys.MonitoringUpdaterShedulerDaysAgo;
             var thresholdDropPercent = _configSettings.ApplicationKeys.ThresholdDropPercent;
-            var daysRecordStorage = _configSettings.ApplicationKeys.MonitoringDaysRecordStorage;
             var lastTradesInDB = await _tradeRepository.FindLastTrades();
             var agoTradesInDB = await _tradeRepository.FindAgoTrades(daysAgo);
             var monitoringsInDB = await _monitoringRepository.Get();
@@ -59,41 +48,19 @@ namespace moex_web.Managers
                 if (agoTrade != null && monitoringInDB == null 
                     && currentDropPercent < 100 && currentDropPercent >= thresholdDropPercent)
                 {
-                    //monitorings.Add(new Monitoring()
-                    //{
-                    //    SecId = agoTrade.SecId,
-                    //    InitClose = agoTrade.Close,
-                    //    CurrentClose = lastTrade.Close,
-                    //    Percent = -1 * Math.Round((decimal)(1 - lastTrade.Close / agoTrade.Close),4) * 100,
-                    //    DeleteDate = DateTime.Now.AddDays(daysRecordStorage)
-                    //});
                     var updateMonitoring = new Monitoring()
                     {
                         SecId = agoTrade.SecId,
                         InitClose = agoTrade.Close,
                         CurrentClose = lastTrade.Close,
-                        //Percent = -1 * Math.Round((decimal)(1 - lastTrade.Close / agoTrade.Close), 4) * 100,
-                        //DeleteDate = DateTime.Now.AddDays(daysRecordStorage).Date
                         ToBuyDate = DateTime.Now.Date
                     };
-
-                    //var monitoringInDB = monitoringsInDB.Find(m => m.SecId == agoTrade.SecId);
-
-                    //if (monitoringInDB != null)
-                    //{
-                    //    await _monitoringRepository.Update(updateMonitoring);
-                    //}
-                    //else
-                    //{
-                    //    await _monitoringRepository.Add(updateMonitoring);
-                    //}
                     await _monitoringRepository.Add(updateMonitoring);
 
                     Console.WriteLine(agoTrade.SecId + "\t" + agoTrade.Close + "\t"
                         + lastTrade.Close + "\t-" + Math.Round((decimal)(1 - lastTrade.Close / agoTrade.Close),4) * 100 + "%");
                 }
             }
-            //await _monitoringRepository.UpdateRange(monitorings);
         }
 
         public async Task DeleteOldRecords()

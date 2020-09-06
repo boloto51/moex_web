@@ -3,6 +3,7 @@ using moex_web.Data.DbContext;
 using moex_web.Data.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +21,14 @@ namespace moex_web.Data.Repositories
         public async Task<List<Security>> Get()
         {
             return await _context.GetContext().Securities.ToListAsync();
+        }
+
+        public async Task<List<Security>> Get(List<string> restrictMonitorings)
+        {
+            var securities = await _context.GetContext().Securities
+                .Where(s => restrictMonitorings.Contains(s.SecId)).ToListAsync();
+
+            return securities;
         }
 
         public async Task<Security> Get(string secId)

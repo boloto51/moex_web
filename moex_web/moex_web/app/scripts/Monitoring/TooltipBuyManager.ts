@@ -1,16 +1,18 @@
 import {MonitoringIndexModel} from "../Models/MonitoringIndexModel";
 import {NetSender} from "../NetSender";
 import {UtcZone} from "../Components/UtcZone";
+import { isDate } from "lodash";
 
 export class TooltipBuyManager {
     wrapperSelector: JQuery;
     cancelSelector: JQuery;
     confirmSelector: JQuery;
     dateSelector: JQuery;
+    dateValidationSelector: JQuery;
     priceSelector: JQuery;
     priceValidationSelector: JQuery;
-    lotCountValidationSelector: JQuery;
     lotCountSelector: JQuery;
+    lotCountValidationSelector: JQuery;
     titleSelector: JQuery;
     currentEntity: MonitoringIndexModel;
     private buySecurityUrl: string;
@@ -21,6 +23,7 @@ export class TooltipBuyManager {
         this.cancelSelector = this.wrapperSelector.find(".cancel");
         this.confirmSelector = this.wrapperSelector.find(".confirm");
         this.dateSelector = this.wrapperSelector.find(".date-input");
+        this.dateValidationSelector = this.wrapperSelector.find(".date-validation");
         this.priceSelector = this.wrapperSelector.find(".price-input");
         this.priceValidationSelector = this.wrapperSelector.find(".price-validation");
         this.lotCountValidationSelector = this.wrapperSelector.find(".lotcount-validation");
@@ -34,17 +37,24 @@ export class TooltipBuyManager {
         this.currentEntity = entity;
         this.titleSelector.text(entity.SecId + " - " + entity.SecName);
         this.wrapperSelector.removeClass("hidden-element");
+        this.dateSelector.val(new Date().toISOString());
         this.dateSelector.datepicker("setDate", new Date());
     }
 
     private initEvents() {
         this.cancelSelector.on("click", () => {
             this.closeTooltip();
+            this.dateSelector.removeClass("invalid-value");
             this.priceSelector.removeClass("invalid-value");
             this.lotCountSelector.removeClass("invalid-value");
+            this.dateValidationSelector.addClass("hidden-element");
             this.priceValidationSelector.addClass("hidden-element");
             this.lotCountValidationSelector.addClass("hidden-element");
-        })
+        });
+        this.dateSelector.on("input", () => {
+            this.dateValidationSelector.addClass("hidden-element");
+            this.dateSelector.removeClass("invalid-value");
+        });
         this.priceSelector.on("input", () => {
             this.priceValidationSelector.addClass("hidden-element");
             this.priceSelector.removeClass("invalid-value");
@@ -53,7 +63,13 @@ export class TooltipBuyManager {
             this.lotCountValidationSelector.addClass("hidden-element");
             this.lotCountSelector.removeClass("invalid-value");
         });
-        this.confirmSelector.on("click", () => {            
+        this.confirmSelector.on("click", () => {
+            const date = this.dateSelector.val();
+            if (!date || isDate(date) || (date.valueOf() <= new Date().valueOf())) {
+                this.dateValidationSelector.removeClass("hidden-element");
+                this.dateSelector.addClass("invalid-value");
+                return;
+            }
             const price = Number(this.priceSelector.val());
             if(!price || price <= 0) {
                 this.priceValidationSelector.removeClass("hidden-element");

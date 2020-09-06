@@ -1,12 +1,14 @@
 ﻿import {InProgressIndexModel} from "../Models/InProgressIndexModel";
 import {NetSender} from "../NetSender";
-import {UtcZone} from "../Components/UtcZone";
+import { UtcZone } from "../Components/UtcZone";
+import { isDate } from "lodash";
 
 export class TooltipSellManager {
     wrapperSelector: JQuery;
     cancelSelector: JQuery;
     confirmSelector: JQuery;
     dateSelector: JQuery;
+    dateValidationSelector: JQuery;
     priceSelector: JQuery;
     priceValidationSelector: JQuery;
     lotCountSelector: JQuery;
@@ -20,6 +22,7 @@ export class TooltipSellManager {
         this.cancelSelector = this.wrapperSelector.find(".cancel");
         this.confirmSelector = this.wrapperSelector.find(".confirm");
         this.dateSelector = this.wrapperSelector.find(".date-input");
+        this.dateValidationSelector = this.wrapperSelector.find(".date-validation");
         this.priceSelector = this.wrapperSelector.find(".price-input");
         this.priceValidationSelector = this.wrapperSelector.find(".price-validation");
         this.lotCountSelector = this.wrapperSelector.find(".lotcount-input");
@@ -51,14 +54,26 @@ export class TooltipSellManager {
     private initEvents() {
         this.cancelSelector.on("click", () => {
             this.closeTooltip();
+            this.dateSelector.removeClass("invalid-value");
             this.priceSelector.removeClass("invalid-value");
+            this.dateValidationSelector.addClass("hidden-element");
             this.priceValidationSelector.addClass("hidden-element");
+        });
+        this.dateSelector.on("input", () => {
+            this.dateValidationSelector.addClass("hidden-element");
+            this.dateSelector.removeClass("invalid-value");
         });
         this.priceSelector.on("input", () => {
             this.priceValidationSelector.addClass("hidden-element");
             this.priceSelector.removeClass("invalid-value");
         });
         this.confirmSelector.on("click", () => {
+            const date = this.dateSelector.val();
+            if (!date || isDate(date) || (date.valueOf() <= new Date().valueOf())) {
+                this.dateValidationSelector.removeClass("hidden-element");
+                this.dateSelector.addClass("invalid-value");
+                return;
+            }
             const price = Number(this.priceSelector.val());
             if (!price || price <= 0) {
                 this.priceValidationSelector.removeClass("hidden-element");

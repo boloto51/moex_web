@@ -22,6 +22,7 @@ export class TooltipSellManager {
         this.priceSelector = this.wrapperSelector.find(".price-input");
         this.lotCountSelector = this.wrapperSelector.find(".lotcount-input");
         this.titleSelector = this.wrapperSelector.find(".title");
+
         this.initEvents();
     }
 
@@ -31,6 +32,17 @@ export class TooltipSellManager {
         this.wrapperSelector.removeClass("hidden-element");
         this.lotCountSelector.val(entity.LotCount);
         this.dateSelector.val(new Date().toISOString());
+
+        if (entity.Percent >= 0)
+        {
+            this.confirmSelector.addClass("confirm-color-positive-percent");
+            this.confirmSelector.removeClass("confirm-color-negative-percent");
+        }
+        else
+        {
+            this.confirmSelector.addClass("confirm-color-negative-percent");
+            this.confirmSelector.removeClass("confirm-color-positive-percent");
+        }
     }
 
     private initEvents() {

@@ -10,5 +10,5 @@ export class InProgressIndexModel {
     BuyDate: Date;
     DaysToSell: number;
     rowSelector: JQuery;
-    buySelector: JQuery;
+    sellSelector: JQuery;
 }

@@ -117,6 +117,8 @@
 }
 .buy-tooltip-wrapper .buy-tooltip .validation {
   color: red;
+  margin: auto;
+  font-size: 13px;
 }
 .buy-tooltip-wrapper .buy-tooltip .invalid-value {
   border: 1px solid red;

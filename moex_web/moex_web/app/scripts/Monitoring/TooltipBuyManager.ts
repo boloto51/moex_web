@@ -9,6 +9,7 @@ export class TooltipBuyManager {
     dateSelector: JQuery;
     priceSelector: JQuery;
     priceValidationSelector: JQuery;
+    lotCountValidationSelector: JQuery;
     lotCountSelector: JQuery;
     titleSelector: JQuery;
     currentEntity: MonitoringIndexModel;
@@ -22,6 +23,7 @@ export class TooltipBuyManager {
         this.dateSelector = this.wrapperSelector.find(".date-input");
         this.priceSelector = this.wrapperSelector.find(".price-input");
         this.priceValidationSelector = this.wrapperSelector.find(".price-validation");
+        this.lotCountValidationSelector = this.wrapperSelector.find(".lotcount-validation");
         this.lotCountSelector = this.wrapperSelector.find(".lotcount-input");
         this.titleSelector = this.wrapperSelector.find(".title");
         this.initEvents();
@@ -38,16 +40,30 @@ export class TooltipBuyManager {
     private initEvents() {
         this.cancelSelector.on("click", () => {
             this.closeTooltip();
+            this.priceSelector.removeClass("invalid-value");
+            this.lotCountSelector.removeClass("invalid-value");
+            this.priceValidationSelector.addClass("hidden-element");
+            this.lotCountValidationSelector.addClass("hidden-element");
         })
         this.priceSelector.on("input", () => {
             this.priceValidationSelector.addClass("hidden-element");
             this.priceSelector.removeClass("invalid-value");
         });
+        this.lotCountSelector.on("input", () => {
+            this.lotCountValidationSelector.addClass("hidden-element");
+            this.lotCountSelector.removeClass("invalid-value");
+        });
         this.confirmSelector.on("click", () => {            
             const price = Number(this.priceSelector.val());
-            if(!price || price < 0) {
+            if(!price || price <= 0) {
                 this.priceValidationSelector.removeClass("hidden-element");
                 this.priceSelector.addClass("invalid-value");
+                return;
+            }
+            const lotCount = Number(this.lotCountSelector.val());
+            if (!lotCount || lotCount <= 0) {
+                this.lotCountValidationSelector.removeClass("hidden-element");
+                this.lotCountSelector.addClass("invalid-value");
                 return;
             }
             this.closeTooltip();

@@ -1,5 +1,5 @@
-﻿import {InProgressIndexModel} from "../Models/InProgressIndexModel";
-import {NetSender} from "../NetSender";
+﻿import { InProgressIndexModel } from "../Models/InProgressIndexModel";
+import { NetSender } from "../NetSender";
 import { UtcZone } from "../Components/UtcZone";
 import { isDate } from "lodash";
 
@@ -39,13 +39,11 @@ export class TooltipSellManager {
         this.dateSelector.val(new Date().toISOString());
         this.dateSelector.datepicker("setDate", new Date());
 
-        if (entity.Percent >= 0)
-        {
+        if (entity.Percent >= 0) {
             this.confirmSelector.addClass("confirm-color-positive-percent");
             this.confirmSelector.removeClass("confirm-color-negative-percent");
         }
-        else
-        {
+        else {
             this.confirmSelector.addClass("confirm-color-negative-percent");
             this.confirmSelector.removeClass("confirm-color-positive-percent");
         }
@@ -82,11 +80,11 @@ export class TooltipSellManager {
             }
             this.closeTooltip();
             NetSender.post(this.sellSecurityUrl, {
-                    Id: this.currentEntity.SecId,
-                    Date: UtcZone.getUtc(new Date(this.dateSelector.val() as string)),
-                    Price: Number(this.priceSelector.val()),
-                    LotCount: Number(this.lotCountSelector.val()),
-                },
+                Id: this.currentEntity.SecId,
+                Date: UtcZone.getUtc(new Date(this.dateSelector.val() as string)),
+                Price: Number(this.priceSelector.val()),
+                LotCount: Number(this.lotCountSelector.val()),
+            },
                 () => {
                     this.currentEntity.rowSelector.remove();
                 })

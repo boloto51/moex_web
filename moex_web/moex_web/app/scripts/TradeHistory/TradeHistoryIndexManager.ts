@@ -34,10 +34,10 @@ export class TradeHistoryIndexManager {
         BuyDate.innerText = new Intl.DateTimeFormat('ru', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(tradeHistory.BuyDate));
         tradeHistory.rowSelector.append(BuyDate);
         const sellPrice = document.createElement("td");
-        sellPrice.innerText = tradeHistory.BuyPrice + "";
+        sellPrice.innerText = tradeHistory.SellPrice + "";
         tradeHistory.rowSelector.append(sellPrice);
         const sellDate = document.createElement("td");
-        sellDate.innerText = new Intl.DateTimeFormat('ru', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(tradeHistory.BuyDate));
+        sellDate.innerText = new Intl.DateTimeFormat('ru', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(tradeHistory.SellDate));
         tradeHistory.rowSelector.append(sellDate);
     }
 }

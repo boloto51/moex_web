@@ -1,6 +1,6 @@
-import {MonitoringIndexModel} from "../Models/MonitoringIndexModel";
-import {NetSender} from "../NetSender";
-import {UtcZone} from "../Components/UtcZone";
+import { MonitoringIndexModel } from "../Models/MonitoringIndexModel";
+import { NetSender } from "../NetSender";
+import { UtcZone } from "../Components/UtcZone";
 import { isDate } from "lodash";
 
 export class TooltipBuyManager {
@@ -32,8 +32,8 @@ export class TooltipBuyManager {
         this.initEvents();
         this.initDatepicker();
     }
-    
-    public show(entity: MonitoringIndexModel): void{
+
+    public show(entity: MonitoringIndexModel): void {
         this.currentEntity = entity;
         this.titleSelector.text(entity.SecId + " - " + entity.SecName);
         this.wrapperSelector.removeClass("hidden-element");
@@ -71,7 +71,7 @@ export class TooltipBuyManager {
                 return;
             }
             const price = Number(this.priceSelector.val());
-            if(!price || price <= 0) {
+            if (!price || price <= 0) {
                 this.priceValidationSelector.removeClass("hidden-element");
                 this.priceSelector.addClass("invalid-value");
                 return;
@@ -90,7 +90,7 @@ export class TooltipBuyManager {
                 LotCount: Number(this.lotCountSelector.val() > 0 ? this.lotCountSelector.val() : 1)
             },
                 () => {
-                this.currentEntity.rowSelector.remove();
+                    this.currentEntity.rowSelector.remove();
                 })
         })
     }
@@ -98,8 +98,8 @@ export class TooltipBuyManager {
     private closeTooltip() {
         this.wrapperSelector.addClass("hidden-element");
     }
-    
-    private initDatepicker(){
+
+    private initDatepicker() {
         let maxDate = new Date();
         this.dateSelector.datepicker({
             format: {

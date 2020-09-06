@@ -51,7 +51,7 @@ export class TooltipBuyManager {
             this.priceValidationSelector.addClass("hidden-element");
             this.lotCountValidationSelector.addClass("hidden-element");
         });
-        this.dateSelector.on("input", () => {
+        this.dateSelector.on("change", () => {
             this.dateValidationSelector.addClass("hidden-element");
             this.dateSelector.removeClass("invalid-value");
         });
@@ -65,7 +65,8 @@ export class TooltipBuyManager {
         });
         this.confirmSelector.on("click", () => {
             const date = this.dateSelector.val();
-            if (!date || (Object.prototype.toString.call(date) === "[object Date]") || (date.valueOf() >= new Date().valueOf())) {
+            if (!date || (Object.prototype.toString.call(date) === "[object Date]")
+                    || (new Date(this.dateSelector.val() as string) >= new Date())) {
                 this.dateValidationSelector.removeClass("hidden-element");
                 this.dateSelector.addClass("invalid-value");
                 return;
@@ -112,7 +113,7 @@ export class TooltipBuyManager {
                     return new Date(d);
                 }
             },
-            endDate: new Date()
+            //endDate: new Date()
         });
         //this.dateSelector.datepicker("setEndDate", new Date());
     }

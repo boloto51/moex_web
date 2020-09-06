@@ -57,7 +57,7 @@ export class TooltipSellManager {
             this.dateValidationSelector.addClass("hidden-element");
             this.priceValidationSelector.addClass("hidden-element");
         });
-        this.dateSelector.on("input", () => {
+        this.dateSelector.on("change", () => {
             this.dateValidationSelector.addClass("hidden-element");
             this.dateSelector.removeClass("invalid-value");
         });
@@ -107,8 +107,7 @@ export class TooltipSellManager {
                     return new Date(d);
                 }
             },
-            endDate: new Date()
+            //endDate: new Date()
         });
     }
-
 }

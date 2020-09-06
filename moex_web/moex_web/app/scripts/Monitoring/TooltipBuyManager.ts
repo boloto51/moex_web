@@ -32,7 +32,7 @@ export class TooltipBuyManager {
     
     public show(entity: MonitoringIndexModel): void{
         this.currentEntity = entity;
-        this.titleSelector.text(entity.SecName);
+        this.titleSelector.text(entity.SecId + " - " + entity.SecName);
         this.wrapperSelector.removeClass("hidden-element");
         this.dateSelector.datepicker("setDate", new Date());
     }

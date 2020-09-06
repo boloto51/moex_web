@@ -28,7 +28,7 @@ export class TooltipSellManager {
 
     public show(entity: InProgressIndexModel): void {
         this.currentEntity = entity;
-        this.titleSelector.text(entity.SecName);
+        this.titleSelector.text(entity.SecId + " - " + entity.SecName);
         this.wrapperSelector.removeClass("hidden-element");
         this.lotCountSelector.val(entity.LotCount);
         this.dateSelector.val(new Date().toISOString());

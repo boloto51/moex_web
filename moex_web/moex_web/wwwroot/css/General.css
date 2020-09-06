@@ -21,6 +21,9 @@
   background-color: #b7b7b7;
   color: #000;
 }
+.content-wrapper .page-content {
+  background-color: #f8f9fc;
+}
 .hidden-element {
   display: none !important;
 }

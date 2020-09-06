@@ -2,9 +2,19 @@
   height: 100%;
   width: 100%;
   font-family: Nunito, serif;
-  padding: 35px;
+  padding: 30px;
+  background-color: transparent;
+  margin: auto;
 }
-.monitoring-index-page .monitoring-button-buy {
+.monitoring-index-page .monitoring-index-h1 {
+  margin: 0px 0px 24px;
+}
+.monitoring-index-page .monitoring-index-content {
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+}
+.monitoring-index-page .monitoring-index-content .monitoring-button-buy {
   color: #ffffff;
   background-color: #265999;
   width: 90px;

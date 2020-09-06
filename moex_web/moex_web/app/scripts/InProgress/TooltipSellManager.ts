@@ -24,8 +24,8 @@ export class TooltipSellManager {
         this.priceValidationSelector = this.wrapperSelector.find(".price-validation");
         this.lotCountSelector = this.wrapperSelector.find(".lotcount-input");
         this.titleSelector = this.wrapperSelector.find(".title");
-
         this.initEvents();
+        this.initDatepicker();
     }
 
     public show(entity: InProgressIndexModel): void {
@@ -34,6 +34,7 @@ export class TooltipSellManager {
         this.wrapperSelector.removeClass("hidden-element");
         this.lotCountSelector.val(entity.LotCount);
         this.dateSelector.val(new Date().toISOString());
+        this.dateSelector.datepicker("setDate", new Date());
 
         if (entity.Percent >= 0)
         {
@@ -80,4 +81,21 @@ export class TooltipSellManager {
     private closeTooltip() {
         this.wrapperSelector.addClass("hidden-element");
     }
+
+    private initDatepicker() {
+        let maxDate = new Date();
+        this.dateSelector.datepicker({
+            format: {
+                toDisplay: function (date, format, language) {
+                    return new Date(date).toLocaleDateString(navigator.language).replace(/\u200F/g, "");
+                },
+                toValue: function (date, format, language) {
+                    var d = new Date(date);
+                    return new Date(d);
+                }
+            },
+            endDate: new Date()
+        });
+    }
+
 }

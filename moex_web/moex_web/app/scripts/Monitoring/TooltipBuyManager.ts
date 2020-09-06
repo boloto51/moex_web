@@ -95,8 +95,8 @@ export class TooltipBuyManager {
                     //d.setDate(d.getDate() + 7);
                     return new Date(d);
                 }
-            }    ,
-            endDate:  new Date()
+            },
+            endDate: new Date()
         });
         //this.dateSelector.datepicker("setEndDate", new Date());
     }
